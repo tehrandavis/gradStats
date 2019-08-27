@@ -1,0 +1,452 @@
+# ANOVA V: Higher Order Factorial ANOVA
+
+This walk-through is a continuation of our previous work with factorial ANOVA. If you haven't already, please check the factorial ANOVA and Interaction vignettes. In truth, nothing terribly new is being introduced here; we are just ramping up the complexity of our ANOVA models. Whereas before we considered a scenario with just 2 factors, here we will consider a 3 factor ANOVA. For all practical purposes you typically do not want to go higher than a 3 or 4 factor ANOVA, simply because of the exponential increase in complexity. For example, consider below where each letter is an IV and the resulting tests in the full factorial omnibus ANOVA:
+
+- 2 factor: a, b, a×b
+- 3 factor: a, b, c, a×b, a×c, b×c, a×b×c
+- 4 factor: a, b, c, d, a×b, a×c, a×d, b×c, b×d, c×d, a×b×c, a×b×d, a×c×d, b×c×d, a×b×c×d
+- 5 factor: ummm, no... just don't (unless you really want to)
+
+Increasing the number of factors not only increases the practical difficulty of analysis, but more importantly, makes it more difficult to interpret your results. The primary culprit here is the potential presence of multiple interactions.
+
+When dealing with interactions in a higher order factorial design you always start off with the highest order interaction. For example in the 3 factor case, if you have a 3-way interaction, that supercedes any other effects and interactions, and must be dealt with first. If there is no three-way interaction, then you can co about the business of addressing any two way interactions that are present.
+
+## Packages and data
+
+Let's load in our necessary packages, scripts and some data and try some examples. This write-up requires the following packages:
+
+```{r}
+# required packages:
+pacman::p_load(tidyverse, afex, cowplot, agricolae)
+
+# custom simple effects ANOVA script (see interaction vignette):
+source('https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsScripts/simpleEffectsAOV.R')
+```
+
+And now let's reaquaint ourselves with our dataset from last week, but with one new twist...
+
+Background: Given the ease of access for new technologies and increasing enrollment demands, many grade schools are advocating that teachers switch over to E-courses, where students view an online, pre-recorded lecture on the course topic in lieu of sitting in a classroom in a live lecture. Given this push, a critical question remains regarding the impact of E-courses on primary school student outcomes. More it may be the case that certain subject content more readily lends itself to E-course presentations than other subjects. To address this question we tested students performance on a test one week after listening to the related lecture. Lectures were either experienced via online (Computer) or in a live classroom (Standard). In addition, the lecture content varied in topic (Physical science, Social science, History). Finally, to assess whether age had an impact on expected outcomes we assessed students in 5th and 8th grades.
+
+Looking at the above we have a 2 (Grade: 5th, 8th) × 2 (Presentation: Computer, Standard) × 3 (Lecture: Physical, Social, History) design. Our omnibus ANOVA therefore will test for the following effects:
+
+- Main Effects: Grade, Presentation, Lecture
+- 2-way interactions: Grade × Presentation, Grade × Lecture, Lecture × Presentation
+- 3-way interation: Grade × Presentation × Lecture
+
+
+## EXAMPLE 1: no three-way interaction, single two way interaction
+
+Let's load in this data:
+```{r}
+higherEx1 <- read_delim("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA5_higherEx1.txt", delim = "\t")
+```
+
+
+### First plot: 3 way interaction plot
+
+One thing you may notice is since we have a more complex ANOVA, we have a more complex design with three factors we also have to construct a more complex plot. Whereas in the 2 factor case we could place one factor on the x-axis and group the other factor by line or shape or color; in the three factor case things become slightly more tricky. 
+
+One thing to consider is the logic of what we are doing with our plots. When we have two factors, say A & B, we are distinguishing between each level of B (by lines, shapes, colors) at each level of A (on the x-axis). In the 3 factor case where we have A,B, & C, we are distinguishing the B×C interaction (through the combination of shapes, lines, colors) on each level of A. 
+
+In the folling plot, let's place Lecture type along the x-axis. From here, we can create 2 groups of lines (each with 2 levels) representing the Grade × Presentation interaction. We note this by specifying the `interaction` in `group` of our baseline `ggplot` call:
+
+```{r}
+require(ggplot2)
+p <- ggplot(higherEx1,mapping = aes(x = Lecture,y = Score, group=interaction(Presentation,Grade)))
+```
+
+From here, we can proceed as before. Note, however, depending on the complexity of your plot you may also need to specify the interaction in each `stat_summary::aes()` as necessary. 
+
+Below I am changing the `shape` by `Presentation` and the `linetype` by `Grade`
+
+```{r}
+ p <- p +
+  stat_summary(geom = "pointrange",fun.data = "mean_se",position = position_dodge(.15), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.15), aes(linetype=Grade)) + 
+  theme_cowplot() + 
+  # adjusting the legend
+  theme(
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.2,.25)) +
+  # renaming axies
+  xlab("Lecture") + 
+  ylab ("Score") +
+  # adding whitespace around plot (optional)
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in"))
+show(p)
+```
+
+OK, not exactly the best plot. Let's see if we can create some more space to work with by forcing the y-axis to go to 0, instead of cutting off at 10. There's also a trick that we can use to stack our legend keys horizontally, rather than vertically
+
+```{r}
+p <- p + # take the previous plot and... 
+  # set the y-axis limits to 0 and 50
+  coord_cartesian(ylim=c(0,50)) + 
+  # direction to stack legend keys
+  theme(legend.direction = "horizontal", 
+        legend.position = c(.2,.25))
+show(p)
+```
+
+alternatively, we could also just stack the legend boxes side by side:
+
+```{r}
+# redoing intial steps
+p <- ggplot(higherEx1,mapping = aes(x = Lecture,y = Score, group=interaction(Presentation,Grade))) +
+  stat_summary(geom = "pointrange",fun.data = "mean_se",position = position_dodge(.15), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.15), aes(linetype=Grade)) + theme_cowplot() + 
+  theme(
+    legend.position = c(.25,.25)) +
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  coord_cartesian(ylim=c(0,50)) +
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+show(p)
+```
+
+
+### running the ANOVA:
+
+From here we run the omnibus as usual:
+
+```{r}
+omnibus.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = higherEx1,between = c("Lecture","Presentation","Grade"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+omnibus.aov$anova_table
+
+```
+
+In this case we only have Main effects for Lecture and Presentation, and a Lecture × Presentation interaction. Given this we can disregard Grade as its not contributing to any effects. 
+
+### Replotting the 2-way interaction
+
+In some cases it is advisable to re-plot the data factoring out Grade by removing Grade from baseline `group=` as well as any `summary_stat::aes()`, (essentially treating this if it was a 2 factorial design like last week). For the sake of your sanity, and your readers' sanity) I would also suggest being consistent with how you present your conditions. For example, in the original plot, Presentation was differentiated by `shape`. To be consistent, we need to do the same here). 
+
+(You'll note in the example below I'm also customing font size and weight ourely for personal aesthetics):
+
+```{r}
+p <- ggplot(higherEx1,mapping = aes(x = Lecture,y = Score, group=Presentation)) +
+  stat_summary(geom = "pointrange",fun.data = "mean_se",position = position_dodge(.15), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.15), aes(shape=Presentation)) + theme_cowplot() + theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.25)) +
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  coord_cartesian(ylim=c(0,50)) + 
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+From here I would deal with the follow-ups as we did in our 2×3 example from the last write-up: Run the simple effects and any necessary posthocs, being sure to correct using the error terms from the omnibus ANOVA.
+
+
+## EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:
+
+Let's load in a data set that is a little more complicated:
+```{r}
+higherEx2 <- read_delim("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA5_higherEx2.txt", delim = "\t")
+```
+
+### plotting the data
+```{r}
+p <- ggplot(higherEx2,mapping = aes(x = Lecture,y = Score, group=interaction(Presentation,Grade))) +
+  stat_summary(geom = "pointrange",fun.data = "mean_se",position = position_dodge(.15), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.15), aes(linetype=Grade)) + theme_classic() + theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.25)) +
+
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  coord_cartesian(ylim=c(0,60)) +
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+Looking at this plot its quite apparent that the pattern of results is different from Example 1. Perhaps most simply, there is a general shared pattern of effects for each of the shapes (Presentation) with the exception of the 8th Grade-Computer condition. For the remainder there is a dip for Social lectures, but in this one condition Social actually increases. Let's run our ANOVA.
+
+### running the omnibus ANOVA:
+
+```{r}
+omnibus.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = higherEx2,between = c("Lecture","Presentation","Grade"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+omnibus.aov$anova_table
+```
+
+Our ANOVA reveals an abundance of results. There are main effects for each of our IVs. In addition there are **two** interaction effects: `Lecture:Presentation` and `Lecture:Grade`. Unless there is a strong theoretical reason not to (which I see none) we will need to examine each of these interactions in further detail.
+
+### testing the `Lecture:Presentation` interaction: 
+
+#### 2-way interaction plot
+
+We can begin by recreating our interaction plot, this time only focusing on the IVs that are of interest (those that are interacting). In this first case, they are `Lecture` and `Presentation`.
+
+```{r}
+p <- ggplot(higherEx2,mapping = aes(x = Lecture,y = Score, group=Presentation)) +
+  stat_summary(geom = "pointrange",fun.data = "mean_cl_normal",position = position_dodge(.15), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.15), aes(shape=Presentation)) + theme_cowplot() + theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.25)) +
+
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  coord_cartesian(ylim=c(0,60)) +
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+#### simple effect ANOVAs:
+
+Provided what we see on this plot, it may make sense to first run a simple effects ANOVA for each Presentation and then run the appropriate follow-ups. I say this because the more obvious, and potentially easily interpret-able effects occur moving across the line series (i.e., lines trend up or down). 
+
+##### computer AOV and follow-ups:
+```{r}
+computer.data <- filter(higherEx2, Presentation=="Computer")
+
+computer.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = computer.data,between = c("Lecture"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,computer.aov)
+```
+
+Our simple effects ANOVA of Lecture on our `computer.data` was significant, suggesting that we should perform a post-hoc:
+
+```{r}
+agricolae::HSD.test(computer.data$Score,trt = computer.data$Lecture,MSerror = 54.62,DFerror = 60,group = T,console = T)
+```
+
+The results of the Tukey post-hoc suggests that History scores are significantly less than the other two groups for the Computer presentation.
+
+##### standard AOV and follow-ups:
+```{r}
+standard.data <- filter(higherEx2, Presentation=="Standard")
+standard.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = standard.data,between = c("Lecture"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,standard.aov)
+```
+Our simple effects ANOVA for `cstandard.data` was also significant, suggesting that we should perform a post-hoc:
+
+```{r}
+agricolae::HSD.test(standard.data$Score,trt = standard.data$Lecture,MSerror = 54.62,DFerror = 60,group = T,console = T)
+```
+
+For the standard presentation, scores in the History and Physical lecture were greater than the Social lecture.
+
+### testing the `Lecture:Grade` interaction: 
+Now we do the same for the `Lecture:Grade` interaction. This time removing `Presentation` from our consideration.
+
+#### 2-way interaction plot
+
+You'll notice that in this interaction plot, and the plot above, I am using the shape/linetype conventions that I established in my original plot. This will make things much easier if I wind up comparing these plots to my 3-way plot. I know I've said this before, but ONE MORE TIME WITH FEELING!
+
+```{r}
+p <- ggplot(higherEx2,mapping = aes(x = Lecture,y = Score, group=Grade)) +
+  stat_summary(geom = "pointrange",fun.data = "mean_se",position = position_dodge(.15), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.15), aes(linetype=Grade)) + theme_classic() + theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.25)) +
+
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  coord_cartesian(ylim=c(0,60)) +
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+### simple effect ANOVAs:
+
+Looking at this plot
+Provided what we see on this plot, it may make the best sense to examine the pairwise differences in each Grade group by Lecture. Whereas in the previous interaction, the compelling changes occurred across lines, here what is more compelling is the presence/absence of gaps between the lines. In particular, while there are practically no differences due to Grade in the History or Physical Lectures, there is a larger gap in the Social condition.
+
+#### History AOV:
+```{r}
+history.data <- filter(higherEx2, Lecture=="History")
+
+history.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = history.data,between = c("Grade"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,history.aov)
+```
+
+#### Physical AOV:
+```{r}
+physical.data <- filter(higherEx2, Lecture=="Physical")
+
+physical.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = physical.data,between = c("Grade"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,physical.aov)
+```
+
+#### Social AOV:
+```{r}
+social.data <- filter(higherEx2, Lecture=="Social")
+
+social.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = social.data,between = c("Grade"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,social.aov)
+```
+
+As anticipated from looking at the plot, there was a significant difference between our Grades in the Social group, but not the remainder.
+
+### Main takeaways / write-up
+
+It's typically best to go back and look at all of your plots. 
+
+1. the main effect for `Presentation` is meaningful: Regardless of what plays out on the other factors, students tended to perform better in the computer presentation. Best to report that.
+2. the `Lecture:Presentation` interaction resulted from the following:
+    a. in the **Computer presentations** scores were lowest in the History lecture (indifferent in other two)
+    b. in the **Standard presentations** scores were lowest in the Social lecture (indifferent in the other two)
+3. the `Lecture:Grade` interaction resulted from the 5th graders performing worse than the eight graders in Social lectures; while performance was not different in the other two lectures.
+
+With this in mind, an example write-up:
+
+>Our results revealed main effects for each of our factors, in addition to Lecture × Presentation $[F(2,60)=13.37, p<.001, \eta_p^2=.31]$ and Lecture × Grade interactions $[F(2,60)=5.53, p=.006, \eta_p^2=.16]$. 
+<p>Considering the former interaction, students presented material via computer format tended to perform poorest from the History Lecture, compared to Physical and Social (Tukey HSD, *p*<.05). However, when material was presented in the standard format, students performed poorest in the Social condition (*p*<.05), while the other two were not different. 
+<p>Considering the latter interaction, a detailed analysis of performance as a function of lecture revaled that 8th Graders performed better than their 5th grade counterparts only in the Social lecture, $F(1,60) = 16.71, p < .001, \eta_p^2=0.21$.
+<p>In all conditions, students performed better when presented the material via computer compared to the standard presentation, $[F(2,60)=7.09, p=.002, \eta_p^2=.19]$ (see Figure 1).
+
+
+## EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!
+
+Finally let's take a look at some data that is all over the place:
+
+```{r}
+higherEx3 <- read_delim("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA5_higherEx3.txt", delim = "\t")
+
+```
+
+### Plotting:
+```{r}
+p <- ggplot(higherEx3,mapping = aes(x = Lecture,y = Score, group=interaction(Presentation,Grade))) +
+  stat_summary(geom = "pointrange",fun.data = "mean_se",position = position_dodge(.5), aes(shape=Presentation)) + 
+  stat_summary(geom = "line", fun.y="mean", position = position_dodge(.5), aes(linetype=Grade)) + 
+  theme_classic() + theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.15)) +
+
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  coord_cartesian(ylim=c(0,50)) + 
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+### running the ANOVA:
+```{r}
+omnibus.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = higherEx3,between = c("Lecture","Presentation","Grade"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+omnibus.aov$anova_table
+```
+
+O.M.F.G., everything is significant!!! What to do!!! 
+
+Remember, the first thing that we do is tackle the highest-order interaction. In this case we should tease-out the three-way. Again, we should look to our plot to help guide us in what to do. Looking at the plot it appears that different things are happening by Grade. The `Presentation:Lecture` lines tend to stay parallel for the 5th graders, but not as much for the 8th graders. At the same time the gaps between the two lines are different by grade. So, my advice would be to attack the 3-way interaction by looking at the individual `Lecture:Presentation` interactions on each Grade.
+
+### Fifth Graders, Lecture:Presentation interaction.
+
+```{r}
+fifth.data <- filter(higherEx3, Grade=="5th")
+
+fifth.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = fifth.data , between = c("Lecture","Presentation"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,fifth.aov)
+```
+
+You'll note that our results include simple effects for Lecture and Presentation for 5th graders as well as their interaction. That said, there are no effects when looking at the fifth graders.
+
+### Eighth Graders, Lecture:Presentation interaction.
+```{r}
+eighth.data <- subset(higherEx3, Grade=="8th")
+
+eighth.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = eighth.data, between = c("Lecture","Presentation"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,eighth.aov)
+```
+
+The detailed `Lecture:Presentation` analysis for the 8th graders revealed both main effects and their interaction. We need to follow-up on this interaction in the 8th-grade data. In this case we would look at the effect of Lecture on each level of Presentation for the eighth graders. To do this we first subset the data further:
+
+```{r}
+eighth.computer.data <- filter(eighth.data,Presentation=="Computer")
+eighth.standard.data <- filter(eighth.data,Presentation=="Standard")
+```
+
+#### 8th graders: Computer presentation
+
+ANOVA of Lecture on the 8th graders via Computer presentation:
+```{r}
+eighth.computer.aov<- afex::aov_ez(id = "Subject", dv = "Score", data = eighth.computer.data,between = c("Lecture"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,eighth.computer.aov)
+```
+
+No effect for lecture type for 8th graders using the computer presentation.
+
+#### 8th graders: Standard presentation
+
+ANOVA of Lecture on the 8th graders via Standard presentation
+```{r}
+eighth.standard.aov<- afex::aov_ez(id = "Subject", dv = "Score", data = eighth.standard.data,between = c("Lecture"),within = NULL,type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+simpleEffectsAOV(omnibus.aov,eighth.standard.aov)
+```
+
+This yielded an effect, so now the necessary follow-up post-hocs:
+
+```{r}
+agricolae::HSD.test(eighth.standard.data$Score,trt = eighth.standard.data$Lecture,DFerror = 60,MSerror = 42.86, console = T,group = T)
+```
+
+Scores for the Social test were less than the Physical and History.
+
+### Constructing a narrative:
+
+Given these results, what narrative do you think you can tell? Remember use the plots to unpack what the results are telling you. Our results focused on differences in the `Lecture:Presentation` analysis for each grade. I would recommend that your story start there. Something to the effect of Lecture and Presentation interact for 8th graders but not 5th graders.
+
+To remind ourselves:
+
+- Main effects for Lecture, Presentation, and Grade
+- Two way interactions
+- Three-way interaction that we focus on
+- The results of the 3-way interaction, by Grade:
+  - 5th graders = no effects
+  - 8th graders = Lecture × Presentation interaction, where there was a null effect for Lecture on the Computer presentation, but an effect for Lecture on the Standard Presentation.
+  
+  
+Now the narrative:
+
+... to answer this question we conducted a 2 (Grade) × 2 (Presentation) × 3 (Lecture) between effects ANOVA. Our ANOVA revealed a three-way, Grade × Presentation × Lecture type interaction, _F_(2, 60) = 3.87, _p_ = .03, $\eta_p^2$ = .11. To address this interaction we conducted seperate Presentation × Lecture ANOVA for each Grade. Our results for 5th graders showed no main effects nor an interaction (_p_ > .05). For 8th graders, we found an Presentation × Lecture interaction, _F_(2, 60) = 8.61, _p_ < .001, $\eta_p^2$ = .22. While there were no differences due to Lecture type for 8th graders presented information via computer (_p_ > .05), 8th graders in the Standard presentation, _F_(2, 60) = 19.61, _p_ < .001, $\eta_p^2$ = .40 tended to perform worse for the Social lecture (_M_ ± _SD_ = 12.33 ± 3.72) than for the History (31.17 ± 9.87) and Physical (34.17 ± 10.98) lectures (Tukey HSD, _p_ < .05).
+
+
+
+
+
+

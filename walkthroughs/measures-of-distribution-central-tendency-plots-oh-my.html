@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Week 1 Measures of distribution, central tendency, PLOTS… oh my! | 02week.utf8.md</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Week 1 Measures of distribution, central tendency, PLOTS… oh my! | 02week.utf8.md" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Week 1 Measures of distribution, central tendency, PLOTS… oh my! | 02week.utf8.md" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Words from the Professor</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#measures-of-distribution-central-tendency-plots-oh-my"><i class="fa fa-check"></i><b>1</b> Measures of distribution, central tendency, PLOTS… oh my!</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#getting-measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1</b> Getting measures of central tendency</a><ul>
+<li class="chapter" data-level="1.1.1" data-path=""><a href="#turning-numeric-data-into-categorical"><i class="fa fa-check"></i><b>1.1.1</b> turning numeric data into categorical</a></li>
+<li class="chapter" data-level="1.1.2" data-path=""><a href="#getting-summary-stats-by-groups-or-conditions"><i class="fa fa-check"></i><b>1.1.2</b> Getting summary stats by groups or conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#creating-a-table-of-summary-stats"><i class="fa fa-check"></i><b>1.2</b> Creating a table of summary stats</a></li>
+</ul></li>
+<li class="divider"></li>
+<li></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="measures-of-distribution-central-tendency-plots-oh-my" class="section level1">
+<h1><span class="header-section-number">Week 1</span> Measures of distribution, central tendency, PLOTS… oh my!</h1>
+<p>We covered a lot of ground this week talking about measures of central tendency and introducing ourselves to distributions. When you get a chance be sure to check out some of the in-class workshopping code and examples on RStudio.cloud. These will help you remember what we did in the workshop and you can compare them to your source and output.</p>
+<p>This week I want to expand upon a few things that were touched upon in the workshop and in lecture. This one might be a little lengthly, but it should serve to supplement your assigned readings and help you a little with the home work. Before jumping in, let’s install and load the necessary packages in R. This week we will make use of <code>psych</code> and several of the core packages of the <code>tidyverse</code>. We’ll also be using <code>pander()</code></p>
+<p>Using the <code>cheat code</code> from last week’s <strong>Level-up</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># 1. check to see if pacman is on your computer and if not, let&#39;s install it:</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;pacman&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;pacman&quot;</span>,<span class="dt">repos=</span><span class="st">&quot;http://cran.us.r-project.org&quot;</span>)</a></code></pre></div>
+<pre><code>## Loading required package: pacman</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># 2. install all other packages that we will be using:</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">pacman<span class="op">::</span><span class="kw">p_load</span>(psych, tidyverse, pander)</a></code></pre></div>
+<p>Throughout this walkthrough we’ll use data from an example provided in the Howell textbook (Table 2.1). Let’s start by reading that data into <code>R</code>. Since the data was reaction time data, let’s just name it <code>RTData</code>. Note that I’m just using the code generated by the GUI method of data loading (see Week 1):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># importing data:</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">RTData &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;datasets/Tab2-1.dat&quot;</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Trial = col_character(),
+##   RxTime = col_double(),
+##   NStim = col_double(),
+##   YesNo = col_double()
+## )</code></pre>
+<p>Invoking <code>class(RTData)</code> tells us that RTData is a data frame. Invoking <code>names(RTData)</code> provides us with the header names (but you already knew that):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">class</span>(RTData)</a></code></pre></div>
+<pre><code>## [1] &quot;spec_tbl_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">names</span>(RTData)</a></code></pre></div>
+<pre><code>## [1] &quot;Trial&quot;  &quot;RxTime&quot; &quot;NStim&quot;  &quot;YesNo&quot;</code></pre>
+<p>Building from last week’s homework assignment, we can call individual columns within the data frame using the <code>$</code> operator:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># column of Trial(s):</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">RTData<span class="op">$</span>Trial</a></code></pre></div>
+<pre><code>##   [1] &quot;001&quot; &quot;002&quot; &quot;003&quot; &quot;004&quot; &quot;005&quot; &quot;006&quot; &quot;007&quot; &quot;008&quot; &quot;009&quot; &quot;010&quot; &quot;011&quot;
+##  [12] &quot;012&quot; &quot;013&quot; &quot;014&quot; &quot;015&quot; &quot;016&quot; &quot;017&quot; &quot;018&quot; &quot;019&quot; &quot;020&quot; &quot;021&quot; &quot;022&quot;
+##  [23] &quot;023&quot; &quot;024&quot; &quot;025&quot; &quot;026&quot; &quot;027&quot; &quot;028&quot; &quot;029&quot; &quot;030&quot; &quot;031&quot; &quot;032&quot; &quot;033&quot;
+##  [34] &quot;034&quot; &quot;035&quot; &quot;036&quot; &quot;037&quot; &quot;038&quot; &quot;039&quot; &quot;040&quot; &quot;041&quot; &quot;042&quot; &quot;043&quot; &quot;044&quot;
+##  [45] &quot;045&quot; &quot;046&quot; &quot;047&quot; &quot;048&quot; &quot;049&quot; &quot;050&quot; &quot;051&quot; &quot;052&quot; &quot;053&quot; &quot;054&quot; &quot;055&quot;
+##  [56] &quot;056&quot; &quot;057&quot; &quot;058&quot; &quot;059&quot; &quot;060&quot; &quot;061&quot; &quot;062&quot; &quot;063&quot; &quot;064&quot; &quot;065&quot; &quot;066&quot;
+##  [67] &quot;067&quot; &quot;068&quot; &quot;069&quot; &quot;070&quot; &quot;071&quot; &quot;072&quot; &quot;073&quot; &quot;074&quot; &quot;075&quot; &quot;076&quot; &quot;077&quot;
+##  [78] &quot;078&quot; &quot;079&quot; &quot;080&quot; &quot;081&quot; &quot;082&quot; &quot;083&quot; &quot;084&quot; &quot;085&quot; &quot;086&quot; &quot;087&quot; &quot;088&quot;
+##  [89] &quot;089&quot; &quot;090&quot; &quot;091&quot; &quot;092&quot; &quot;093&quot; &quot;094&quot; &quot;095&quot; &quot;096&quot; &quot;097&quot; &quot;098&quot; &quot;099&quot;
+## [100] &quot;100&quot; &quot;101&quot; &quot;102&quot; &quot;103&quot; &quot;104&quot; &quot;105&quot; &quot;106&quot; &quot;107&quot; &quot;108&quot; &quot;109&quot; &quot;110&quot;
+## [111] &quot;111&quot; &quot;112&quot; &quot;113&quot; &quot;114&quot; &quot;115&quot; &quot;116&quot; &quot;117&quot; &quot;118&quot; &quot;119&quot; &quot;120&quot; &quot;121&quot;
+## [122] &quot;122&quot; &quot;123&quot; &quot;124&quot; &quot;125&quot; &quot;126&quot; &quot;127&quot; &quot;128&quot; &quot;129&quot; &quot;130&quot; &quot;131&quot; &quot;132&quot;
+## [133] &quot;133&quot; &quot;134&quot; &quot;135&quot; &quot;136&quot; &quot;137&quot; &quot;138&quot; &quot;139&quot; &quot;140&quot; &quot;141&quot; &quot;142&quot; &quot;143&quot;
+## [144] &quot;144&quot; &quot;145&quot; &quot;146&quot; &quot;147&quot; &quot;148&quot; &quot;149&quot; &quot;150&quot; &quot;151&quot; &quot;152&quot; &quot;153&quot; &quot;154&quot;
+## [155] &quot;155&quot; &quot;156&quot; &quot;157&quot; &quot;158&quot; &quot;159&quot; &quot;160&quot; &quot;161&quot; &quot;162&quot; &quot;163&quot; &quot;164&quot; &quot;165&quot;
+## [166] &quot;166&quot; &quot;167&quot; &quot;168&quot; &quot;169&quot; &quot;170&quot; &quot;171&quot; &quot;172&quot; &quot;173&quot; &quot;174&quot; &quot;175&quot; &quot;176&quot;
+## [177] &quot;177&quot; &quot;178&quot; &quot;179&quot; &quot;180&quot; &quot;181&quot; &quot;182&quot; &quot;183&quot; &quot;184&quot; &quot;185&quot; &quot;186&quot; &quot;187&quot;
+## [188] &quot;188&quot; &quot;189&quot; &quot;190&quot; &quot;191&quot; &quot;192&quot; &quot;193&quot; &quot;194&quot; &quot;195&quot; &quot;196&quot; &quot;197&quot; &quot;198&quot;
+## [199] &quot;199&quot; &quot;200&quot; &quot;201&quot; &quot;202&quot; &quot;203&quot; &quot;204&quot; &quot;205&quot; &quot;206&quot; &quot;207&quot; &quot;208&quot; &quot;209&quot;
+## [210] &quot;210&quot; &quot;211&quot; &quot;212&quot; &quot;213&quot; &quot;214&quot; &quot;215&quot; &quot;216&quot; &quot;217&quot; &quot;218&quot; &quot;219&quot; &quot;220&quot;
+## [221] &quot;221&quot; &quot;222&quot; &quot;223&quot; &quot;224&quot; &quot;225&quot; &quot;226&quot; &quot;227&quot; &quot;228&quot; &quot;229&quot; &quot;230&quot; &quot;231&quot;
+## [232] &quot;232&quot; &quot;233&quot; &quot;234&quot; &quot;235&quot; &quot;236&quot; &quot;237&quot; &quot;238&quot; &quot;239&quot; &quot;240&quot; &quot;241&quot; &quot;242&quot;
+## [243] &quot;243&quot; &quot;244&quot; &quot;245&quot; &quot;246&quot; &quot;247&quot; &quot;248&quot; &quot;249&quot; &quot;250&quot; &quot;251&quot; &quot;252&quot; &quot;253&quot;
+## [254] &quot;254&quot; &quot;255&quot; &quot;256&quot; &quot;257&quot; &quot;258&quot; &quot;259&quot; &quot;260&quot; &quot;261&quot; &quot;262&quot; &quot;263&quot; &quot;264&quot;
+## [265] &quot;265&quot; &quot;266&quot; &quot;267&quot; &quot;268&quot; &quot;269&quot; &quot;270&quot; &quot;271&quot; &quot;272&quot; &quot;273&quot; &quot;274&quot; &quot;275&quot;
+## [276] &quot;276&quot; &quot;277&quot; &quot;278&quot; &quot;279&quot; &quot;280&quot; &quot;281&quot; &quot;282&quot; &quot;283&quot; &quot;284&quot; &quot;285&quot; &quot;286&quot;
+## [287] &quot;287&quot; &quot;288&quot; &quot;289&quot; &quot;290&quot; &quot;291&quot; &quot;292&quot; &quot;293&quot; &quot;294&quot; &quot;295&quot; &quot;296&quot; &quot;297&quot;
+## [298] &quot;298&quot; &quot;299&quot; &quot;300&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># column of RxTime (reaction time)</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">RTData<span class="op">$</span>RxTime</a></code></pre></div>
+<pre><code>##   [1]  40  41  47  38  40  37  38  47  45  61  54  67  49  43  52  39  46
+##  [18]  47  45  43  39  49  50  44  53  46  64  51  40  41  44  48  50  42
+##  [35]  90  51  55  60  47  45  41  42  72  36  43  94  45  51  46  52  52
+##  [52]  45  74  56  53  59  43  46  51  40  48  47  57  54  44  56  47  62
+##  [69]  44  53  48 104  50  58  52  57  66  49  59  56  71  76  54  71  44
+##  [86]  67  45  79  46  57  58  47  73  67  46  57  52  61  72 104  73  83
+## [103]  55  59  51  65  61  64  63  86  42  65  62  62  51  62  72  55  58
+## [120]  46  67  56  52  46  62  51  51  61  60  75  53  59  56  50  43  58
+## [137]  67  52  56  80  53  72  62  59  47  62  53  52  46  60  73  47  63
+## [154]  63  56  66  72  58  60  69  74  51  49  69  51  60  52  72  58  74
+## [171]  59  63  60  66  59  61  50  67  63  61  80  63  60  64  64  57  59
+## [188]  58  59  60  62  63  67  78  61  52  51  56  95  54  39  65  53  46
+## [205]  78  60  71  58  87  77  62  94  81  46  49  62  55  59  88  56  77
+## [222]  67  79  54  83  75  67  60  65  62  62  62  60  58  67  48  51  67
+## [239]  98  64  57  67  55  55  66  60  57  54  78  69  66  53  61  74  76
+## [256]  69  82  56  66  63  69  76  71  65  67  67  55  65  58  64  65  81
+## [273]  69  69  63  68  70  80  68 125  63  74  61  85  59  61  74  76  62
+## [290]  83  58  72  65  61  95  58  64  66  66  72</code></pre>
+<div id="getting-measures-of-central-tendency" class="section level2">
+<h2><span class="header-section-number">1.1</span> Getting measures of central tendency</h2>
+<p>We can use simple functions to get the mean, median, and standard deviation of a vector:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">mean</span>(RTData<span class="op">$</span>RxTime) <span class="co">#mean</span></a></code></pre></div>
+<pre><code>## [1] 60.26</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">median</span>(RTData<span class="op">$</span>RxTime) <span class="co">#median</span></a></code></pre></div>
+<pre><code>## [1] 59.5</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">sd</span>(RTData<span class="op">$</span>RxTime) <span class="co">#std. dev.</span></a></code></pre></div>
+<pre><code>## [1] 13.01064</code></pre>
+<p>However, most of the data that we deal with comes in the for of data frames (e.g., <code>tibbles</code>. In this week’s workshop, we touched upon using <code>psych::describe()</code> to generate summary stats of all data in a data frame:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">psych<span class="op">::</span><span class="kw">describe</span>(RTData)</a></code></pre></div>
+<pre><code>##        vars   n   mean    sd median trimmed    mad min max range skew
+## Trial*    1 300 150.50 86.75  150.5   150.5 111.19   1 300   299 0.00
+## RxTime    2 300  60.26 13.01   59.5    59.3  11.12  36 125    89 0.97
+## NStim     3 300   3.00  1.64    3.0     3.0   2.97   1   5     4 0.00
+## YesNo     4 300   1.50  0.50    1.5     1.5   0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial*    -1.21 5.01
+## RxTime     2.12 0.75
+## NStim     -1.51 0.09
+## YesNo     -2.01 0.03</code></pre>
+<p>This provides info related to the:</p>
+<ol style="list-style-type: decimal">
+<li>item name</li>
+<li>item number</li>
+<li>number of valid cases</li>
+<li>mean</li>
+<li>standard deviation</li>
+<li>trimmed mean (with trim defaulting to .1)</li>
+<li>median (standard or interpolated)</li>
+<li>mad: median absolute deviation (see Leys et al, 2013)</li>
+<li>minimum value</li>
+<li>maximum value</li>
+<li>skew</li>
+<li>kurtosis</li>
+<li>standard error</li>
+</ol>
+<div id="turning-numeric-data-into-categorical" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> turning numeric data into categorical</h3>
+<p>As you can see we get a mean, sd, median, etc for <code>NStim</code>, <strong>BUT SHOULD WE?</strong> The number of stimuli is not numerical properly… but instead represent experimental categories. The same can be said for the <code>YesNo</code> data. We need to tell <code>R</code> that these data are categories, or <em>factors</em> and not continuous numbers. To do so we can call on the <code>factor()</code> function as below.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># convert a numeric to a categorical (i.e., make a factor)</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">factor</span>(RTData<span class="op">$</span>NStim)</a></code></pre></div>
+<pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [71] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3
+## [106] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [141] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [176] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 5 5 5 5 5 5 5 5 5 5
+## [211] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+## [246] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+## [281] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+## Levels: 1 3 5</code></pre>
+<p>When you run the line above you’ll note at the end of the output it mentions <code>Levels: 1 3 5</code>. This is telling you that in this vector, there are three levels, or conditions in this factor- number of stimuli = 1; number of stimuli = 3; number of stimuli = 5. To connect this factorized vector to your original data set, you can either create a new column in the data set or overwrite the original <code>NStim</code> column that you are replacing. For beginners, I would recommend adding a new column. To do this, let’s take advantage of some of those fancy <code>tidyverse</code> / <code>dplyr</code> skills you picked up from DataCamp:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># 1. create a new vector attached to the original data frame</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">#    using the dplyr::mutate function:</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">RTData &lt;-<span class="st"> </span>RTData <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">categoricalNStim =</span> <span class="kw">factor</span>(NStim))</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">psych<span class="op">::</span><span class="kw">describe</span>(RTData) </a></code></pre></div>
+<pre><code>##                   vars   n   mean    sd median trimmed    mad min max
+## Trial*               1 300 150.50 86.75  150.5   150.5 111.19   1 300
+## RxTime               2 300  60.26 13.01   59.5    59.3  11.12  36 125
+## NStim                3 300   3.00  1.64    3.0     3.0   2.97   1   5
+## YesNo                4 300   1.50  0.50    1.5     1.5   0.74   1   2
+## categoricalNStim*    5 300   2.00  0.82    2.0     2.0   1.48   1   3
+##                   range skew kurtosis   se
+## Trial*              299 0.00    -1.21 5.01
+## RxTime               89 0.97     2.12 0.75
+## NStim                 4 0.00    -1.51 0.09
+## YesNo                 1 0.00    -2.01 0.03
+## categoricalNStim*     2 0.00    -1.51 0.05</code></pre>
+<p>The asterisk next to <code>categoricalNStim</code> lets you know it’s categorical.</p>
+<p>Note that you could have just strung several pipes together and obviated the need to save to an object. This is useful if you just want to print the output and don’t need to save it for later use.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">RTData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">categoricalNStim =</span> <span class="kw">factor</span>(NStim)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="st">  </span>psych<span class="op">::</span><span class="kw">describe</span>() </a></code></pre></div>
+<pre><code>##                   vars   n   mean    sd median trimmed    mad min max
+## Trial*               1 300 150.50 86.75  150.5   150.5 111.19   1 300
+## RxTime               2 300  60.26 13.01   59.5    59.3  11.12  36 125
+## NStim                3 300   3.00  1.64    3.0     3.0   2.97   1   5
+## YesNo                4 300   1.50  0.50    1.5     1.5   0.74   1   2
+## categoricalNStim*    5 300   2.00  0.82    2.0     2.0   1.48   1   3
+##                   range skew kurtosis   se
+## Trial*              299 0.00    -1.21 5.01
+## RxTime               89 0.97     2.12 0.75
+## NStim                 4 0.00    -1.51 0.09
+## YesNo                 1 0.00    -2.01 0.03
+## categoricalNStim*     2 0.00    -1.51 0.05</code></pre>
+<p>Now that I look at it, <code>YesNo</code> is categorical as well. This can be accomplished by just adding another argument to <code>mutate</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">RTData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">categoricalNStim =</span> <span class="kw">factor</span>(NStim),</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">                <span class="dt">categoricalYesNo =</span> <span class="kw">factor</span>(YesNo)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span>psych<span class="op">::</span><span class="kw">describe</span>() </a></code></pre></div>
+<pre><code>##                   vars   n   mean    sd median trimmed    mad min max
+## Trial*               1 300 150.50 86.75  150.5   150.5 111.19   1 300
+## RxTime               2 300  60.26 13.01   59.5    59.3  11.12  36 125
+## NStim                3 300   3.00  1.64    3.0     3.0   2.97   1   5
+## YesNo                4 300   1.50  0.50    1.5     1.5   0.74   1   2
+## categoricalNStim*    5 300   2.00  0.82    2.0     2.0   1.48   1   3
+## categoricalYesNo*    6 300   1.50  0.50    1.5     1.5   0.74   1   2
+##                   range skew kurtosis   se
+## Trial*              299 0.00    -1.21 5.01
+## RxTime               89 0.97     2.12 0.75
+## NStim                 4 0.00    -1.51 0.09
+## YesNo                 1 0.00    -2.01 0.03
+## categoricalNStim*     2 0.00    -1.51 0.05
+## categoricalYesNo*     1 0.00    -2.01 0.03</code></pre>
+</div>
+<div id="getting-summary-stats-by-groups-or-conditions" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Getting summary stats by groups or conditions</h3>
+<p>You may also get summary statistics subsetted for individual <code>group</code>s. In this case the <code>NStim</code> column represents experimental conditions (num. of stimuli = 1, num. of stimuli = 3, num. of stimuli = 5). To take a look at the summary stat by condition we use the <code>psych::describeBy()</code> function:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">psych<span class="op">::</span><span class="kw">describeBy</span>(RTData,<span class="dt">group =</span> RTData<span class="op">$</span>NStim)</a></code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: 1
+##                   vars   n  mean    sd median trimmed   mad min max range
+## Trial*               1 100 50.50 29.01   50.5   50.50 37.06   1 100    99
+## RxTime               2 100 53.27 13.36   50.0   51.27  8.90  36 104    68
+## NStim                3 100  1.00  0.00    1.0    1.00  0.00   1   1     0
+## YesNo                4 100  1.50  0.50    1.5    1.50  0.74   1   2     1
+## categoricalNStim*    5 100  1.00  0.00    1.0    1.00  0.00   1   1     0
+##                   skew kurtosis   se
+## Trial*             0.0    -1.24 2.90
+## RxTime             1.7     3.34 1.34
+## NStim              NaN      NaN 0.00
+## YesNo              0.0    -2.02 0.05
+## categoricalNStim*  NaN      NaN 0.00
+## -------------------------------------------------------- 
+## group: 3
+##                   vars   n   mean    sd median trimmed   mad min max range
+## Trial*               1 100 150.50 29.01  150.5  150.50 37.06 101 200    99
+## RxTime               2 100  60.65  9.41   60.0   60.01  7.41  42  95    53
+## NStim                3 100   3.00  0.00    3.0    3.00  0.00   3   3     0
+## YesNo                4 100   1.50  0.50    1.5    1.50  0.74   1   2     1
+## categoricalNStim*    5 100   2.00  0.00    2.0    2.00  0.00   2   2     0
+##                   skew kurtosis   se
+## Trial*            0.00    -1.24 2.90
+## RxTime            0.78     1.13 0.94
+## NStim              NaN      NaN 0.00
+## YesNo             0.00    -2.02 0.05
+## categoricalNStim*  NaN      NaN 0.00
+## -------------------------------------------------------- 
+## group: 5
+##                   vars   n   mean    sd median trimmed   mad min max range
+## Trial*               1 100 250.50 29.01  250.5  250.50 37.06 201 300    99
+## RxTime               2 100  66.86 12.28   65.0   65.91  9.64  39 125    86
+## NStim                3 100   5.00  0.00    5.0    5.00  0.00   5   5     0
+## YesNo                4 100   1.50  0.50    1.5    1.50  0.74   1   2     1
+## categoricalNStim*    5 100   3.00  0.00    3.0    3.00  0.00   3   3     0
+##                   skew kurtosis   se
+## Trial*            0.00    -1.24 2.90
+## RxTime            1.29     4.03 1.23
+## NStim              NaN      NaN 0.00
+## YesNo             0.00    -2.02 0.05
+## categoricalNStim*  NaN      NaN 0.00</code></pre>
+</div>
+</div>
+<div id="creating-a-table-of-summary-stats" class="section level2">
+<h2><span class="header-section-number">1.2</span> Creating a table of summary stats</h2>
+<p>I personally am not a big fan of presenting / publishing data in tables. My feeling is that all things being equal, an good plot is typically the most effective way to present data. BUT, I recognize that there are times that call for us to present our data in tables.</p>
+<p>One downside is that by default, <code>psych::describe()</code> doesn’t give us nice pretty (APA-esqu) tables, and putting this ouput into a cleaner format requires a little work. In order to do so, we can leverage some of the functions from the <code>tidyverse</code>. How you go about constructing a cleaner table depends in large part on the content. For example, if you just wanted to convey the number of observations, mean, and std. dev, then it might be best to construct a summary table using <code>dplyr::summarize()</code>. For example a summary of <code>RxTime</code>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">RTData <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="st">&quot;count&quot;</span> =<span class="st"> </span><span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">                            <span class="st">&quot;mean&quot;</span> =<span class="st"> </span><span class="kw">mean</span>(RxTime),</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">                            <span class="st">&quot;sd&quot;</span> =<span class="st"> </span><span class="kw">sd</span>(RxTime)</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">                            ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption =</span> <span class="st">&quot;Table X. Summary statistics for reaction time&quot;</span>)</a></code></pre></div>
+<table style="width:33%;">
+<caption>Table X. Summary statistics for reaction time</caption>
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">count</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">300</td>
+<td align="center">60.26</td>
+<td align="center">13.01</td>
+</tr>
+</tbody>
+</table>
+<p><code>pander()</code> allows us to put the table in a neat (publication friendly) format, including adding a <code>caption</code> or title.</p>
+<p>We can also create a simple table by <code>group</code> by using <code>dplyr::group_by()</code></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">RTData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(categoricalNStim) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="st">&quot;count&quot;</span> =<span class="st"> </span><span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">                   <span class="st">&quot;mean&quot;</span> =<span class="st"> </span><span class="kw">mean</span>(RxTime),</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">                   <span class="st">&quot;sd&quot;</span> =<span class="st"> </span><span class="kw">sd</span>(RxTime)</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">                   ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-7" data-line-number="7"><span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption =</span> <span class="st">&quot;Table X. Summary statistics for reaction time by group&quot;</span>)</a></code></pre></div>
+<table style="width:60%;">
+<caption>Table X. Summary statistics for reaction time by group</caption>
+<colgroup>
+<col width="26%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">categoricalNStim</th>
+<th align="center">count</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">100</td>
+<td align="center">53.27</td>
+<td align="center">13.36</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">100</td>
+<td align="center">60.65</td>
+<td align="center">9.408</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">100</td>
+<td align="center">66.86</td>
+<td align="center">12.28</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

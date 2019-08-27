@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>musings of the Professor</title>
+  <meta name="description" content="Weekly examples and musings related to PSYC 7014.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="musings of the Professor" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Weekly examples and musings related to PSYC 7014." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="musings of the Professor" />
+  
+  <meta name="twitter:description" content="Weekly examples and musings related to PSYC 7014." />
+  
+
+<meta name="author" content="Tehran J. Davis">
+
+
+<meta name="date" content="2018-12-15">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="anova-v-higher-order-factorial-anova.html">
+<link rel="next" href="anova-vi-mixed-effects-anova-bs-ws.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Words from the Professor</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Weekly musings</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html"><i class="fa fa-check"></i><b>1</b> Introduction to R / getting to know your data</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-and-loading-an-r-package"><i class="fa fa-check"></i><b>1.1</b> Installing and loading an R package:</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-a-package-using-the-gui"><i class="fa fa-check"></i><b>1.1.1</b> Installing a package using the GUI</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-packages-with-install.packages"><i class="fa fa-check"></i><b>1.1.2</b> Installing packages with <code>install.packages()</code></a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#an-important-note-on-knitting-with-install.packages"><i class="fa fa-check"></i><b>1.1.3</b> An IMPORTANT note on knitting with install.packages:</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-packages-with-library"><i class="fa fa-check"></i><b>1.1.4</b> Loading packages with <code>library()</code></a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-packages-with-require"><i class="fa fa-check"></i><b>1.1.5</b> Loading packages with <code>require()</code></a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-and-loading-packages-like-a-ninja"><i class="fa fa-check"></i><b>1.1.6</b> Installing and loading packages like a ninja</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-in-data"><i class="fa fa-check"></i><b>1.2</b> Loading in data</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-in-local-data-using-a-gui"><i class="fa fa-check"></i><b>1.2.1</b> Loading in local data using a GUI:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#importing-data-from-the-web"><i class="fa fa-check"></i><b>1.2.2</b> importing data from the web</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#downloading-data"><i class="fa fa-check"></i><b>1.2.3</b> Downloading data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#looking-ahead"><i class="fa fa-check"></i><b>1.3</b> Looking ahead…</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html"><i class="fa fa-check"></i><b>2</b> Measures of distribution, central tendency, PLOTS… oh my!</a><ul>
+<li class="chapter" data-level="2.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#getting-measures-of-central-tendency"><i class="fa fa-check"></i><b>2.1</b> Getting measures of central tendency</a></li>
+<li class="chapter" data-level="2.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-the-distribution-with-a-histogram"><i class="fa fa-check"></i><b>2.2</b> Plotting the distribution with a histogram</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#using-hist"><i class="fa fa-check"></i><b>2.2.1</b> Using <code>hist()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-a-histogram-with-ggplot"><i class="fa fa-check"></i><b>2.2.2</b> Plotting a histogram with <code>ggplot()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-your-data-in-a-boxplot"><i class="fa fa-check"></i><b>2.3</b> Plotting your data in a boxplot:</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#turning-numeric-data-into-categorical"><i class="fa fa-check"></i><b>2.3.1</b> turning numeric data into categorical</a></li>
+<li class="chapter" data-level="2.3.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#boxplotting-using-ggplot"><i class="fa fa-check"></i><b>2.3.2</b> boxplotting using <code>ggplot()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#assessing-the-data-for-normality"><i class="fa fa-check"></i><b>2.4</b> Assessing the data for normality</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#q-q-plots"><i class="fa fa-check"></i><b>2.4.1</b> Q-Q Plots</a></li>
+<li class="chapter" data-level="2.4.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#generating-a-theoretical-normal-distribution."><i class="fa fa-check"></i><b>2.4.2</b> Generating a theoretical normal distribution.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#subsetting-your-data"><i class="fa fa-check"></i><b>2.5</b> Subsetting your data</a></li>
+<li class="chapter" data-level="2.6" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#looking-ahead-means-and-better-models"><i class="fa fa-check"></i><b>2.6</b> Looking ahead: Means and better models</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-highest-probability"><i class="fa fa-check"></i><b>2.6.1</b> mean as highest probability:</a></li>
+<li class="chapter" data-level="2.6.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-fulcrum-point"><i class="fa fa-check"></i><b>2.6.2</b> mean as fulcrum point</a></li>
+<li class="chapter" data-level="2.6.3" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-minimizing-random-error"><i class="fa fa-check"></i><b>2.6.3</b> mean as minimizing random error</a></li>
+<li class="chapter" data-level="2.6.4" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#but-we-can-do-better-than-that"><i class="fa fa-check"></i><b>2.6.4</b> but we can do better than that</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html"><i class="fa fa-check"></i><b>3</b> Sampling distributions and building the logic of NHST</a><ul>
+<li class="chapter" data-level="3.1" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-sampling-distribution"><i class="fa fa-check"></i><b>3.1</b> The sampling distribution</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>3.2</b> Standard error of the mean</a></li>
+<li class="chapter" data-level="3.3" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-difference-distribution"><i class="fa fa-check"></i><b>3.3</b> The difference distribution</a></li>
+<li class="chapter" data-level="3.4" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-null-distribution"><i class="fa fa-check"></i><b>3.4</b> The Null distribution</a></li>
+<li class="chapter" data-level="3.5" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#probabilty-of-observed-differences"><i class="fa fa-check"></i><b>3.5</b> Probabilty of observed differences</a></li>
+<li class="chapter" data-level="3.6" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#a-note-about-sample-size"><i class="fa fa-check"></i><b>3.6</b> A note about sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html"><i class="fa fa-check"></i><b>4</b> Probability and the Binomial Distribution</a><ul>
+<li class="chapter" data-level="4.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#a-few-words-on-where-we-are-at-so-far"><i class="fa fa-check"></i><b>4.1</b> A few words on where we are at so far…</a></li>
+<li class="chapter" data-level="4.2" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#okay-on-to-this-weeks-example-analyses"><i class="fa fa-check"></i><b>4.2</b> Okay on to this week’s example analyses:</a></li>
+<li class="chapter" data-level="4.3" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#classic-example-the-coin-flip"><i class="fa fa-check"></i><b>4.3</b> Classic example: The coin flip</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#how-many-heads-would-we-get-if-we-flipped-a-fair-coin-10-times"><i class="fa fa-check"></i><b>4.3.1</b> How many heads would we get if we flipped a fair coin 10 times?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#changing-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Changing the parameters</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#constructing-a-table-of-outcome-probabilities"><i class="fa fa-check"></i><b>4.4.1</b> Constructing a table of outcome probabilities:</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#assessing-cummulative-probability"><i class="fa fa-check"></i><b>4.4.2</b> Assessing cummulative probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#catching-a-cheat"><i class="fa fa-check"></i><b>4.5</b> Catching a cheat</a></li>
+<li class="chapter" data-level="4.6" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#one-last-thing-permutations-combinations-and-building-functions"><i class="fa fa-check"></i><b>4.6</b> One last thing… Permutations, combinations, and building functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html"><i class="fa fa-check"></i><b>5</b> Chi-square and associated methods</a><ul>
+<li class="chapter" data-level="5.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>5.1</b> Goodness of fit test</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#what-to-do-if-you-are-given-a-table-with-tallies"><i class="fa fa-check"></i><b>5.1.1</b> What to do if you are given a table with tallies</a></li>
+<li class="chapter" data-level="5.1.2" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#assuming-all-things-are-not-equal"><i class="fa fa-check"></i><b>5.1.2</b> Assuming all things are NOT equal</a></li>
+<li class="chapter" data-level="5.1.3" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#real-data-is-likely-not-pre-tallied"><i class="fa fa-check"></i><b>5.1.3</b> Real data is likely NOT pre-tallied</a></li>
+<li class="chapter" data-level="5.1.4" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#getting-counts-the-in-class-way-not-recommended"><i class="fa fa-check"></i><b>5.1.4</b> getting counts the in-class way (not recommended)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#getting-counts-the-table-way-my-new-recommendation"><i class="fa fa-check"></i><b>5.1.5</b> getting counts the <code>table()</code> way (my new recommendation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#contingency-table-analysis-in-r"><i class="fa fa-check"></i><b>5.2</b> Contingency Table Analysis in R</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#okay-but-what-about-with-real-data"><i class="fa fa-check"></i><b>5.2.1</b> Okay, but what about with REAL DATA:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#effect-sizes-and-odds-ratios"><i class="fa fa-check"></i><b>5.3</b> Effect Sizes and Odds Ratios</a></li>
+<li class="chapter" data-level="5.4" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.4</b> Fisher’s exact test</a></li>
+<li class="chapter" data-level="5.5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#cohens-kappa"><i class="fa fa-check"></i><b>5.5</b> Cohen’s kappa</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>6</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#the-relationship-btw-stress-and-health"><i class="fa fa-check"></i><b>6.1</b> The Relationship b/tw Stress and Health</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#testing-our-assumptions"><i class="fa fa-check"></i><b>6.1.1</b> Testing our assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#plotting-the-data"><i class="fa fa-check"></i><b>6.2</b> Plotting the data</a></li>
+<li class="chapter" data-level="6.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.3</b> Covariance and Correlation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#correlation"><i class="fa fa-check"></i><b>6.3.2</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#sigfnificance-testing-r"><i class="fa fa-check"></i><b>6.4</b> Sigfnificance testing <span class="math inline">\(r\)</span></a></li>
+<li class="chapter" data-level="6.5" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#fitting-the-data-to-a-model"><i class="fa fa-check"></i><b>6.5</b> Fitting the data to a model</a></li>
+<li class="chapter" data-level="6.6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-models-in-r"><i class="fa fa-check"></i><b>6.6</b> Linear models in R</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#attributes-of-class-lm"><i class="fa fa-check"></i><b>6.6.1</b> Attributes of class <code>lm</code>:</a></li>
+<li class="chapter" data-level="6.6.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#testing-the-residuals"><i class="fa fa-check"></i><b>6.6.2</b> Testing the residuals</a></li>
+<li class="chapter" data-level="6.6.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#using-your-lm-object-with-other-functions"><i class="fa fa-check"></i><b>6.6.3</b> Using your <code>lm</code> object with other functions</a></li>
+<li class="chapter" data-level="6.6.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#plotting-the-regression-line"><i class="fa fa-check"></i><b>6.6.4</b> Plotting the regression line</a></li>
+<li class="chapter" data-level="6.6.5" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#a-note-on-degrees-of-freedom-of-our-model"><i class="fa fa-check"></i><b>6.6.5</b> A note on degrees of freedom of our model</a></li>
+<li class="chapter" data-level="6.6.6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#interpreting-the-output"><i class="fa fa-check"></i><b>6.6.6</b> Interpreting the output</a></li>
+<li class="chapter" data-level="6.6.7" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#the-coeff.-of-determination-as-index-of-explanatory-value"><i class="fa fa-check"></i><b>6.6.7</b> The coeff. of determination as index of explanatory value</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#write-up-and-presentaion"><i class="fa fa-check"></i><b>6.7</b> Write up and presentaion</a></li>
+<li class="chapter" data-level="6.8" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#advanced-plotting"><i class="fa fa-check"></i><b>6.8</b> Advanced plotting</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#adding-text-to-the-plot"><i class="fa fa-check"></i><b>6.8.1</b> Adding text to the plot</a></li>
+<li class="chapter" data-level="6.8.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#addnig-text-like-a-r-ninja"><i class="fa fa-check"></i><b>6.8.2</b> addnig text like a R-ninja:</a></li>
+<li class="chapter" data-level="6.8.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#placing-plots-side-by-side-in-a-grid"><i class="fa fa-check"></i><b>6.8.3</b> Placing plots side-by-side in a grid</a></li>
+<li class="chapter" data-level="6.8.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#two-series-on-the-same-damn-plot"><i class="fa fa-check"></i><b>6.8.4</b> Two series on the same damn plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html"><i class="fa fa-check"></i><b>7</b> Testing differences in means: t-test</a><ul>
+<li class="chapter" data-level="7.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#things-to-consider-before-running-the-t-test"><i class="fa fa-check"></i><b>7.1</b> Things to consider before running the t-test</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#what-is-the-nature-of-your-sample-data"><i class="fa fa-check"></i><b>7.1.1</b> What is the nature of your sample data?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#what-is-the-structure-of-your-data-file"><i class="fa fa-check"></i><b>7.1.2</b> What is the structure of your data file?</a></li>
+<li class="chapter" data-level="7.1.3" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#testing-assumptions"><i class="fa fa-check"></i><b>7.1.3</b> Testing assumptions</a></li>
+<li class="chapter" data-level="7.1.4" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#getting-the-descriptive-stats-and-plotting-the-means."><i class="fa fa-check"></i><b>7.1.4</b> Getting the descriptive stats and plotting the means.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#performing-the-t-test-paired-sample-t-test"><i class="fa fa-check"></i><b>7.2</b> Performing the t-test (Paired sample t-test)</a></li>
+<li class="chapter" data-level="7.3" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#measuring-effect-size"><i class="fa fa-check"></i><b>7.3</b> Measuring effect size</a></li>
+<li class="chapter" data-level="7.4" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#other-t-tests"><i class="fa fa-check"></i><b>7.4</b> Other <span class="math inline">\(t\)</span> tests:</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#one-sample"><i class="fa fa-check"></i><b>7.4.1</b> One sample:</a></li>
+<li class="chapter" data-level="7.4.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#independent-samples-example"><i class="fa fa-check"></i><b>7.4.2</b> Independent samples example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#independent-or-paired-sample"><i class="fa fa-check"></i><b>7.5</b> Independent or Paired Sample?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html"><i class="fa fa-check"></i><b>8</b> Analysis of Variance I: the One-way ANOVA</a><ul>
+<li class="chapter" data-level="8.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#required-packages"><i class="fa fa-check"></i><b>8.1</b> Required packages</a></li>
+<li class="chapter" data-level="8.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#anovas-for-comparing-means"><i class="fa fa-check"></i><b>8.2</b> ANOVAs for comparing means</a></li>
+<li class="chapter" data-level="8.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#pre-processing-the-data"><i class="fa fa-check"></i><b>8.3</b> Pre-processing the data:</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#recoding-the-factors-if-dummy-coded"><i class="fa fa-check"></i><b>8.3.1</b> Recoding the factors (if dummy coded)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#renaming-column-headers"><i class="fa fa-check"></i><b>8.3.2</b> Renaming column headers</a></li>
+<li class="chapter" data-level="8.3.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reordering-your-levels"><i class="fa fa-check"></i><b>8.3.3</b> Reordering your levels</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#assumptions-for-anova"><i class="fa fa-check"></i><b>8.4</b> Assumptions for ANOVA</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#checking-the-normality-assumption-option-1"><i class="fa fa-check"></i><b>8.4.1</b> Checking the normality assumption, OPTION 1</a></li>
+<li class="chapter" data-level="8.4.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#checking-the-normality-assumption-option-2"><i class="fa fa-check"></i><b>8.4.2</b> Checking the normality assumption, OPTION 2</a></li>
+<li class="chapter" data-level="8.4.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>8.4.3</b> Homogeneity of Variance</a></li>
+<li class="chapter" data-level="8.4.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#what-to-do-if-the-assumptions-are-violated"><i class="fa fa-check"></i><b>8.4.4</b> What to do if the assumptions are violated?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#running-the-anova-in-r"><i class="fa fa-check"></i><b>8.5</b> Running the ANOVA in R:</a></li>
+<li class="chapter" data-level="8.6" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reporting-your-data"><i class="fa fa-check"></i><b>8.6</b> Reporting your data</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reporting-in-the-text"><i class="fa fa-check"></i><b>8.6.1</b> Reporting in the text</a></li>
+<li class="chapter" data-level="8.6.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#what-the-omnibus-anova-tells-you"><i class="fa fa-check"></i><b>8.6.2</b> What the omnibus ANOVA tells you</a></li>
+<li class="chapter" data-level="8.6.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#plots"><i class="fa fa-check"></i><b>8.6.3</b> Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#digging-deeper-anova-and-regression"><i class="fa fa-check"></i><b>8.7</b> DIGGING DEEPER: ANOVA and Regression</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#regression-method-v.-means-method"><i class="fa fa-check"></i><b>8.7.1</b> Regression method v. means method</a></li>
+<li class="chapter" data-level="8.7.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#comparing-two-models"><i class="fa fa-check"></i><b>8.7.2</b> Comparing two models</a></li>
+<li class="chapter" data-level="8.7.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#means-method-calculations"><i class="fa fa-check"></i><b>8.7.3</b> Means method calculations</a></li>
+<li class="chapter" data-level="8.7.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#bringing-it-together-its-all-about-the-residuals-baby"><i class="fa fa-check"></i><b>8.7.4</b> Bringing it together: it’s all about the residuals, baby</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><i class="fa fa-check"></i><b>9</b> Analysis of Variance II: Multiple comparisons in One-way ANOVA</a><ul>
+<li class="chapter" data-level="9.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#getting-started-loading-packages-and-data"><i class="fa fa-check"></i><b>9.1</b> Getting started (loading packages and data)</a></li>
+<li class="chapter" data-level="9.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#running-the-one-way-anova"><i class="fa fa-check"></i><b>9.2</b> Running the One-way ANOVA</a></li>
+<li class="chapter" data-level="9.3" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#post-hoc-tests"><i class="fa fa-check"></i><b>9.3</b> Post-hoc tests</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#bonferonni-dunn-and-holm-tests"><i class="fa fa-check"></i><b>9.3.1</b> Bonferonni-Dunn and Holm tests</a></li>
+<li class="chapter" data-level="9.3.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#tukey-hsd-and-regwq-tests"><i class="fa fa-check"></i><b>9.3.2</b> Tukey HSD and REGWQ tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#the-logic-of-planned-contrasts"><i class="fa fa-check"></i><b>9.4</b> The logic of Planned contrasts</a></li>
+<li class="chapter" data-level="9.5" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#performing-planned-contrasts-in-r"><i class="fa fa-check"></i><b>9.5</b> Performing planned contrasts in R</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#making-the-output-easier-to-read"><i class="fa fa-check"></i><b>9.5.1</b> Making the output easier to read</a></li>
+<li class="chapter" data-level="9.5.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#calculating-your-effect-size"><i class="fa fa-check"></i><b>9.5.2</b> Calculating your effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#reporting-your-results"><i class="fa fa-check"></i><b>9.6</b> Reporting your results</a></li>
+<li class="chapter" data-level="9.7" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#a-note-on-using-the-multcomp-package-v.-using-the-base-stats-method"><i class="fa fa-check"></i><b>9.7</b> A note on using the <code>multcomp</code> package v. using the base stats method</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html"><i class="fa fa-check"></i><b>10</b> Analysis of Varience III: Factorial ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#main-effect-main-effect-and-interactions-oh-my"><i class="fa fa-check"></i><b>10.1</b> Main effect, main effect, and interactions… oh my!</a></li>
+<li class="chapter" data-level="10.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#example-a-22-anova"><i class="fa fa-check"></i><b>10.2</b> Example: a 2×2 ANOVA</a></li>
+<li class="chapter" data-level="10.3" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#making-sense-of-plots"><i class="fa fa-check"></i><b>10.3</b> Making sense of plots</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plots"><i class="fa fa-check"></i><b>10.3.1</b> Interaction plots</a></li>
+<li class="chapter" data-level="10.3.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#plotting-main-effects"><i class="fa fa-check"></i><b>10.3.2</b> Plotting main effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-lm-method"><i class="fa fa-check"></i><b>10.4</b> Running the ANOVA <code>lm()</code> method</a></li>
+<li class="chapter" data-level="10.5" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-in-the-afexaov_ez-method"><i class="fa fa-check"></i><b>10.5</b> Running the ANOVA in the <code>afex::aov_ez()</code> method:</a></li>
+<li class="chapter" data-level="10.6" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#getting-cell-means"><i class="fa fa-check"></i><b>10.6</b> Getting cell means</a></li>
+<li class="chapter" data-level="10.7" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#more-examples-a-2-3-anova"><i class="fa fa-check"></i><b>10.7</b> More examples: a 2 × 3 ANOVA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova"><i class="fa fa-check"></i><b>10.7.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="10.7.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#apa-plotting"><i class="fa fa-check"></i><b>10.7.2</b> APA plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#anova-howell-13.1"><i class="fa fa-check"></i><b>10.8</b> 2 × 5 ANOVA (Howell 13.1)</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-1"><i class="fa fa-check"></i><b>10.8.1</b> Running the ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#one-last-example"><i class="fa fa-check"></i><b>10.9</b> One last example,</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-2"><i class="fa fa-check"></i><b>10.9.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="10.9.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plot"><i class="fa fa-check"></i><b>10.9.2</b> Interaction plot</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-v.-no-interaction"><i class="fa fa-check"></i><b>10.10</b> Interaction v. no interaction</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#no-interaction-how-about-some-posthocs"><i class="fa fa-check"></i><b>10.10.1</b> No interaction? How about some posthocs?</a></li>
+<li class="chapter" data-level="10.10.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#what-to-do-if-you-do-have-an-interaction"><i class="fa fa-check"></i><b>10.10.2</b> what to do if you DO have an interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="10.11" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#what-about-planned-contrasts"><i class="fa fa-check"></i><b>10.11</b> What about planned contrasts?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html"><i class="fa fa-check"></i><b>11</b> ANOVA IV: Interactions &amp; simple Effects</a><ul>
+<li class="chapter" data-level="11.1" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#the-data-set"><i class="fa fa-check"></i><b>11.1</b> the data set</a></li>
+<li class="chapter" data-level="11.2" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#plotting-the-data-and-descriptive-stats"><i class="fa fa-check"></i><b>11.2</b> Plotting the data and descriptive stats</a></li>
+<li class="chapter" data-level="11.3" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#the-omnibus-anova-and-assumption-tests"><i class="fa fa-check"></i><b>11.3</b> the Omnibus ANOVA (and assumption tests)</a></li>
+<li class="chapter" data-level="11.4" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#running-the-simple-effects-anova-in-6-steps"><i class="fa fa-check"></i><b>11.4</b> Running the simple effects ANOVA in 6 steps:</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-1-get-the-omnibus-anova"><i class="fa fa-check"></i><b>11.4.1</b> step 1: get the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="11.4.2" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova"><i class="fa fa-check"></i><b>11.4.2</b> step 2: get the MSError, Error df, and Error SS from omnibus ANOVA</a></li>
+<li class="chapter" data-level="11.4.3" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-3-subset-your-data-accordingly"><i class="fa fa-check"></i><b>11.4.3</b> step 3: subset your data accordingly</a></li>
+<li class="chapter" data-level="11.4.4" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-4-run-your-one-way-simple-effects-anovas"><i class="fa fa-check"></i><b>11.4.4</b> step 4: run your One-way simple effects ANOVA(s)</a></li>
+<li class="chapter" data-level="11.4.5" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova"><i class="fa fa-check"></i><b>11.4.5</b> step 5: get the treatment MS, df, SS, and F-value from your simple ANOVA</a></li>
+<li class="chapter" data-level="11.4.6" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-6-make-our-corrections"><i class="fa fa-check"></i><b>11.4.6</b> step 6: make our corrections</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#building-a-function-to-ninja-this-for-us"><i class="fa fa-check"></i><b>11.5</b> Building a function to ninja this for us</a></li>
+<li class="chapter" data-level="11.6" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#post-hoc-tests-1"><i class="fa fa-check"></i><b>11.6</b> Post hoc tests</a></li>
+<li class="chapter" data-level="11.7" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#interpreting-these-results"><i class="fa fa-check"></i><b>11.7</b> Interpreting these results:</a></li>
+<li class="chapter" data-level="11.8" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#example-write-up"><i class="fa fa-check"></i><b>11.8</b> Example write-up:</a></li>
+<li class="chapter" data-level="11.9" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#performing-this-in-spss-video"><i class="fa fa-check"></i><b>11.9</b> Performing this in SPSS (video)</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html"><i class="fa fa-check"></i><b>12</b> ANOVA V: Higher Order Factorial ANOVA</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#packages-and-data"><i class="fa fa-check"></i><b>12.1</b> Packages and data</a></li>
+<li class="chapter" data-level="12.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-1-no-three-way-interaction-single-two-way-interaction"><i class="fa fa-check"></i><b>12.2</b> EXAMPLE 1: no three-way interaction, single two way interaction</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#first-plot-3-way-interaction-plot"><i class="fa fa-check"></i><b>12.2.1</b> First plot: 3 way interaction plot</a></li>
+<li class="chapter" data-level="12.2.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-anova-3"><i class="fa fa-check"></i><b>12.2.2</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="12.2.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#replotting-the-2-way-interaction"><i class="fa fa-check"></i><b>12.2.3</b> Replotting the 2-way interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions"><i class="fa fa-check"></i><b>12.3</b> EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#plotting-the-data-1"><i class="fa fa-check"></i><b>12.3.1</b> plotting the data</a></li>
+<li class="chapter" data-level="12.3.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-omnibus-anova"><i class="fa fa-check"></i><b>12.3.2</b> running the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="12.3.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#testing-the-lecturepresentation-interaction"><i class="fa fa-check"></i><b>12.3.3</b> testing the <code>Lecture:Presentation</code> interaction:</a></li>
+<li class="chapter" data-level="12.3.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#testing-the-lecturegrade-interaction"><i class="fa fa-check"></i><b>12.3.4</b> testing the <code>Lecture:Grade</code> interaction:</a></li>
+<li class="chapter" data-level="12.3.5" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#simple-effect-anovas-1"><i class="fa fa-check"></i><b>12.3.5</b> simple effect ANOVAs:</a></li>
+<li class="chapter" data-level="12.3.6" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#main-takeaways-write-up"><i class="fa fa-check"></i><b>12.3.6</b> Main takeaways / write-up</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way"><i class="fa fa-check"></i><b>12.4</b> EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#plotting"><i class="fa fa-check"></i><b>12.4.1</b> Plotting:</a></li>
+<li class="chapter" data-level="12.4.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-anova-4"><i class="fa fa-check"></i><b>12.4.2</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="12.4.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#fifth-graders-lecturepresentation-interaction."><i class="fa fa-check"></i><b>12.4.3</b> Fifth Graders, Lecture:Presentation interaction.</a></li>
+<li class="chapter" data-level="12.4.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#eighth-graders-lecturepresentation-interaction."><i class="fa fa-check"></i><b>12.4.4</b> Eighth Graders, Lecture:Presentation interaction.</a></li>
+<li class="chapter" data-level="12.4.5" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#constructing-a-narrative"><i class="fa fa-check"></i><b>12.4.5</b> Constructing a narrative:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html"><i class="fa fa-check"></i><b>13</b> ANOVA6: Within-Subjects</a><ul>
+<li class="chapter" data-level="13.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#within-subject-v.-between-subjects"><i class="fa fa-check"></i><b>13.1</b> Within-Subject v. Between Subjects</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#within-v-between-anova"><i class="fa fa-check"></i><b>13.1.1</b> Within v Between ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-1"><i class="fa fa-check"></i><b>13.2</b> EXAMPLE 1</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data"><i class="fa fa-check"></i><b>13.2.1</b> loading in the data:</a></li>
+<li class="chapter" data-level="13.2.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-2"><i class="fa fa-check"></i><b>13.2.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-a-within-anova-afex"><i class="fa fa-check"></i><b>13.2.3</b> running a within ANOVA (afex):</a></li>
+<li class="chapter" data-level="13.2.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#planned-contrasts"><i class="fa fa-check"></i><b>13.2.4</b> planned contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-2"><i class="fa fa-check"></i><b>13.3</b> EXAMPLE 2</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data-1"><i class="fa fa-check"></i><b>13.3.1</b> loading in the data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-3"><i class="fa fa-check"></i><b>13.3.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-anova-5"><i class="fa fa-check"></i><b>13.3.3</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="13.3.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#post-hocs"><i class="fa fa-check"></i><b>13.3.4</b> post-hocs</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-3"><i class="fa fa-check"></i><b>13.4</b> EXAMPLE 3</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data-2"><i class="fa fa-check"></i><b>13.4.1</b> loading in the data:</a></li>
+<li class="chapter" data-level="13.4.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-4"><i class="fa fa-check"></i><b>13.4.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.4.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-omnibus-anova-1"><i class="fa fa-check"></i><b>13.4.3</b> running the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="13.4.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-simple-effects-anovas"><i class="fa fa-check"></i><b>13.4.4</b> running the simple effects ANOVAs</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#how-to-perform-a-within-subjects-analysis-in-spss"><i class="fa fa-check"></i><b>13.5</b> How to perform a within subjects analysis in SPSS:</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html"><i class="fa fa-check"></i><b>14</b> ANOVA VI: Mixed-effects ANOVA (BS + WS)</a><ul>
+<li class="chapter" data-level="14.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#example-1-1"><i class="fa fa-check"></i><b>14.1</b> Example 1:</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#data-import-and-wrangling"><i class="fa fa-check"></i><b>14.1.1</b> data import and wrangling</a></li>
+<li class="chapter" data-level="14.1.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#plotting-the-data-5"><i class="fa fa-check"></i><b>14.1.2</b> plotting the data</a></li>
+<li class="chapter" data-level="14.1.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#running-our-anova"><i class="fa fa-check"></i><b>14.1.3</b> Running our ANOVA:</a></li>
+<li class="chapter" data-level="14.1.4" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#simple-effects"><i class="fa fa-check"></i><b>14.1.4</b> simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#example-2-1"><i class="fa fa-check"></i><b>14.2</b> Example 2:</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#data-import-and-wrangling-1"><i class="fa fa-check"></i><b>14.2.1</b> data import and wrangling</a></li>
+<li class="chapter" data-level="14.2.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#plotting-the-data-6"><i class="fa fa-check"></i><b>14.2.2</b> plotting the data</a></li>
+<li class="chapter" data-level="14.2.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#run-your-omnibus-anova"><i class="fa fa-check"></i><b>14.2.3</b> Run your omnibus ANOVA:</a></li>
+<li class="chapter" data-level="14.2.4" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#simple-effects-1"><i class="fa fa-check"></i><b>14.2.4</b> simple effects:</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#to-pool-or-not-to-pool-this-is-the-yada-yada-yada"><i class="fa fa-check"></i><b>14.3</b> to pool or not to pool, this is the yada yada yada</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html"><i class="fa fa-check"></i><b>A</b> Plotting histograms and probability distributions</a><ul>
+<li class="chapter" data-level="A.1" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#the-basics"><i class="fa fa-check"></i><b>A.1</b> The Basics</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-1-building-the-canvas"><i class="fa fa-check"></i><b>A.1.1</b> Step 1: Building the canvas</a></li>
+<li class="chapter" data-level="A.1.2" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-2-tell-ggplot-what-kind-of-plot-to-make."><i class="fa fa-check"></i><b>A.1.2</b> Step 2: Tell <code>ggplot</code> what kind of plot to make.</a></li>
+<li class="chapter" data-level="A.1.3" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-3-adjust-the-axes-and-labels"><i class="fa fa-check"></i><b>A.1.3</b> Step 3: Adjust the axes and labels</a></li>
+<li class="chapter" data-level="A.1.4" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-4-adjusting-for-apa"><i class="fa fa-check"></i><b>A.1.4</b> Step 4: Adjusting for APA</a></li>
+<li class="chapter" data-level="A.1.5" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-5-add-and-adjust-the-legend"><i class="fa fa-check"></i><b>A.1.5</b> Step 5: Add and adjust the legend</a></li>
+<li class="chapter" data-level="A.1.6" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-6-save-the-ggplot."><i class="fa fa-check"></i><b>A.1.6</b> Step 6: Save the <code>ggplot</code>.</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#a-note-about-your-bonus-on-week-4."><i class="fa fa-check"></i><b>A.2</b> A note about your BONUS on Week 4.</a></li>
+<li class="chapter" data-level="A.3" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#advanced-stuff"><i class="fa fa-check"></i><b>A.3</b> Advanced stuff</a></li>
+</ul></li>
+<li class="divider"></li>
+<li></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">musings of the Professor</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="anova6-within-subjects" class="section level1">
+<h1><span class="header-section-number">Week 13</span> ANOVA6: Within-Subjects</h1>
+<div id="within-subject-v.-between-subjects" class="section level2">
+<h2><span class="header-section-number">13.1</span> Within-Subject v. Between Subjects</h2>
+<p>Up until now we have considered ANOVA in between subjects designs. Data at each level of each factor comes from a different set of participants. This week we more onto within-subjects designs. As we mentioned in class we have a within-subject design whenever data from the same participants exists on at least two levels of a factor (or analogously occupied at least two cells within our interaction matrix).</p>
+<p>To contrast some important distinctions let’s revisit our familiar data set contrasting test outcomes for students as a function of Lecture. I realize before, Lecture was crossed with at least one other factor, but for the sake on simplicity let’s just consider data from this single factor. The goal of this first section is to contrast results as a function whether this data is considered within-subjects or between-subjects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">within_between &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/withinVbetween.txt&quot;</span>, 
+    <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   WithinSubjects = col_integer(),
+##   Lecture = col_character(),
+##   Score = col_integer(),
+##   BetweenSubjects = col_integer()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">within_between</code></pre></div>
+<pre><code>## # A tibble: 36 x 4
+##    WithinSubjects Lecture  Score BetweenSubjects
+##             &lt;int&gt; &lt;chr&gt;    &lt;int&gt;           &lt;int&gt;
+##  1              1 Physical    53               1
+##  2              2 Physical    49               2
+##  3              3 Physical    47               3
+##  4              4 Physical    42               4
+##  5              5 Physical    51               5
+##  6              6 Physical    34               6
+##  7              7 Physical    44               7
+##  8              8 Physical    48               8
+##  9              9 Physical    35               9
+## 10             10 Physical    18              10
+## # ... with 26 more rows</code></pre>
+<div id="within-v-between-anova" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> Within v Between ANOVA</h3>
+<p>So we have our dataset <code>within_between</code>. You’ll note that there are two subjects columns <code>WithinSubjects</code> which imagines 12 participants each going through all 3 Lecture types and <code>BetweenSubjects</code> where each participant (N=36) is assigned to a single Lecture type. Previously, we might have treated this as a between subjects design. Looking at the <code>ezDeign</code> of this design we see that every <code>BetweenSubject</code> is assigned to a single condition (as evidenced by count = 1)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ez<span class="op">::</span><span class="kw">ezDesign</span>(within_between, <span class="dt">y =</span> Lecture, <span class="dt">x =</span> BetweenSubjects)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-392-1.png" width="672" /></p>
+<p>Skipping past the preliminaries (e.g., testing for assumptions) and straight to running the BS ANOVA:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">between.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;BetweenSubjects&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Score&quot;</span>, <span class="dt">data =</span> within_between, 
+    <span class="dt">between =</span> <span class="st">&quot;Lecture&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>))</code></pre></div>
+<pre><code>## Converting to factor: Lecture</code></pre>
+<pre><code>## Contrasts set to contr.sum for the following variables: Lecture</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">between.aov<span class="op">$</span>anova_table</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Score
+##         num Df den Df    MSE      F     pes  Pr(&gt;F)  
+## Lecture      2     33 139.36 4.2838 0.20611 0.02218 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>However, let’s assume instead that this data set comes a within design. That is, instead of different participants in each <code>Lecture</code> group, the same group of people went through all three lectures:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ez<span class="op">::</span><span class="kw">ezDesign</span>(within_between, <span class="dt">y =</span> Lecture, <span class="dt">x =</span> WithinSubjects)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-394-1.png" width="672" /></p>
+<p>We see that the <code>ezDesign</code> has changed. Instead of 36 participants each individually assigned to a single condition, we have 12 participants each assigned to all three conditions for a single trial (measure). Running the within-subjects ANOVA:</p>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Score
+##         num Df den Df    MSE      F     pes   Pr(&gt;F)    
+## Lecture      2     22 48.515 12.305 0.52801 0.000259 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>(You may have noticed I’ve added a <code>correction</code> argument to my <code>aov_ez</code> call. More on this later)</p>
+<p>In both of these cases the data is exactly the same. What has changed is how we parse the variance (you’ll notice that the denominator degrees of freedom are different for the second ANOVA). In a within design, we need to take into account the “within-subject” variance. That is how individual subjects vary from one level of treatment to the other. In this respect, within designs are typically more powerful than analogous between designs. Whilet the inherent differences between individual subjects is present in both types of designs, your within-subjects ANOVA model includes it in its analysis. This increase in power is reflected by the lower MSE (48.52 v. 139.36) and subsequently, larger F-value (12.31 v. 4.28) and effect size (0.53 v. 0.21) in our within-subjects analysis.</p>
+<p>Well if that’s the case why not run within-subject (WS) designs all of the time. Well, typically psychologists do when the phenomena lends itself to WS-designs. BUT there are certainly times when they are not practical, for example if you are concerned about learning, practice, or carryover effects where exposure to a treatment on one level might impact the other levels. For example if you were studying radiation poisoning and had a placebo v. radiation dose condition, it be likely that you wouldn’t run your experiement as a within—or at the very least you wouldn’t give them the radiation first. It would also be likely that you’d be in violation several standards of ethics.</p>
+<p>Perhaps a little more inside baseball, there are underlying questions on whether or not we are indeed making the appropriate corrections in our WS models or correctly specifying our experiments units. For example, if participants data is collected over 4 (or any number) trials in each treactment condition, then both SPSS and R <code>afex</code> require you to collapse those trials to means, therefore turning what are truly 4 observations into 1 see <a href="https://search.proquest.com/docview/232357509/fulltextPDF/E6BE3DC885B947D6PQ/">Max et al., 1999</a> for details. In R, <code>afex</code> handles this automatically for data in long format. In SPSS you need to organize your data in another program (like Excel), calculate the means, and then send that data to SPSS.</p>
+<p>At the same time there are debates as to the importance of sphericity in the subjects data. One alternative method that avoids these issues is to invoke mixed models (e.g., <code>lmer</code>). However, if you really want to go down the rabbit hole check out <a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">Doug Bates reponse on appropriate dfs and p.values in <code>lmer</code></a>. You’ll not that these discussions were ten years ago and are still being debated (see <a href="https://www.reddit.com/r/AskStatistics/comments/2x9ipp/linear_mixed_effect_models_and_pvalues_r/">here</a>.</p>
+<p>For now, we won’t go down the rabbit hole and just focus on the practical issues confronted when running a repeated-measures ANOVA.</p>
+</div>
+</div>
+<div id="example-1" class="section level2">
+<h2><span class="header-section-number">13.2</span> EXAMPLE 1</h2>
+<p>To start, we will use data from Howell’s example in the opening of Chapter 14. Here are data related to the effectiveness of relaxation therapy to the number of episodes that chronic migraine sufferers reported. Data was collected from each subject over the course of 5 weeks. After week 2 the therapy treatment was implemented effectively dividing the 5 weeks into two phases, Pre (Weeks 1 &amp; 2) and Post (Weeks 3,4, &amp; 5).</p>
+<p>The data that you see here represent a single observation per participant per week, so with this example there is no need to collapse multiple observations to a mean value per participant per week. We’ll confront an example where this is an issue later in the vignette.</p>
+<div id="loading-in-the-data" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> loading in the data:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example1 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab14-3.dat&quot;</span>, 
+    <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Subject = col_integer(),
+##   Wk1 = col_integer(),
+##   Wk2 = col_integer(),
+##   Wk3 = col_integer(),
+##   Wk4 = col_integer(),
+##   Wk5 = col_integer()
+## )</code></pre>
+<p>You’ll notice that the data set above is in wide format. Each subject is on a single row and each week is in its own column. Note that <strong>this is the preferred format for within subjects analysis for SPSS</strong>. However in <code>R</code> we want it in long format.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example1_long &lt;-<span class="st"> </span><span class="kw">gather</span>(example1, <span class="dt">key =</span> <span class="st">&quot;Week&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)
+
+example1_long<span class="op">$</span>Week &lt;-<span class="st"> </span><span class="kw">as.factor</span>(example1_long<span class="op">$</span>Week)
+
+example1_long</code></pre></div>
+<pre><code>## # A tibble: 45 x 3
+##    Subject Week  Migraines
+##      &lt;int&gt; &lt;fct&gt;     &lt;int&gt;
+##  1       1 Wk1          21
+##  2       2 Wk1          20
+##  3       3 Wk1          17
+##  4       4 Wk1          25
+##  5       5 Wk1          30
+##  6       6 Wk1          19
+##  7       7 Wk1          26
+##  8       8 Wk1          17
+##  9       9 Wk1          26
+## 10       1 Wk2          22
+## # ... with 35 more rows</code></pre>
+<p>Ok, much better, each Subject × Week observation is on a single row.</p>
+</div>
+<div id="plotting-the-data-2" class="section level3">
+<h3><span class="header-section-number">13.2.2</span> plotting the data</h3>
+<p>One additional concern that we must deal with when plotting within-subjects data is the error bars. Plotting the standard error or regular confidence intervals may be misleading for making statistical inferences. This is beause the values, normally caluculated do not account for within subject correlation. Luckily for us there is a correction that we can make using the <code>Rmisc</code> package. Please see <a href="https://doaj.org/article/dd17c4ccc4684c9da60c02f3864d09e6">Cousineau (2005)</a> and <a href="https://doaj.org/article/011cd52c58b449c4bf169676ca704062">Morey (2008)</a> for details on this issue and subsequent correction.</p>
+<p>The practical steps for this correction include first norming the data to account for within subjects correlations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">normedData &lt;-<span class="st"> </span>Rmisc<span class="op">::</span><span class="kw">normDataWithin</span>(<span class="dt">data =</span> example1_long, <span class="dt">measurevar =</span> <span class="st">&quot;Migraines&quot;</span>, 
+    <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">betweenvars =</span> <span class="ot">NULL</span>)
+
+normedData</code></pre></div>
+<pre><code>##    Subject Week Migraines MigrainesNormed
+## 1        1  Wk1        21       21.644444
+## 2        1  Wk4         6        6.644444
+## 3        1  Wk5         6        6.644444
+## 4        1  Wk3         8        8.644444
+## 5        1  Wk2        22       22.644444
+## 6        2  Wk5         4        5.844444
+## 7        2  Wk4         4        5.844444
+## 8        2  Wk2        19       20.844444
+## 9        2  Wk3        10       11.844444
+## 10       2  Wk1        20       21.844444
+## 11       3  Wk5         5        9.044444
+## 12       3  Wk2        15       19.044444
+## 13       3  Wk4         4        8.044444
+## 14       3  Wk3         5        9.044444
+## 15       3  Wk1        17       21.044444
+## 16       4  Wk4        12        5.844444
+## 17       4  Wk5        17       10.844444
+## 18       4  Wk3        13        6.844444
+## 19       4  Wk2        30       23.844444
+## 20       4  Wk1        25       18.844444
+## 21       5  Wk4         8        4.444444
+## 22       5  Wk1        30       26.444444
+## 23       5  Wk3        13        9.444444
+## 24       5  Wk5         6        2.444444
+## 25       5  Wk2        27       23.444444
+## 26       6  Wk5         4        4.244444
+## 27       6  Wk4         7        7.244444
+## 28       6  Wk3         8        8.244444
+## 29       6  Wk1        19       19.244444
+## 30       6  Wk2        27       27.244444
+## 31       7  Wk5         5        7.444444
+## 32       7  Wk3         5        7.444444
+## 33       7  Wk2        16       18.444444
+## 34       7  Wk4         2        4.444444
+## 35       7  Wk1        26       28.444444
+## 36       8  Wk5         5        8.444444
+## 37       8  Wk3         8       11.444444
+## 38       8  Wk4         1        4.444444
+## 39       8  Wk2        18       21.444444
+## 40       8  Wk1        17       20.444444
+## 41       9  Wk4         8        5.044444
+## 42       9  Wk3        14       11.044444
+## 43       9  Wk1        26       23.044444
+## 44       9  Wk2        24       21.044444
+## 45       9  Wk5         9        6.044444</code></pre>
+<p>We then calculate the se, sd, and ci values of our normed data, in this case <code>MigrainesNormed</code>.</p>
+<p>The final step is to make a correction on these <code>Normed</code> values (<a href="https://doaj.org/article/011cd52c58b449c4bf169676ca704062">Morey (2008)</a>). This is done by taking the number of levels of the within factor (<code>nWithinGroups</code>) and applying the following correction:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the number of levels in Week:</span>
+nWithinGroups &lt;-<span class="st"> </span><span class="kw">nlevels</span>(example1_long<span class="op">$</span>Week)
+
+<span class="co"># apply the correction factor:</span>
+correctionFactor &lt;-<span class="st"> </span><span class="kw">sqrt</span>(nWithinGroups<span class="op">/</span>(nWithinGroups <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<p>The range of our corrected errorbars are the sd, se, ci multiplied by this <code>correctionFactor</code>.</p>
+<p>For example, the <code>sd</code> of participants’ <code>Migraines</code> in <code>Wk1</code> is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(normedData<span class="op">$</span>MigrainesNormed[normedData<span class="op">$</span>Week <span class="op">==</span><span class="st"> &quot;Wk1&quot;</span>]) <span class="op">*</span><span class="st"> </span>correctionFactor</code></pre></div>
+<pre><code>## [1] 3.588369</code></pre>
+<p>Fortunately there is a function in <code>Rmisc</code> that handles this correction for us, <code>summarySEwithin</code>. It is very similar to the <code>summarySE</code> function you are familiar with, but asks you to specify which IVs are within-subjects (<code>withinvars</code>), between-subjects(<code>betweenvars</code>) and which column contains subject IDs <code>idvar</code>. Using our original <code>example1_long</code> data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Rmisc<span class="op">::</span><span class="kw">summarySEwithin</span>(<span class="dt">data =</span> example1_long, <span class="dt">measurevar =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dt">withinvars =</span> <span class="st">&quot;Week&quot;</span>, 
+    <span class="dt">betweenvars =</span> <span class="ot">NULL</span>, <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>)</code></pre></div>
+<pre><code>##   Week N Migraines       sd        se       ci
+## 1  Wk1 9 22.333333 3.588369 1.1961229 2.758264
+## 2  Wk2 9 22.000000 2.993280 0.9977598 2.300838
+## 3  Wk3 9  9.333333 1.984663 0.6615545 1.525547
+## 4  Wk4 9  5.777778 1.474788 0.4915960 1.133623
+## 5  Wk5 9  6.777778 2.837252 0.9457507 2.180905</code></pre>
+<p>Unfortunately, to date I haven’t found a way to get this to play nice with <code>stat_summary()</code> in <code>ggplot()</code>. HOWEVER, there is a simple work around. Since <code>stat_summary()</code> is simply summarizing our means and error values from the dataset and <code>summarySEwithin</code> is doing the exact same thing, we can simply pull these values straight from <code>summarySEwithin</code> with one MAJOR caveat. <code>summarySEwithin</code> reports the normed means, however for plotting we need the original means. Note that this is not an issue when you are only dealing with within subjects factors, but if you are performing mixed ANOVA (combination within-subjects and between-subjects) these means can differ.</p>
+<p>To address this problem user <code>Hause Lin</code> created a custom function <code>summarySEwithin2</code> that reports both normed and unnormed means. You can find this script on their Github site <a href="https://gist.github.com/hauselin/a83b6d2f05b0c90c0428017455f73744">here</a>. I would recommend copying and pasting the code you your own “.R” file for future use. In the meantime we can directly source this code from their site:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;https://gist.githubusercontent.com/hauselin/a83b6d2f05b0c90c0428017455f73744/raw/38e03ea4bf658d913cf11f4f1c18a1c328265a71/summarySEwithin2.R&quot;</span>)</code></pre></div>
+<p>A similar script may be found on <a href="http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2)/">this ggplot tutorial site</a>, which forms the basis of this alternative plotting method.</p>
+<p>Note that this “alternative” is how I in fact create most of my own ANOVA plots.</p>
+<p>First we save the output of <code>summarySEwithin2</code> to an object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summaryData &lt;-<span class="st"> </span><span class="kw">summarySEwithin2</span>(<span class="dt">data =</span> example1_long, <span class="dt">measurevar =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dt">withinvars =</span> <span class="st">&quot;Week&quot;</span>, 
+    <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>)
+summaryData</code></pre></div>
+<pre><code>##   Week N Migraines MigrainesNormed       sd        se       ci
+## 1  Wk1 9 22.333333       22.333333 3.588369 1.1961229 2.758264
+## 2  Wk2 9 22.000000       22.000000 2.993280 0.9977598 2.300838
+## 3  Wk3 9  9.333333        9.333333 1.984663 0.6615545 1.525547
+## 4  Wk4 9  5.777778        5.777778 1.474788 0.4915960 1.133623
+## 5  Wk5 9  6.777778        6.777778 2.837252 0.9457507 2.180905</code></pre>
+<p>From here we can refer directly to <code>summaryData</code> in constructing the <code>ggplot</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(summaryData, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Week, <span class="dt">y =</span> Migraines, <span class="dt">group =</span> <span class="dv">1</span>))</code></pre></div>
+<p>And now to construct the plot. rather than using <code>summary_stat()</code> we directly call each <code>geom</code>. For example, adding the means and as points:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+p</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-405-1.png" width="672" /></p>
+<p>Connecting those points with lines:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()
+p</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-406-1.png" width="672" /></p>
+<p>Adding error bars (SE):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Migraines <span class="op">-</span><span class="st"> </span>se, <span class="dt">ymax =</span> Migraines <span class="op">+</span><span class="st"> </span>se), <span class="dt">width =</span> <span class="dv">0</span>)
+p</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-407-1.png" width="672" /></p>
+<p>(note that above I set width of the error bars to 0 to keep consistent with how we’ve been plotting pointranges). However, if you want caps, you can change the width. I recommend a width no higher than 0.2.</p>
+<p>From here you can use your familiar commands to whip it into APA format!</p>
+</div>
+<div id="running-a-within-anova-afex" class="section level3">
+<h3><span class="header-section-number">13.2.3</span> running a within ANOVA (afex):</h3>
+<p>Running a WS ANOVA is just like running a BS ANOVA in <code>afex</code>. We call in our within subjects factors using the <code>within=</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">within.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dt">data =</span> example1_long, 
+    <span class="dt">between =</span> <span class="ot">NULL</span>, <span class="dt">within =</span> <span class="st">&quot;Week&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>))
+within.aov<span class="op">$</span>anova_table</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Migraines
+##      num Df den Df    MSE      F     pes    Pr(&gt;F)    
+## Week 2.7378 21.903 10.519 85.042 0.91402 5.773e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>You’ll also notice in the code above that I’ve added a <code>correction=&quot;none&quot;</code> call to my <code>anova_table</code> argument. Otherwise <code>afex</code> defaults to applying the Greenhouse-Geisser correction <a href="https://statistics.laerd.com/statistical-guides/sphericity-statistical-guide.php">link</a>. There is an argument to be made that you should always make a correction to guard against deviations from sphericity. The correction becomes larger the further your data is from sphericity. However, standard practice in the psychology literature is to only apply the correction if our data fail Mauchly’s Test <a href="https://statistics.laerd.com/statistical-guides/sphericity-statistical-guide.php">link</a>. The outcome of this test can be obtained by using the <code>summary()</code> function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(within.aov)</code></pre></div>
+<pre><code>## Warning in summary.Anova.mlm(object$Anova, multivariate = FALSE): HF eps &gt;
+## 1 treated as 1</code></pre>
+<pre><code>## 
+## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+## 
+##             Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
+## (Intercept) 7893.7      1   486.71      8 129.747 3.186e-06 ***
+## Week        2449.2      4   230.40     32  85.042 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## 
+## Mauchly Tests for Sphericity
+## 
+##      Test statistic p-value
+## Week        0.28236 0.53699
+## 
+## 
+## Greenhouse-Geisser and Huynh-Feldt Corrections
+##  for Departure from Sphericity
+## 
+##       GG eps Pr(&gt;F[GG])    
+## Week 0.68446  5.773e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##        HF eps  Pr(&gt;F[HF])
+## Week 1.075624 1.39444e-16</code></pre>
+<p>This gives us our original ANOVA, the Mauchly Test, and the Greenhouse-Geisser and Huynh-Feldt corrections. In this case the Mauchly Test <code>p = .54</code>, so no corrections are necessary. If your elect to make the correction (i.e., the data fails Mauchly’s Test) then you could multiply your original degrees of freedom by the GG eps (or HF eps). The p.value next to the correction values tells you the p.value for your ANOVA effect assuming corrections. In this case even with the corrections the effect of Week is significant. Alternatively you could just rerun the <code>afex</code> function and specifying the <code>correction=</code> call.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## GG correction:
+within.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dt">data =</span> example1_long, 
+    <span class="dt">between =</span> <span class="ot">NULL</span>, <span class="dt">within =</span> <span class="st">&quot;Week&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>))
+within.aov</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Migraines
+##   Effect          df   MSE         F pes p.value
+## 1   Week 2.74, 21.90 10.52 85.04 *** .91  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+## 
+## Sphericity correction method: GG</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## HF correction (note that any HF eps &gt; 1 will be treated as 1):
+within.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dt">data =</span> example1_long, 
+    <span class="dt">between =</span> <span class="ot">NULL</span>, <span class="dt">within =</span> <span class="st">&quot;Week&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;HF&quot;</span>))</code></pre></div>
+<pre><code>## Warning: HF eps &gt; 1 treated as 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">within.aov</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Migraines
+##   Effect    df  MSE         F pes p.value
+## 1   Week 4, 32 7.20 85.04 *** .91  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+## 
+## Sphericity correction method: HF</code></pre>
+</div>
+<div id="planned-contrasts" class="section level3">
+<h3><span class="header-section-number">13.2.4</span> planned contrasts</h3>
+<p>We can also perform planned contrasts. For example, in this case it make the most sense to examine differences between the pre-treatment weeks (1,2) and post-treatment weeks (3,4,5). To do this we can set up a contrast vector and and using the <code>emmeans()</code> function as below. You call in the <code>within.aov</code>, specify the custom contrast, and apply the contrast to the within factor. The resulting output gives you means data for each level as well as a <code>t.test</code> on the contrast.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">before.v.treat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+within.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Migraines&quot;</span>, <span class="dt">data =</span> example1_long, 
+    <span class="dt">between =</span> <span class="ot">NULL</span>, <span class="dt">within =</span> <span class="st">&quot;Week&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>))
+
+<span class="co"># custom.comp = custom contrasts note that I&#39;ve named the contrast</span>
+custom.comp =<span class="st"> </span><span class="kw">list</span>(<span class="dt">before.v.treat =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>))
+
+<span class="co"># original aov, , and apply it to Week:</span>
+emmeans<span class="op">::</span><span class="kw">emmeans</span>(within.aov, <span class="dt">specs =</span> <span class="st">&quot;Week&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">contrast</span>(., custom.comp)</code></pre></div>
+<pre><code>##  contrast        estimate        SE df t.ratio p.value
+##  before.v.treat -14.87037 0.8164966 32 -18.212  &lt;.0001</code></pre>
+<p>``</p>
+</div>
+</div>
+<div id="example-2" class="section level2">
+<h2><span class="header-section-number">13.3</span> EXAMPLE 2</h2>
+<p>Let’s take a look at another example, using a experimental paragdigm we are familiar with:</p>
+<div id="loading-in-the-data-1" class="section level3">
+<h3><span class="header-section-number">13.3.1</span> loading in the data</h3>
+<p>You note that this data is already in long format so no need to adjust.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example2_long &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA6_withinEx2.txt&quot;</span>, 
+    <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Subject = col_integer(),
+##   Lecture = col_character(),
+##   Score = col_integer()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example2_long</code></pre></div>
+<pre><code>## # A tibble: 36 x 3
+##    Subject Lecture  Score
+##      &lt;int&gt; &lt;chr&gt;    &lt;int&gt;
+##  1       1 Physical    53
+##  2       2 Physical    49
+##  3       3 Physical    47
+##  4       4 Physical    42
+##  5       5 Physical    51
+##  6       6 Physical    34
+##  7       7 Physical    44
+##  8       8 Physical    48
+##  9       9 Physical    35
+## 10      10 Physical    18
+## # ... with 26 more rows</code></pre>
+</div>
+<div id="plotting-the-data-3" class="section level3">
+<h3><span class="header-section-number">13.3.2</span> plotting the data</h3>
+<p>Let’s plot this data. This time, I’ll make my points a little larger, lines a little thicker, and add caps to the error bars:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summaryData &lt;-<span class="st"> </span><span class="kw">summarySEwithin2</span>(<span class="dt">data =</span> example2_long, <span class="dt">measurevar =</span> <span class="st">&quot;Score&quot;</span>, <span class="dt">withinvars =</span> <span class="st">&quot;Lecture&quot;</span>, 
+    <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>)</code></pre></div>
+<pre><code>## Automatically converting the following non-factors to factors: Lecture</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(summaryData, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Lecture, <span class="dt">y =</span> Score, <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Score <span class="op">-</span><span class="st"> </span>se, <span class="dt">ymax =</span> Score <span class="op">+</span><span class="st"> </span>se), 
+    <span class="dt">width =</span> <span class="fl">0.15</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_cowplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, 
+    <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">lineheight =</span> <span class="fl">0.55</span>), <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>), <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, 
+    <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>), <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, 
+    <span class="st">&quot;grey50&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Lecture&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Score&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="fl">0.25</span>, 
+    <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>), <span class="st">&quot;in&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="co"># stack legend boxes horizontally:</span>
+<span class="kw">theme</span>(<span class="dt">legend.box =</span> <span class="st">&quot;horizontal&quot;</span>)
+
+<span class="kw">show</span>(p)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-413-1.png" width="672" /></p>
+<p>Maybe not the best plot, but wanted to show you how to tweak things.</p>
+</div>
+<div id="running-the-anova-5" class="section level3">
+<h3><span class="header-section-number">13.3.3</span> running the ANOVA:</h3>
+<p>As before, let’s run this using afex:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">within.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Score&quot;</span>, <span class="dt">data =</span> example2_long, <span class="dt">between =</span> <span class="ot">NULL</span>, 
+    <span class="dt">within =</span> <span class="st">&quot;Lecture&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>))
+<span class="kw">summary</span>(within.aov)</code></pre></div>
+<pre><code>## 
+## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+## 
+##             Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
+## (Intercept)  40401      1   3531.7     11 125.836 2.319e-07 ***
+## Lecture       1194      2   1067.3     22  12.305  0.000259 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## 
+## Mauchly Tests for Sphericity
+## 
+##         Test statistic  p-value
+## Lecture        0.41524 0.012345
+## 
+## 
+## Greenhouse-Geisser and Huynh-Feldt Corrections
+##  for Departure from Sphericity
+## 
+##          GG eps Pr(&gt;F[GG])   
+## Lecture 0.63101    0.00225 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##            HF eps Pr(&gt;F[HF])
+## Lecture 0.6748954 0.00173583</code></pre>
+<p>You’ll notice that in this example the data failed Mauchly Tests for Sphericity. As I mentioned above in this case you’ll need to make the appropriate corrections. GG corrections are the “industry standard” (that is, I typically see these). HF corrections are not as conservative, and are appropriate in instances where the GG eps &gt; 0.75. In this case we’ll use the GG correction. My advice, just rerun the ANOVA with <code>correction=&quot;GG&quot;</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">within.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Score&quot;</span>, <span class="dt">data =</span> example2_long, <span class="dt">between =</span> <span class="ot">NULL</span>, 
+    <span class="dt">within =</span> <span class="st">&quot;Lecture&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;GG&quot;</span>, <span class="dt">sig_symbols =</span> <span class="kw">rep</span>(<span class="st">&quot;&quot;</span>, <span class="dv">4</span>)))
+
+within.aov<span class="op">$</span>anova_table</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Score
+##         num Df den Df    MSE      F     pes  Pr(&gt;F)   
+## Lecture  1.262 13.882 76.885 12.305 0.52801 0.00225 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="post-hocs" class="section level3">
+<h3><span class="header-section-number">13.3.4</span> post-hocs</h3>
+<p>Post-hoc comparisons of means take a different form for repeated measures ANOVA. Typical methods such as Tukey HSD were designed for between-subjects effects, where it makes sense (assuming homogeneity of variance) to use a pooled error term. However, for within-subjects (or repeated measures) effects, the error term is the Treatment x Subjects interaction, and the nature of the TxS interaction across all treatment levels can be very different than it is for any particular pair of treatment levels. So the usual recommendation for carrying out pair-wise contrasts for a within-subjects factor is to use ordinary paired t-tests with an error term based only on the levels being compared.</p>
+<p>This can be most simply accomplished by running a seperate ANOVA for each comparison (this guarantees use of the appropriate error terms), dropping any unused levels from the analysis. For example, comparing Physical v. Social:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">physical_v_social &lt;-<span class="st"> </span><span class="kw">filter</span>(example2_long, Lecture <span class="op">!=</span><span class="st"> &quot;History&quot;</span>)
+afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Score&quot;</span>, <span class="dt">data =</span> physical_v_social, <span class="dt">between =</span> <span class="ot">NULL</span>, 
+    <span class="dt">within =</span> <span class="st">&quot;Lecture&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>))</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Score
+##    Effect    df   MSE         F pes p.value
+## 1 Lecture 1, 11 54.36 21.63 *** .66   .0007
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note that tis p-value is NOT adjusted. A simple way of addressing this is using a Bonferroni correction. For example, if we run the 3 possible tests for this analysis then the critical <em>p</em> would need to be adjusted to .05/3, or <code>.016</code>. In this case I’m still good (.0007 &lt; .016)</p>
+</div>
+</div>
+<div id="example-3" class="section level2">
+<h2><span class="header-section-number">13.4</span> EXAMPLE 3</h2>
+<p>Let’s ramp-up the complexity. Here is a dataset testing Recall over three days as a function of depth of processing (Lo, Med, High). In this case we have 2 within factors.</p>
+<div id="loading-in-the-data-2" class="section level3">
+<h3><span class="header-section-number">13.4.1</span> loading in the data:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example3 &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA6_withinEx3.txt&quot;</span>, 
+    <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Subject = col_integer(),
+##   Recalled = col_integer(),
+##   ProcessDepth = col_character(),
+##   Day = col_character()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example3</code></pre></div>
+<pre><code>## # A tibble: 90 x 4
+##    Subject Recalled ProcessDepth Day  
+##      &lt;int&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;
+##  1       1       14 High         Day1 
+##  2       2       10 High         Day1 
+##  3       3       13 High         Day1 
+##  4       4       14 High         Day1 
+##  5       5       12 High         Day1 
+##  6       6        8 High         Day1 
+##  7       7       13 High         Day1 
+##  8       8       11 High         Day1 
+##  9       9        9 High         Day1 
+## 10      10       12 High         Day1 
+## # ... with 80 more rows</code></pre>
+</div>
+<div id="plotting-the-data-4" class="section level3">
+<h3><span class="header-section-number">13.4.2</span> plotting the data</h3>
+<p>Again, we need to make the appropriate correction for our error bars. In this case the number of within groups is the number of cells that is formed by crossing Day (1,2,3) and Processing Depth (Lo, Med, Hi). As this is a 3 * 3 design there are 9 cells, or <code>nWithinGroups=9</code>. As before this is handled auto-magically in <code>summarySEwithin2</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summaryData &lt;-<span class="st"> </span><span class="kw">summarySEwithin2</span>(<span class="dt">data =</span> example3_long, <span class="dt">measurevar =</span> <span class="st">&quot;Recalled&quot;</span>, <span class="dt">withinvars =</span> <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, 
+    <span class="st">&quot;ProcessDepth&quot;</span>), <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>)
+
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(summaryData, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Day, <span class="dt">y =</span> Recalled, <span class="dt">group =</span> ProcessDepth)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Recalled <span class="op">-</span><span class="st"> </span>
+<span class="st">    </span>se, <span class="dt">ymax =</span> Recalled <span class="op">+</span><span class="st"> </span>se), <span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_cowplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, 
+    <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">lineheight =</span> <span class="fl">0.55</span>), <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>), <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, 
+    <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>), <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, 
+    <span class="st">&quot;grey50&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Lecture&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Score&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="fl">0.25</span>, 
+    <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>), <span class="st">&quot;in&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="co"># stack legend boxes horizontally:</span>
+<span class="kw">theme</span>(<span class="dt">legend.box =</span> <span class="st">&quot;horizontal&quot;</span>)
+
+<span class="kw">show</span>(p)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-418-1.png" width="672" /></p>
+</div>
+<div id="running-the-omnibus-anova-1" class="section level3">
+<h3><span class="header-section-number">13.4.3</span> running the omnibus ANOVA:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">omnibus.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Recalled&quot;</span>, <span class="dt">data =</span> example3_long, 
+    <span class="dt">between =</span> <span class="ot">NULL</span>, <span class="dt">within =</span> <span class="kw">c</span>(<span class="st">&quot;ProcessDepth&quot;</span>, <span class="st">&quot;Day&quot;</span>), <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, 
+    <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>))
+
+<span class="kw">summary</span>(omnibus.aov)</code></pre></div>
+<pre><code>## Warning in summary.Anova.mlm(object$Anova, multivariate = FALSE): HF eps &gt;
+## 1 treated as 1</code></pre>
+<pre><code>## 
+## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+## 
+##                   Sum Sq num Df Error SS den Df  F value    Pr(&gt;F)    
+## (Intercept)      13493.4      1   41.067      9 2957.153 1.209e-12 ***
+## ProcessDepth       432.2      2   61.400     18   63.345 7.137e-09 ***
+## Day                254.5      2   95.733     18   23.925 8.521e-06 ***
+## ProcessDepth:Day   110.4      4   93.400     36   10.636 8.567e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## 
+## Mauchly Tests for Sphericity
+## 
+##                  Test statistic p-value
+## ProcessDepth            0.94884 0.81054
+## Day                     0.81573 0.44277
+## ProcessDepth:Day        0.22026 0.27277
+## 
+## 
+## Greenhouse-Geisser and Huynh-Feldt Corrections
+##  for Departure from Sphericity
+## 
+##                   GG eps Pr(&gt;F[GG])    
+## ProcessDepth     0.95133  1.559e-08 ***
+## Day              0.84440  3.539e-05 ***
+## ProcessDepth:Day 0.71617  0.0001178 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##                    HF eps   Pr(&gt;F[HF])
+## ProcessDepth     1.199509 7.136593e-09
+## Day              1.018163 8.520701e-06
+## ProcessDepth:Day 1.085791 8.566883e-06</code></pre>
+<p>Here we have two main effects and an interaction. Let’s unpack the interaction by taking a look at whether <code>Recall</code> inceases over sucessive days.</p>
+</div>
+<div id="running-the-simple-effects-anovas" class="section level3">
+<h3><span class="header-section-number">13.4.4</span> running the simple effects ANOVAs</h3>
+<p>It’s recommended that one avoid the use of pooled error terms when performing simple effects analysis of within-subjects ANOVA. This is definitely the case when the spherecity assumption is violated, but as a general rule, even when the assumption is not technically violated, deviations from spherecity can artificially adjust Type I error. So in this case, simple follow up ANOVAs are justified.</p>
+<p>One way to do this would be, as we have done in the past, seperate out the data and run seperate simple effects ANOVAs:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hi.data &lt;-<span class="st"> </span><span class="kw">filter</span>(example3_long, ProcessDepth <span class="op">==</span><span class="st"> &quot;High&quot;</span>)
+med.data &lt;-<span class="st"> </span><span class="kw">filter</span>(example3_long, ProcessDepth <span class="op">==</span><span class="st"> &quot;Med&quot;</span>)
+lo.data &lt;-<span class="st"> </span><span class="kw">filter</span>(example3_long, ProcessDepth <span class="op">==</span><span class="st"> &quot;Lo&quot;</span>)
+
+hi.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Recalled&quot;</span>, <span class="dt">data =</span> hi.data, <span class="dt">between =</span> <span class="ot">NULL</span>, 
+    <span class="dt">within =</span> <span class="st">&quot;Day&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>))
+
+hi.aov</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Recalled
+##   Effect    df  MSE         F pes p.value
+## 1    Day 2, 18 4.59 30.88 *** .77  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">med.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Recalled&quot;</span>, <span class="dt">data =</span> med.data, <span class="dt">between =</span> <span class="ot">NULL</span>, 
+    <span class="dt">within =</span> <span class="st">&quot;Day&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>))
+
+med.aov</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Recalled
+##   Effect    df  MSE         F pes p.value
+## 1    Day 2, 18 3.51 11.01 *** .55   .0008
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lo.aov &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;Subject&quot;</span>, <span class="dt">dv =</span> <span class="st">&quot;Recalled&quot;</span>, <span class="dt">data =</span> lo.data, <span class="dt">between =</span> <span class="ot">NULL</span>, 
+    <span class="dt">within =</span> <span class="st">&quot;Day&quot;</span>, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>, <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>, 
+        <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>))
+
+lo.aov</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Recalled
+##   Effect    df  MSE    F pes p.value
+## 1    Day 2, 18 2.40 0.85 .09     .45
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>I’m only printing the ANOVA and not the tests of Sphericity here for the same of brevity, though it’s always a good idea to check those. How about you go ahead an do that right now… I’ll wait.</p>
+<p>In this spirit of self-reliance, I also leave it to you to perform any necessary post hocs on the <code>hi</code> and <code>med</code> data. Remember however that for each post-hoc you run you need to correct your critical p-value. I imagine you’ll end up running 6 tests, so critical <code>p</code> needs to be <code>.05/6</code></p>
+<p>Bottom line: The simple effects ANOVAs (and subsequent post-hocs) confirm what the figure suggest; that recall increased over sucessive days in the High and Med processing conditions, but not the Low processing condition.</p>
+</div>
+</div>
+<div id="how-to-perform-a-within-subjects-analysis-in-spss" class="section level2">
+<h2><span class="header-section-number">13.5</span> How to perform a within subjects analysis in SPSS:</h2>
+<p>I’ll likely but together my own vid, but it won’t be much better than this:</p>
+<p><a href="https://www.youtube.com/watch?v=9TDvejlOP0Q" class="uri">https://www.youtube.com/watch?v=9TDvejlOP0Q</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="anova-v-higher-order-factorial-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="anova-vi-mixed-effects-anova-bs-ws.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Vignettes.pdf", "Vignettes.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

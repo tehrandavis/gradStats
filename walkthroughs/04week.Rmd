@@ -1,0 +1,350 @@
+# Probability and the Binomial Distribution
+
+## A few words on where we are at so far...
+
+Last week we introduced sampling distributions and importantly the Null sampling distribution. Most importantly we talked about how the null sampling distribution allows us to make assessments on our observed data relative to the Null hypothesis. To remind ourselves here, the null hypothesis assumes that data collected from two or more samples comes from the same population. As such, the descriptive statistics of each of those samples should be nearly identical within a certain amount of tolerance.
+
+A key point in our understanding, is that the null distribution (of mean differences) should approximate the standard distribution, with a mean $\approx$ 0, and a SD $\approx$ 1. As we pointed out a few lectures back, we can do wonderful things with this distribution, including assessing the probability of an obtained difference value assuming the null hypothesis is true (see last week's write-up). This week, we unpack further notions of probability and how they may be used to allow us to make assessments on important aspects of our data... and further how that may allow us to make decisions about our unterlying statistical (and further, theoretical) assumptions.
+
+For the next few weeks, these two critical assumptions about the nature of our observed data will be paramount:
+
+1. that the data (its distribution) is randomly obtained from a normal population.
+2. that our measures of the data (including both the tools we use and the resulting desciptions of the data) are independent of one another. 
+
+We've spent some time at length with Assumption #1. What do I mean in Assumption #2? Here's an example that I use in my Perception course:
+
+>Say I step on a scale and it says that I'm 180 lbs. I then walk over to a stadiometer and get my height measured and it tells me I'm 71 inches tall. Right after this I return to the original scale. If the measurement of my weight and height were independent of one another, then the scale should again read 180 lbs. However, if in some stange reality the measurement of my height changes the measurement of my weight, then all bets are off—the second time on the scale it could say I'm 250lbs, 85lbs, who knows. 
+
+One of the lessons of quantum mechanics (see Stern-Gerlach experiments) is that we do live in that strange reality—at least at the quantum level. Most of you have probably encountered the uncertainty principle which is the physical manifestation of this issue. More pertainent for us consider the example in class:
+
+>We have a theory that adults with children are more likely to wear seatbelts than adults without children. Our null hypotheis is that adults with children are no more likely to wear seatbelts than adults without children.
+
+Here, everyone is being measured in two ways, 1. the seatbelt measurement (do you wear a seatbelt, yes or no?) and 2. the parenthood measurement (do you have a child, yes or no?). If the two measures are independent of one another, then the seatbelt measurement should not have an effect on the parenthood measurement and vice versa. If they do, then the measures are not independent of one another. Of course, in this case, it doesn't mean that the being measured for seatbelt-wearing may instantaneously turn you into a parent (Yikes), but it does mean that being identified as a parent may increase the probability that you are a seatbelt wearer and vice versa.
+
+Hopefully from this example, you now see the relationship between the null and research (alternative) hypotheses—the research hypothesis is structured in such a way that it assumes a violation of the null, in this case a violation of the independence assuption. In many cases we will be testing whether the evidence supports such a violation.
+
+So returning to why probability is so important, the probabilities related to the null distribution have been worked out by women and men far smarter than I. THESE PROBABILITIES ARE KNOWN and tell us the likelihood that our null assumptions have not been violated given our present set of data.
+
+## Okay on to this week's example analyses:
+
+For the following examples, we will be using functions that come pre-installed in `R` (`base` library) as well as the `tidyverse`. Let's go ahead and install the `tidyverse`.
+```{r}
+pacman::p_load(tidyverse)
+```
+
+## Classic example: The coin flip
+
+Let's make a wager. I'll let you flip a single coin 10 times, and if you get 6 or more heads I'll give you \$250. If not, you have to give me \$250. Should you take this bet? To answer this question you'll want to assess the likelihood of getting an observed outcome, in this case $Heads \geq 6$, provided a sample size (10).
+
+We *assume* that the likelhood of getting Heads on any single flip is .5, (assuming that the coin is far and not a cheat). We also *assume* that the coin flips are independent of one another, that is any single flip does not influence or change the likehood of an outcome on subsequent flips. *In light of our discussion in the opening section, I hope you see that depending on the outcome, it may cause us to re-evaluation these assumptions*.
+
+For now, let's assume that both are indeed true and that I'm not a cheat.
+
+### How many heads would we get if we flipped a fair coin 10 times?
+
+In class we noted that with a known sample space and a known sample size we can calculate the *expected outcome*. In this case our sample space is {Heads, Tails} and our sample size is 10 (flips). The probability of observing a Heads in our sample space is .5. Therefore:
+
+$$expected\ Heads = p(Heads) \times N(flips)\\
+expected\ Heads = .5 \times 10 = 5$$
+
+Of course, reality does not often abide our expectations, and given what we know about sampling error you're more likely to not get exactly 5 flips than you are. So, what we're really interested in is what is the likelihood of our expectation, and fortunately for us, over the long-run independent/random outcomes can be predicted probabilistically. There are several ways to address this in `R`.
+
+#### Simulation method
+The first method involves running a large number of simulations and assessing the probability based upon the outcomes. To run a single simulation, you can use the `rbinom()` function. Below I am running a simulation of 1 coin (`n`), with a sample size of ten flips (`size`), and a known (or really assumed) probability of .5 (`prob`).
+
+```{r}
+# set our seeds to get the same numbers:
+set.seed(1)
+
+# n = number of coins
+# size = number of flips
+# prob(ability)
+rbinom(n = 1,size = 10,prob = .5) 
+```
+
+In this simulation you got 4 flips and I'm off to cop a new pair of retro Jordans with your money... or I suppose if I'm being sensible, you've paid for this week's daycare. In any event, you lost. But we know that not much can be learned about the likelihood of an outcome with a sample size of 1. Let's try running this scenerio using a simulation of 100K coins.
+
+To run this simulation, you could:
+
+1. run the above 100K times, write down the number (yea, sure bud)
+2. build a `for()` loop (like you did last week)
+3. run it in a single line by modifying the `rbinom()` call:
+
+```{r}
+set.seed(1)
+numberHeads <- rbinom(n = 100000,size = 10,prob = .5)
+```
+
+Let's plot this using `ggplot()`:
+
+```{r}
+# must convert vector to a data frame
+numberHeads_df <- data_frame(numberHeads)
+
+p <- ggplot2::ggplot(data = numberHeads_df, aes(x=numberHeads)) + 
+        geom_histogram(binwidth=1,boundary=-0.5,fill="red", col="grey") + 
+        scale_x_continuous(limits=c(0,10), breaks = 1:10)
+show(p)
+```
+
+As you can see in the plot above, we get exaclty 5 heads a little less than 25K out of 100K, or about 25% of the time. That's the eyeball test, How might we go about obtaining the exact probabilities from this simulation? We can take advantage of logical statements. Logicals produce outputs that are either `TRUE` or `FALSE`. More, and this is terribly useful for us, `R` also reads those `TRUE` or `FALSE` outcomes as `1` or `0` where `TRUE=1` and `FALSE=0`. Take the following vector for example:
+
+```{r echo=FALSE}
+c(TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE)
+```
+
+`R` reads this as a numeric:
+
+```{r echo=FALSE}
+as.numeric(c(TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE))
+```
+
+Hopefully, its apparent now that you can get info about the number of `TRUE`s by performing mathematical operations on this vector. For example, above you see that there are 4 `TRUE`s out of 10 possible. That means that we get `TRUE` 40% of the time. We can obtain this probability in `R` using the `mean()` function. How? Remember that the mean is the sum of scores divided by the number of scores. In this case the sum is 4; the number of scores is 10; and 4/10 is .40.
+
+Returning to our simulation of 100K samples, `numberHeads`, we can do the following to get the probability of 5 (see Demos, Ch. 3 on logicals for explanation of operators like `==`):
+```{r}
+mean(numberHeads==5)
+```
+
+So the probability of getting exactly 5 heads is 0.245.
+
+Returning to our wager, based on our simulation what's the probability of getting 6 or more heads?
+
+```{r}
+mean(numberHeads>=6)
+```
+About 38%. You probably shouldn't take my bet.
+
+#### Non-simulation method
+
+Simulations are useful for helping us visualize our scenerios and use pseudo real data to test our underlying assumptions. But most times you just want the answer... in fact often  that will suffice because as I mentioned, in most normal circumstances the probabilities have already been worked out. How can we get the results above without simulating 100K coins? By using two functions in `R` that belong to the same family as `rbinom()`: `dbinom()` and `pbinom()`.
+
+`dbinom()` returns the exact probabilty of an outcome, provided a generated probility density function. It takes in arguments related to the numnber of successful outcomes (x), the sample size (size) and the independent probability of a sucessfull outcome (prob).
+
+So the probability of 5 Heads (successes) on 10 flips with a fair coin would be entered:
+```{r}
+dbinom(x = 5,size = 10,prob = .5)
+```
+
+We see that this value is pretty close to our simulated outcome, confirming that the simulation was indeed correct, if not entirely necessary.
+
+We can also use this function to build a table for the individual probabilities of all possible outcomes. To see how, first lets consider the space of possible outcomes in this scenerio. At one extreme, I could flip a coin 10 times and get no Heads. At the other I could get all Heads. So the set of possible outomes can be express as a sequence from 0 to 10. Recall that you can create such a sequence using the `:` operator:
+
+```{r}
+0:10
+```
+
+With this in mind you can modify the previous code like so:
+
+```{r}
+dbinom(x = 0:10,size = 10,prob = .5)
+```
+
+The output gives be the resulting probabilities in order from 0 Heads to 10 Heads.
+
+Let's create a table to make this easier to digest. First I'm going to create a vector of `numberHeads` to show all possbilites from 0 to 10. Second, I will run `dbinom()` as above to test each possibility, saving that to a vector `probHead`. Finally I will combine the two into a data frame called `probTable`:
+
+```{r}
+# 1. range of possibilites
+numberHeads <- 0:10
+# 2. prob of outcome
+probHead <- dbinom(x = numberHeads,size = 10,prob = .5)
+# 3. combine to data frame
+probTable <- data_frame(numberHeads,probHead)
+# 4. Show the data frame (table)
+show(probTable)
+```
+
+Contrats you've just created a Binomial Distribution Probability Table for this scenerio. Note that you're asked to do the same in this week's homework! (Disregard the single line `for()` method mentioned in the homework. It dawned me that this would be a way to do it without for loops!)
+
+*Returning to our wager of 6 or more heads*, we would use `pbinom()`. `pbinom()` returns probabilities according to the cumulative density function, where the output is the likelihood of obtaining that score or less. Note that `pbinom()` takes similar arguments to `dbinom()` but asks for `q` instead of `x`. For our purposes `q` and `x` are the same thing... number of outcomes.
+
+So for example the probability of obtaining *5 or less* Heads provided our scenerio may be calculated:
+
+```{r}
+pbinom(q = 5,size = 10,prob = .5)
+```
+
+Given what we know about the Compliment Law, we can compute the probability of 6 or more Heads as:
+```{r}
+1 - pbinom(q = 5,size = 10,prob = .5)
+```
+which again matches with our simulation.
+
+## Changing the parameters
+
+So obviously if the coin is a fair coin, your shouldn't take the bet. Let's imagine that we kept the same wager, but to entice you to bet, I tell you that this coin lands on Heads 65% of the time? Should you take the bet?
+
+To test this new sceneria all you need to do is change the probability parameter. Let's just skip the simulations and just assess using `dbinom()` and `pbinom()`.
+
+### Constructing a table of outcome probabilities:
+
+As before we'll use `dbinom()` to create a table, simply modifying the `prob` argument to `.65`:
+```{r}
+# 1. range of possibilites
+numberHeads <- 0:10
+# 2. prob of outcome
+probHead <- dbinom(x = numberHeads,size = 10,prob = .65)
+# 3. combine to data frame
+probTable <- data_frame(numberHeads,probHead)
+# 4. Show the data frame (table)
+show(probTable)
+```
+How does this table compare to the one above?
+
+### Assessing cummulative probability
+
+And now, to get the probability of 6 or greater:
+```{r}
+1 - pbinom(q = 6,size = 10,prob = .65)
+```
+
+Ahhh... the odds are ever so slightly in your favor.
+
+What if we changed the bet: you get 60 Heads out of 100 flips?
+```{r}
+1 - pbinom(q = 60,size = 100,prob = .65)
+```
+
+Yea, you should really take that bet! Fortunately for me, I wasn't born yesterday.
+
+How about 12 out of 20?
+
+```{r}
+1 - pbinom(q = 12,size = 20,prob = .65)
+```
+
+Nope, I'm not taking that bet either. Does 3 out of 5 interest you?
+```{r}
+1 - pbinom(q = 3,size = 5,prob = .65)
+```
+
+## Catching a cheat
+
+OK. Last scenerio. Let's imagine that I am not a total sucker, and we reach a compromise on "30 or more Heads out of 50 flips". You run to your computer and calculate your odds and like your chances (maybe I am a sucker)!
+```{r}
+1-pbinom(q = 30,size = 50,prob = .65)
+```
+
+You flip 50 times but only get 27 heads. Astounded, because those odds really were in your favor, you label me a liar and a theif. Are you justified in doing so? This scenerio essentially captures our discussion at the outset, how far of a deviation warrants us being skeptical that our original assumptions were true. In this case the original assumptions were that *1. each coin flip is independent* and *2. the independent probability of getting a Heads is 0.65*. We typically set our threshold at $p<.05$, which remember for a two tailed test means that we are on the lookout of extreme values with a $p<.025$.
+```{r}
+
+```
+
+So essentially we are asking if the probability of obtaining exeacty 27 Heads given this scenerio is less than 2.5%:
+
+```{r}
+dbinom(x = 27,size = 50,prob = .65)
+```
+
+You Madam/Sir have besmirched my honor!
+
+OK, well is 27 isn't enough, then how low (or high) do you need to go to pass the critical threshold? To answer this we need to construct a table of probabilities:
+
+```{r}
+# 1. range of possibilites
+numberHeads <- 0:50
+# 2. prob of outcome
+probHead <- dbinom(x = numberHeads,size = 50,prob = .65)
+# 3. combine to data frame
+probTable <- data_frame(numberHeads,probHead)
+# 4. Show the data frame (table)
+show(probTable)
+```
+
+One could visually inspect the entire table noting which outcomes have a corresponding probability less than .025. But the whole point of learning `R` is to let it do the heavy lift for you. In this case you can ask `R`:
+
+>"Hey, R. Which outcomes in have a probability less than .025"
+
+or more exactly:
+
+>"Which rows in my data frame have a `probHead` less than .025"
+
+This is accomplished using the `which()` function:
+
+```{r}
+which(probTable$probHead<0.025)
+```
+
+This gives us indices of all of the rows that meet this criteria. BUT KEEP IN MIND, our list of possible outcomes started at `0` not `1`. But there's no such thing in `R` as row 0 (now Python on the other hand...). That means in the output above that `1` actually refers to 0 Heads, `2` to `1 Head` and so on. You could stop here and just know that you need to subtract the above output by 1 to get the correct result. Or you could address this in `R` in the following ways:
+
+First, the quick/dirty/limited/bad way. Keep in mind this only works because we know that we can apply a subtraction rule:
+```{r}
+which(probTable$probHead<0.025)-1
+```
+
+*The correct below way will work for cases in which adjusting the index is unknown*. Recall from [Demos Chapter 2](https://ademos.people.uic.edu/Chapter2.html) that you can get a specific value from a vector or data frame by using its index using the `[]` operator such that `[row,column]`. Think of this like how you would get a certain cell in Excel.
+
+For example the get the 17th row of our data frame `probTable`:
+```{r}
+probTable[17,]
+```
+Note that if you want all rows or columns, you leave that index blank (as I did above where I wanted both columns). Keeping in mind that `which(probTable$probHead<.025)` gave us a vector of indecies, we can rewrite the previous chunk like so to get the important rowns in a data frame structure:
+
+```{r}
+crticalValues <- which(probTable$probHead<.025)
+probTable[crticalValues,]
+```
+
+Again this would ask us to look through the whole table, but we can apply the same logic to just show us the corresponding `numberHeads` as a vector (Remember that you'll need to specify the data frame when refering to the columns):
+
+```{r}
+crticalValues <- which(probTable$probHead<.025)
+probTable$numberHeads[crticalValues]
+```
+Note that since vectors don't properly have rows or columns, you just use a single value in the `[ ]`.
+
+So, if you got 1 less head, *then* you can call me a cheat. Conversly if you managed to get 39 heads or above, I might have reason to believe that you are somehow gaming me.
+
+## One last thing... Permutations, combinations, and building functions
+
+In class we noted the equations for calculating permutations and combinations. For example, permutations:
+
+$$P^N_r=\frac{N!}{(N-r)!}$$
+
+So assuming that I have for colored balls (green, white, red, blue) how many possible permutations assuming I only draw two?
+
+Here we can use the `factorial()` function:
+```{r}
+N <- 4 # number total
+r <- 2 # number draw
+
+factorial(N)/factorial(N-r)
+```
+
+Before leaving you, I want to note one more thing that you is possible in `R`... constructing your own functions. This might be especially useful when you have a operation that you are performing over and over again that has to built in function. Functions take the general format:
+```{r eval=FALSE}
+myfunction <- function(input parameters seperated by commas){
+  
+  do something to the input parameters
+  
+  return(output)
+  }
+```
+
+For example, with permutations, I can create a function, let's call it `pFunc` that takes `N` and `r` as input parameters and performs the operation for me:
+
+```{r}
+pFunc <- function(N,r){
+  factorial(N)/factorial(N-r)
+}
+```
+
+After you run these lines of code, `pFunc` is saved to your environment. From here on out we can simply type:
+
+```{r}
+# four balls, draw 2
+pFunc(N = 4,r = 2)
+
+# four balls draw 4
+pFunc(N = 4,r = 4)
+
+# 100 balls, draw 8
+pFunc(N = 25,r = 8)
+```
+
+Given what we've just done, try to construct a function for Combinations, given that:
+
+$$C^N_r=\frac{N!}{r!(N-r)!}$$
+
+OK... signing out for today.

@@ -1,0 +1,381 @@
+# ANOVA6: Within-Subjects
+
+## Within-Subject v. Between Subjects
+
+Up until now we have considered ANOVA in between subjects designs. Data at each level of each factor comes from a different set of participants. This week we more onto within-subjects designs. 
+As we mentioned in class we have a within-subject design whenever data from the same participants exists on at least two levels of a factor (or analogously occupied at least two cells within our interaction matrix).
+
+To contrast some important distinctions let's revisit our familiar data set contrasting test outcomes for students as a function of Lecture. I realize before, Lecture was crossed with at least one other factor, but for the sake on simplicity let's just consider data from this single factor. The goal of this first section is to contrast results as a function whether this data is considered within-subjects or between-subjects.
+
+```{r}
+within_between <- read_delim("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/withinVbetween.txt", delim = "\t")
+within_between
+```
+
+### Within v Between ANOVA
+
+So we have our dataset `within_between`. You'll note that there are two subjects columns `WithinSubjects` which imagines 12 participants each going through all 3 Lecture types and `BetweenSubjects` where each participant (N=36) is assigned to a single Lecture type. Previously, we might have treated this as a between subjects design. Looking at the `ezDeign` of this design we see that every `BetweenSubject` is assigned to a single condition (as evidenced by count = 1)
+
+```{r}
+ez::ezDesign(within_between,y=Lecture,x=BetweenSubjects)
+```
+
+
+Skipping past the preliminaries (e.g., testing for assumptions) and straight to running the BS ANOVA:
+
+```{r}
+between.aov <- afex::aov_ez(id = "BetweenSubjects", dv = "Score", data = within_between,between = "Lecture",type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+between.aov$anova_table
+```
+
+However, let's assume instead that this data set comes a within design. That is, instead of different participants in each `Lecture` group, the same group of people went through all three lectures:
+
+```{r}
+ez::ezDesign(within_between,y=Lecture,x=WithinSubjects)
+```
+
+We see that the `ezDesign` has changed. Instead of 36 participants each individually assigned to a single condition, we have 12 participants each assigned to all three conditions for a single trial (measure). Running the within-subjects ANOVA:
+
+```{r echo=FALSE}
+within.aov <- afex::aov_ez(id = "WithinSubjects", dv = "Score", data = within_between,within = "Lecture",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+
+within.aov$anova_table
+```
+
+(You may have noticed I've added a `correction` argument to my `aov_ez` call. More on this later)
+
+In both of these cases the data is exactly the same. What has changed is how we parse the variance (you'll notice that the denominator degrees of freedom are different for the second ANOVA). In a within design, we need to take into account the  "within-subject" variance. That is how individual subjects vary from one level of treatment to the other. In this respect, within designs are typically more powerful than analogous between designs. Whilet the inherent differences between individual subjects is present in both types of designs, your within-subjects ANOVA model includes it in its analysis. This increase in power is reflected by the lower MSE (48.52 v. 139.36) and subsequently, larger F-value (12.31 v. 4.28) and effect size (0.53 v. 0.21) in our within-subjects analysis.
+
+Well if that's the case why not run within-subject (WS) designs all of the time. Well, typically psychologists do when the phenomena lends itself to WS-designs. BUT there are certainly times when they are not practical, for example if you are concerned about learning, practice, or carryover effects where exposure to a treatment on one level might impact the other levels. For example if you were studying radiation poisoning and had a placebo v. radiation dose condition, it be likely that you wouldn't run your experiement as a within—or at the very least you wouldn't give them the radiation first. It would also be likely that you'd be in violation several standards of ethics.
+
+Perhaps a little more inside baseball, there are underlying questions on whether or not we are indeed making the appropriate corrections in our WS models or correctly specifying our experiments units. For example, if participants data is collected over 4 (or any number) trials in each treactment condition, then both SPSS and R `afex` require you to collapse those trials to means, therefore turning what are truly 4 observations into 1 see [Max et al., 1999](https://search.proquest.com/docview/232357509/fulltextPDF/E6BE3DC885B947D6PQ/) for details. In R, `afex` handles this automatically for data in long format. In SPSS you need to organize your data in another program (like Excel), calculate the means, and then send that data to SPSS.
+
+At the same time there are debates as to the importance of sphericity in the subjects data. One alternative method that avoids these issues is to invoke mixed models (e.g., `lmer`). However, if you really want to go down the rabbit hole check out [Doug Bates reponse on appropriate dfs and p.values in `lmer`](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html). You'll not that these discussions were ten years ago and are still being debated (see [here](https://www.reddit.com/r/AskStatistics/comments/2x9ipp/linear_mixed_effect_models_and_pvalues_r/).
+
+For now, we won't go down the rabbit hole and just focus on the practical issues confronted when running a repeated-measures ANOVA.
+
+
+## EXAMPLE 1
+
+To start, we will use data from Howell's example in the opening of Chapter 14. Here are data related to the effectiveness of relaxation therapy to the number of episodes that chronic migraine sufferers reported. Data was collected from each subject over the course of 5 weeks. After week 2 the therapy treatment was implemented effectively dividing the 5 weeks into two phases, Pre (Weeks 1 & 2) and Post (Weeks 3,4, & 5).
+
+The data that you see here represent a single observation per participant per week, so with this example there is no need to collapse multiple observations to a mean value per participant per week. We'll confront an example where this is an issue later in the vignette.
+
+### loading in the data:
+
+
+```{r}
+example1 <- read_delim("https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab14-3.dat", delim = "\t")
+```
+You'll notice that the data set above is in wide format. Each subject is on a single row and each week is in its own column. Note that **this is the preferred format for within subjects analysis for SPSS**. However in `R` we want it in long format.
+```{r}
+example1_long <- gather(example1,key = "Week",value = "Migraines", 2:6)
+
+example1_long$Week <- as.factor(example1_long$Week)
+
+example1_long
+```
+Ok, much better, each Subject × Week observation is on a single row.
+
+
+### plotting the data
+
+One additional concern that we must deal with when plotting within-subjects data is the error bars. Plotting the standard error or regular confidence intervals may be misleading for making statistical inferences. This is beause the values, normally caluculated do not account for within subject correlation. Luckily for us there is a correction that we can make using the `Rmisc` package. Please see [Cousineau (2005)](https://doaj.org/article/dd17c4ccc4684c9da60c02f3864d09e6) and [Morey (2008)](https://doaj.org/article/011cd52c58b449c4bf169676ca704062) for details on this issue and subsequent correction.
+
+The practical steps for this correction include first norming the data to account for within subjects correlations.
+
+```{r}
+normedData <- Rmisc::normDataWithin(data = example1_long,measurevar = "Migraines",idvar = "Subject", betweenvars = NULL)
+
+normedData
+```
+We then calculate the se, sd, and ci values of our normed data, in this case `MigrainesNormed`.
+
+The final step is to make a correction on these `Normed` values ([Morey (2008)](https://doaj.org/article/011cd52c58b449c4bf169676ca704062)). This is done by taking the number of levels of the within factor (`nWithinGroups`) and applying the following correction:
+
+```{r}
+# get the number of levels in Week:
+nWithinGroups <- nlevels(example1_long$Week)
+
+# apply the correction factor:
+correctionFactor <- sqrt(nWithinGroups/(nWithinGroups - 1))
+```
+
+The range of our corrected errorbars are the sd, se, ci multiplied by this `correctionFactor`.
+
+For example, the `sd` of participants' `Migraines` in `Wk1` is:
+
+```{r}
+sd(normedData$MigrainesNormed[normedData$Week=="Wk1"])*correctionFactor
+```
+
+Fortunately there is a function in `Rmisc` that handles this correction for us, `summarySEwithin`. It is very similar to the `summarySE` function you are familiar with, but asks you to specify which IVs are within-subjects (`withinvars`), between-subjects(`betweenvars`) and which column contains subject IDs `idvar`. Using our original `example1_long` data:
+
+```{r}
+Rmisc::summarySEwithin(data=example1_long,measurevar = "Migraines",withinvars = "Week",betweenvars = NULL, idvar = "Subject")
+```
+
+Unfortunately, to date I haven't found a way to get this to play nice with `stat_summary()` in `ggplot()`. HOWEVER, there is a simple work around. Since `stat_summary()` is simply summarizing our means and error values from the dataset and `summarySEwithin` is doing the exact same thing, we can simply pull these values straight from `summarySEwithin` with one MAJOR caveat. `summarySEwithin` reports the normed means, however for plotting we need the original means. Note that this is not an issue when you are only dealing with within subjects factors, but if you are performing mixed ANOVA (combination within-subjects and between-subjects) these means can differ.
+
+To address this problem user `Hause Lin` created a custom function `summarySEwithin2` that reports both normed and unnormed means. You can find this script on their Github site [here](https://gist.github.com/hauselin/a83b6d2f05b0c90c0428017455f73744). I would recommend copying and pasting the code you your own ".R" file for future use. In the meantime we can directly source this code from their site:
+
+```{r}
+source("https://gist.githubusercontent.com/hauselin/a83b6d2f05b0c90c0428017455f73744/raw/38e03ea4bf658d913cf11f4f1c18a1c328265a71/summarySEwithin2.R")
+```
+
+
+A similar script may be found on [this ggplot tutorial site](http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2)/), which forms the basis of this alternative plotting method. 
+
+Note that this "alternative" is how I in fact create most of my own ANOVA plots.
+
+First we save the output of `summarySEwithin2` to an object:
+
+```{r}
+summaryData <- summarySEwithin2(data=example1_long,measurevar = "Migraines",withinvars = "Week",idvar = "Subject")
+summaryData
+```
+
+From here we can refer directly to `summaryData` in constructing the `ggplot`:
+
+
+```{r}
+p <- ggplot(summaryData,mapping = aes(x = Week,y = Migraines, group=1))
+```
+
+And now to construct the plot. rather than using `summary_stat()` we directly call each `geom`. For example, adding the means and as points:
+
+```{r}
+p <- p + geom_point()
+p
+```
+
+Connecting those points with lines:
+
+```{r}
+p <- p + geom_line()
+p
+```
+
+Adding error bars (SE):
+```{r}
+p <- p + geom_errorbar(aes(ymin=Migraines-se, ymax=Migraines+se), width=0)
+p
+```
+
+(note that above I set width of the error bars to 0 to keep consistent with how we've been plotting pointranges). However, if you want caps, you can change the width. I recommend a width no higher than 0.2.
+
+From here you can use your familiar commands to whip it into APA format!
+
+### running a within ANOVA (afex):
+
+Running a WS ANOVA is just like running a BS ANOVA in `afex`. We call in our within subjects factors using the `within=` argument. 
+
+```{r}
+within.aov <- afex::aov_ez(id = "Subject", dv = "Migraines", data = example1_long,between = NULL,within = "Week",type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+within.aov$anova_table
+```
+
+You'll also notice in the code above that I've added a `correction="none"` call to my `anova_table` argument. Otherwise `afex` defaults to applying the Greenhouse-Geisser correction [link](https://statistics.laerd.com/statistical-guides/sphericity-statistical-guide.php). There is an argument to be made that you should always make a correction to guard against deviations from sphericity. The correction becomes larger the further your data is from sphericity. However, standard practice in the psychology literature is to only apply the correction if our data fail Mauchly's Test [link](https://statistics.laerd.com/statistical-guides/sphericity-statistical-guide.php). The outcome of this test can be obtained by using the `summary()` function 
+```{r}
+summary(within.aov)
+```
+
+This gives us our original ANOVA, the Mauchly Test, and the Greenhouse-Geisser and Huynh-Feldt corrections. In this case the Mauchly Test `p = .54`, so no corrections are necessary. If your elect to make the correction (i.e., the data fails Mauchly's Test) then you could multiply your original degrees of freedom by the GG eps (or HF eps). The p.value next to the correction values tells you the p.value for your ANOVA effect assuming corrections. In this case even with the corrections the effect of Week is significant. Alternatively you could just rerun the `afex` function and specifying the `correction=` call.
+
+```{r}
+## GG correction:
+within.aov <- afex::aov_ez(id = "Subject", dv = "Migraines", data = example1_long,between = NULL,within = "Week",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="GG"))
+within.aov
+
+## HF correction (note that any HF eps > 1 will be treated as 1):
+within.aov <- afex::aov_ez(id = "Subject", dv = "Migraines", data = example1_long,between = NULL,within = "Week",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="HF"))
+within.aov
+```
+
+
+### planned contrasts
+
+We can also perform planned contrasts. For example, in this case it make the most sense to examine differences between the pre-treatment weeks (1,2) and post-treatment weeks (3,4,5). To do this we can set up a contrast vector and and using the `emmeans()` function as below. You call in the `within.aov`, specify the custom contrast, and apply the contrast to the within factor. The resulting output gives you means data for each level as well as a `t.test` on the contrast.
+
+```{r}
+before.v.treat <- c(-1/2,-1/2,1/3,1/3,1/3)
+
+within.aov <- afex::aov_ez(id = "Subject", dv = "Migraines", data = example1_long,between = NULL,within = "Week",type = 3, return = "afex_aov", anova_table=list(es = "pes"))
+
+#custom.comp = custom contrasts
+# note that I've named the contrast
+custom.comp = list(before.v.treat = c(-1/2,-1/2,1/3,1/3,1/3))
+
+# original aov, , and apply it to Week:
+emmeans::emmeans(within.aov, specs="Week") %>% contrast(.,custom.comp)
+```
+``
+
+## EXAMPLE 2
+
+Let's take a look at another example, using a experimental paragdigm we are familiar with:
+
+### loading in the data
+
+You note that this data is already in long format so no need to adjust.
+```{r}
+example2_long <- read_delim("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA6_withinEx2.txt", delim = "\t")
+
+example2_long
+```
+
+### plotting the data
+
+Let's plot this data. This time, I'll make my points a little larger, lines a little thicker, and add caps to the error bars:
+
+```{r}
+
+summaryData <- summarySEwithin2(data=example2_long,measurevar = "Score",withinvars = "Lecture",idvar = "Subject")
+
+
+p <- ggplot(summaryData,mapping = aes(x = Lecture,y = Score, group=1)) +
+  geom_point(size=2) + 
+  geom_line(size=2) +
+  geom_errorbar(aes(ymin=Score-se, ymax=Score+se), width=0.15) +
+  theme_cowplot() +
+  theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.25)) +
+  scale_color_manual(values=c("black","grey50")) + 
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+Maybe not the best plot, but wanted to show you how to tweak things.
+
+### running the ANOVA:
+
+As before, let's run this using afex:
+```{r}
+within.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = example2_long,between = NULL,within = "Lecture",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+summary(within.aov)
+```
+
+You'll notice that in this example the data failed Mauchly Tests for Sphericity. As I mentioned above in this case you'll need to make the appropriate corrections. GG corrections are the "industry standard" (that is, I typically see these). HF corrections are not as conservative, and are appropriate in instances where the GG eps > 0.75. In this case we'll use the GG correction. My advice, just rerun the ANOVA with `correction="GG"`:
+
+```{r}
+within.aov <- afex::aov_ez(id = "Subject", dv = "Score", data = example2_long,between = NULL,within = "Lecture",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="GG",sig_symbols = rep("", 4)))
+
+within.aov$anova_table
+```
+
+### post-hocs
+
+Post-hoc comparisons of means take a different form for repeated measures ANOVA. Typical methods such as Tukey HSD were designed for between-subjects effects, where it makes sense (assuming homogeneity of variance) to use a pooled error term.  However, for within-subjects (or repeated measures) effects, the error term is the Treatment x Subjects interaction, and the nature of the TxS interaction across all treatment levels can be very different than it is for any particular pair of treatment levels. So the usual recommendation for carrying out pair-wise contrasts for a within-subjects factor is to use ordinary paired t-tests with an error term based only on the levels being compared.
+
+This can be most simply accomplished by running a seperate ANOVA for each comparison (this guarantees use of the appropriate error terms), dropping any unused levels from the analysis. For example, comparing Physical v. Social:
+
+```{r}
+physical_v_social <- filter(example2_long, Lecture!="History")
+afex::aov_ez(id = "Subject", dv = "Score", data = physical_v_social,between = NULL,within = "Lecture",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+```
+
+Note that tis p-value is NOT adjusted. A simple way of addressing this is using a Bonferroni correction. For example, if we run the 3 possible tests for this analysis then the critical _p_ would need to be adjusted to .05/3, or `.016`. In this case I'm still good (.0007 < .016)
+
+
+## EXAMPLE 3
+
+Let's ramp-up the complexity. Here is a dataset testing Recall over three days as a function of depth of processing (Lo, Med, High). In this case we have 2 within factors. 
+
+
+### loading in the data:
+```{r}
+example3 <- read_delim("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsData/ANOVA6_withinEx3.txt", delim = "\t")
+example3
+```
+
+### plotting the data
+
+Again, we need to make the appropriate correction for our error bars. In this case the number of within groups is the number of cells that is formed by crossing Day (1,2,3) and Processing Depth (Lo, Med, Hi). As this is a 3 * 3 design there are 9 cells, or `nWithinGroups=9`. As before this is handled auto-magically in `summarySEwithin2`
+
+```{r}
+summaryData <- summarySEwithin2(data=example3_long,measurevar = "Recalled",withinvars = c("Day","ProcessDepth"),idvar = "Subject")
+
+
+p <- ggplot(summaryData,mapping = aes(x = Day,y = Recalled, group=ProcessDepth)) +
+  geom_point(size=2) + 
+  geom_line(size=1) +
+  geom_errorbar(aes(ymin=Recalled-se, ymax=Recalled+se), width=0.1) +
+  theme_cowplot() +
+  theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.25,.25)) +
+  scale_color_manual(values=c("black","grey50")) + 
+  xlab("Lecture") + 
+  ylab ("Score") +
+  theme(plot.margin=unit(c(.25,.25,.25,.25),"in")) + 
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+
+### running the omnibus ANOVA:
+```{r}
+omnibus.aov <- afex::aov_ez(id = "Subject", dv = "Recalled", data = example3_long,between = NULL,within = c("ProcessDepth","Day"),type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+
+summary(omnibus.aov)
+```
+
+Here we have two main effects and an interaction. Let's unpack the interaction by taking a look at whether `Recall` inceases over sucessive days. 
+
+### running the simple effects ANOVAs
+
+It's recommended that one avoid the use of pooled error terms when performing simple effects analysis of within-subjects ANOVA. This is definitely the case when the spherecity assumption is violated, but as a general rule, even when the assumption is not technically violated, deviations from spherecity can artificially adjust Type I error. So in this case, simple follow up ANOVAs are justified.
+
+One way to do this would be, as we have done in the past, seperate out the data and run seperate simple effects ANOVAs:
+
+```{r}
+hi.data <- filter(example3_long, ProcessDepth=="High")
+med.data <- filter(example3_long, ProcessDepth=="Med")
+lo.data <- filter(example3_long, ProcessDepth=="Lo")
+
+hi.aov <- afex::aov_ez(id = "Subject", dv = "Recalled", data = hi.data,between = NULL,within = "Day",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+
+hi.aov
+
+
+med.aov <- afex::aov_ez(id = "Subject", dv = "Recalled", data = med.data,between = NULL,within = "Day",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+
+med.aov
+
+lo.aov <- afex::aov_ez(id = "Subject", dv = "Recalled", data = lo.data,between = NULL,within = "Day",type = 3, return = "afex_aov", anova_table=list(es = "pes", correction="none"))
+
+lo.aov
+```
+
+I'm only printing the ANOVA and not the tests of Sphericity here for the same of brevity, though it's always a good idea to check those. How about you go ahead an do that right now... I'll wait.
+
+In this spirit of self-reliance, I also leave it to you to perform any necessary post hocs on the `hi` and `med` data. Remember however that for each post-hoc you run you need to correct your critical p-value. I imagine you'll end up running 6 tests, so critical `p` needs to be `.05/6`
+
+Bottom line: The simple effects ANOVAs (and subsequent post-hocs) confirm what the figure suggest; that recall increased over sucessive days in the High and Med processing conditions, but not the Low processing condition.
+
+
+## How to perform a within subjects analysis in SPSS:
+
+I'll likely but together my own vid, but it won't be much better than this:
+
+https://www.youtube.com/watch?v=9TDvejlOP0Q
+
+
+
+
+

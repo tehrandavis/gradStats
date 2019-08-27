@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>musings of the Professor</title>
+  <meta name="description" content="Weekly examples and musings related to PSYC 7014.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="musings of the Professor" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Weekly examples and musings related to PSYC 7014." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="musings of the Professor" />
+  
+  <meta name="twitter:description" content="Weekly examples and musings related to PSYC 7014." />
+  
+
+<meta name="author" content="Tehran J. Davis">
+
+
+<meta name="date" content="2018-12-15">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="analysis-of-variance-i-the-one-way-anova.html">
+<link rel="next" href="analysis-of-varience-iii-factorial-anova.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Words from the Professor</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Weekly musings</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html"><i class="fa fa-check"></i><b>1</b> Introduction to R / getting to know your data</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-and-loading-an-r-package"><i class="fa fa-check"></i><b>1.1</b> Installing and loading an R package:</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-a-package-using-the-gui"><i class="fa fa-check"></i><b>1.1.1</b> Installing a package using the GUI</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-packages-with-install.packages"><i class="fa fa-check"></i><b>1.1.2</b> Installing packages with <code>install.packages()</code></a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#an-important-note-on-knitting-with-install.packages"><i class="fa fa-check"></i><b>1.1.3</b> An IMPORTANT note on knitting with install.packages:</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-packages-with-library"><i class="fa fa-check"></i><b>1.1.4</b> Loading packages with <code>library()</code></a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-packages-with-require"><i class="fa fa-check"></i><b>1.1.5</b> Loading packages with <code>require()</code></a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-and-loading-packages-like-a-ninja"><i class="fa fa-check"></i><b>1.1.6</b> Installing and loading packages like a ninja</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-in-data"><i class="fa fa-check"></i><b>1.2</b> Loading in data</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-in-local-data-using-a-gui"><i class="fa fa-check"></i><b>1.2.1</b> Loading in local data using a GUI:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#importing-data-from-the-web"><i class="fa fa-check"></i><b>1.2.2</b> importing data from the web</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#downloading-data"><i class="fa fa-check"></i><b>1.2.3</b> Downloading data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#looking-ahead"><i class="fa fa-check"></i><b>1.3</b> Looking ahead…</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html"><i class="fa fa-check"></i><b>2</b> Measures of distribution, central tendency, PLOTS… oh my!</a><ul>
+<li class="chapter" data-level="2.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#getting-measures-of-central-tendency"><i class="fa fa-check"></i><b>2.1</b> Getting measures of central tendency</a></li>
+<li class="chapter" data-level="2.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-the-distribution-with-a-histogram"><i class="fa fa-check"></i><b>2.2</b> Plotting the distribution with a histogram</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#using-hist"><i class="fa fa-check"></i><b>2.2.1</b> Using <code>hist()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-a-histogram-with-ggplot"><i class="fa fa-check"></i><b>2.2.2</b> Plotting a histogram with <code>ggplot()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-your-data-in-a-boxplot"><i class="fa fa-check"></i><b>2.3</b> Plotting your data in a boxplot:</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#turning-numeric-data-into-categorical"><i class="fa fa-check"></i><b>2.3.1</b> turning numeric data into categorical</a></li>
+<li class="chapter" data-level="2.3.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#boxplotting-using-ggplot"><i class="fa fa-check"></i><b>2.3.2</b> boxplotting using <code>ggplot()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#assessing-the-data-for-normality"><i class="fa fa-check"></i><b>2.4</b> Assessing the data for normality</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#q-q-plots"><i class="fa fa-check"></i><b>2.4.1</b> Q-Q Plots</a></li>
+<li class="chapter" data-level="2.4.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#generating-a-theoretical-normal-distribution."><i class="fa fa-check"></i><b>2.4.2</b> Generating a theoretical normal distribution.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#subsetting-your-data"><i class="fa fa-check"></i><b>2.5</b> Subsetting your data</a></li>
+<li class="chapter" data-level="2.6" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#looking-ahead-means-and-better-models"><i class="fa fa-check"></i><b>2.6</b> Looking ahead: Means and better models</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-highest-probability"><i class="fa fa-check"></i><b>2.6.1</b> mean as highest probability:</a></li>
+<li class="chapter" data-level="2.6.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-fulcrum-point"><i class="fa fa-check"></i><b>2.6.2</b> mean as fulcrum point</a></li>
+<li class="chapter" data-level="2.6.3" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-minimizing-random-error"><i class="fa fa-check"></i><b>2.6.3</b> mean as minimizing random error</a></li>
+<li class="chapter" data-level="2.6.4" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#but-we-can-do-better-than-that"><i class="fa fa-check"></i><b>2.6.4</b> but we can do better than that</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html"><i class="fa fa-check"></i><b>3</b> Sampling distributions and building the logic of NHST</a><ul>
+<li class="chapter" data-level="3.1" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-sampling-distribution"><i class="fa fa-check"></i><b>3.1</b> The sampling distribution</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>3.2</b> Standard error of the mean</a></li>
+<li class="chapter" data-level="3.3" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-difference-distribution"><i class="fa fa-check"></i><b>3.3</b> The difference distribution</a></li>
+<li class="chapter" data-level="3.4" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-null-distribution"><i class="fa fa-check"></i><b>3.4</b> The Null distribution</a></li>
+<li class="chapter" data-level="3.5" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#probabilty-of-observed-differences"><i class="fa fa-check"></i><b>3.5</b> Probabilty of observed differences</a></li>
+<li class="chapter" data-level="3.6" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#a-note-about-sample-size"><i class="fa fa-check"></i><b>3.6</b> A note about sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html"><i class="fa fa-check"></i><b>4</b> Probability and the Binomial Distribution</a><ul>
+<li class="chapter" data-level="4.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#a-few-words-on-where-we-are-at-so-far"><i class="fa fa-check"></i><b>4.1</b> A few words on where we are at so far…</a></li>
+<li class="chapter" data-level="4.2" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#okay-on-to-this-weeks-example-analyses"><i class="fa fa-check"></i><b>4.2</b> Okay on to this week’s example analyses:</a></li>
+<li class="chapter" data-level="4.3" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#classic-example-the-coin-flip"><i class="fa fa-check"></i><b>4.3</b> Classic example: The coin flip</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#how-many-heads-would-we-get-if-we-flipped-a-fair-coin-10-times"><i class="fa fa-check"></i><b>4.3.1</b> How many heads would we get if we flipped a fair coin 10 times?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#changing-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Changing the parameters</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#constructing-a-table-of-outcome-probabilities"><i class="fa fa-check"></i><b>4.4.1</b> Constructing a table of outcome probabilities:</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#assessing-cummulative-probability"><i class="fa fa-check"></i><b>4.4.2</b> Assessing cummulative probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#catching-a-cheat"><i class="fa fa-check"></i><b>4.5</b> Catching a cheat</a></li>
+<li class="chapter" data-level="4.6" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#one-last-thing-permutations-combinations-and-building-functions"><i class="fa fa-check"></i><b>4.6</b> One last thing… Permutations, combinations, and building functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html"><i class="fa fa-check"></i><b>5</b> Chi-square and associated methods</a><ul>
+<li class="chapter" data-level="5.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>5.1</b> Goodness of fit test</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#what-to-do-if-you-are-given-a-table-with-tallies"><i class="fa fa-check"></i><b>5.1.1</b> What to do if you are given a table with tallies</a></li>
+<li class="chapter" data-level="5.1.2" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#assuming-all-things-are-not-equal"><i class="fa fa-check"></i><b>5.1.2</b> Assuming all things are NOT equal</a></li>
+<li class="chapter" data-level="5.1.3" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#real-data-is-likely-not-pre-tallied"><i class="fa fa-check"></i><b>5.1.3</b> Real data is likely NOT pre-tallied</a></li>
+<li class="chapter" data-level="5.1.4" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#getting-counts-the-in-class-way-not-recommended"><i class="fa fa-check"></i><b>5.1.4</b> getting counts the in-class way (not recommended)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#getting-counts-the-table-way-my-new-recommendation"><i class="fa fa-check"></i><b>5.1.5</b> getting counts the <code>table()</code> way (my new recommendation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#contingency-table-analysis-in-r"><i class="fa fa-check"></i><b>5.2</b> Contingency Table Analysis in R</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#okay-but-what-about-with-real-data"><i class="fa fa-check"></i><b>5.2.1</b> Okay, but what about with REAL DATA:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#effect-sizes-and-odds-ratios"><i class="fa fa-check"></i><b>5.3</b> Effect Sizes and Odds Ratios</a></li>
+<li class="chapter" data-level="5.4" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.4</b> Fisher’s exact test</a></li>
+<li class="chapter" data-level="5.5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#cohens-kappa"><i class="fa fa-check"></i><b>5.5</b> Cohen’s kappa</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>6</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#the-relationship-btw-stress-and-health"><i class="fa fa-check"></i><b>6.1</b> The Relationship b/tw Stress and Health</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#testing-our-assumptions"><i class="fa fa-check"></i><b>6.1.1</b> Testing our assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#plotting-the-data"><i class="fa fa-check"></i><b>6.2</b> Plotting the data</a></li>
+<li class="chapter" data-level="6.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.3</b> Covariance and Correlation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#correlation"><i class="fa fa-check"></i><b>6.3.2</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#sigfnificance-testing-r"><i class="fa fa-check"></i><b>6.4</b> Sigfnificance testing <span class="math inline">\(r\)</span></a></li>
+<li class="chapter" data-level="6.5" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#fitting-the-data-to-a-model"><i class="fa fa-check"></i><b>6.5</b> Fitting the data to a model</a></li>
+<li class="chapter" data-level="6.6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-models-in-r"><i class="fa fa-check"></i><b>6.6</b> Linear models in R</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#attributes-of-class-lm"><i class="fa fa-check"></i><b>6.6.1</b> Attributes of class <code>lm</code>:</a></li>
+<li class="chapter" data-level="6.6.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#testing-the-residuals"><i class="fa fa-check"></i><b>6.6.2</b> Testing the residuals</a></li>
+<li class="chapter" data-level="6.6.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#using-your-lm-object-with-other-functions"><i class="fa fa-check"></i><b>6.6.3</b> Using your <code>lm</code> object with other functions</a></li>
+<li class="chapter" data-level="6.6.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#plotting-the-regression-line"><i class="fa fa-check"></i><b>6.6.4</b> Plotting the regression line</a></li>
+<li class="chapter" data-level="6.6.5" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#a-note-on-degrees-of-freedom-of-our-model"><i class="fa fa-check"></i><b>6.6.5</b> A note on degrees of freedom of our model</a></li>
+<li class="chapter" data-level="6.6.6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#interpreting-the-output"><i class="fa fa-check"></i><b>6.6.6</b> Interpreting the output</a></li>
+<li class="chapter" data-level="6.6.7" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#the-coeff.-of-determination-as-index-of-explanatory-value"><i class="fa fa-check"></i><b>6.6.7</b> The coeff. of determination as index of explanatory value</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#write-up-and-presentaion"><i class="fa fa-check"></i><b>6.7</b> Write up and presentaion</a></li>
+<li class="chapter" data-level="6.8" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#advanced-plotting"><i class="fa fa-check"></i><b>6.8</b> Advanced plotting</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#adding-text-to-the-plot"><i class="fa fa-check"></i><b>6.8.1</b> Adding text to the plot</a></li>
+<li class="chapter" data-level="6.8.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#addnig-text-like-a-r-ninja"><i class="fa fa-check"></i><b>6.8.2</b> addnig text like a R-ninja:</a></li>
+<li class="chapter" data-level="6.8.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#placing-plots-side-by-side-in-a-grid"><i class="fa fa-check"></i><b>6.8.3</b> Placing plots side-by-side in a grid</a></li>
+<li class="chapter" data-level="6.8.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#two-series-on-the-same-damn-plot"><i class="fa fa-check"></i><b>6.8.4</b> Two series on the same damn plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html"><i class="fa fa-check"></i><b>7</b> Testing differences in means: t-test</a><ul>
+<li class="chapter" data-level="7.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#things-to-consider-before-running-the-t-test"><i class="fa fa-check"></i><b>7.1</b> Things to consider before running the t-test</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#what-is-the-nature-of-your-sample-data"><i class="fa fa-check"></i><b>7.1.1</b> What is the nature of your sample data?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#what-is-the-structure-of-your-data-file"><i class="fa fa-check"></i><b>7.1.2</b> What is the structure of your data file?</a></li>
+<li class="chapter" data-level="7.1.3" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#testing-assumptions"><i class="fa fa-check"></i><b>7.1.3</b> Testing assumptions</a></li>
+<li class="chapter" data-level="7.1.4" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#getting-the-descriptive-stats-and-plotting-the-means."><i class="fa fa-check"></i><b>7.1.4</b> Getting the descriptive stats and plotting the means.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#performing-the-t-test-paired-sample-t-test"><i class="fa fa-check"></i><b>7.2</b> Performing the t-test (Paired sample t-test)</a></li>
+<li class="chapter" data-level="7.3" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#measuring-effect-size"><i class="fa fa-check"></i><b>7.3</b> Measuring effect size</a></li>
+<li class="chapter" data-level="7.4" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#other-t-tests"><i class="fa fa-check"></i><b>7.4</b> Other <span class="math inline">\(t\)</span> tests:</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#one-sample"><i class="fa fa-check"></i><b>7.4.1</b> One sample:</a></li>
+<li class="chapter" data-level="7.4.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#independent-samples-example"><i class="fa fa-check"></i><b>7.4.2</b> Independent samples example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#independent-or-paired-sample"><i class="fa fa-check"></i><b>7.5</b> Independent or Paired Sample?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html"><i class="fa fa-check"></i><b>8</b> Analysis of Variance I: the One-way ANOVA</a><ul>
+<li class="chapter" data-level="8.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#required-packages"><i class="fa fa-check"></i><b>8.1</b> Required packages</a></li>
+<li class="chapter" data-level="8.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#anovas-for-comparing-means"><i class="fa fa-check"></i><b>8.2</b> ANOVAs for comparing means</a></li>
+<li class="chapter" data-level="8.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#pre-processing-the-data"><i class="fa fa-check"></i><b>8.3</b> Pre-processing the data:</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#recoding-the-factors-if-dummy-coded"><i class="fa fa-check"></i><b>8.3.1</b> Recoding the factors (if dummy coded)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#renaming-column-headers"><i class="fa fa-check"></i><b>8.3.2</b> Renaming column headers</a></li>
+<li class="chapter" data-level="8.3.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reordering-your-levels"><i class="fa fa-check"></i><b>8.3.3</b> Reordering your levels</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#assumptions-for-anova"><i class="fa fa-check"></i><b>8.4</b> Assumptions for ANOVA</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#checking-the-normality-assumption-option-1"><i class="fa fa-check"></i><b>8.4.1</b> Checking the normality assumption, OPTION 1</a></li>
+<li class="chapter" data-level="8.4.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#checking-the-normality-assumption-option-2"><i class="fa fa-check"></i><b>8.4.2</b> Checking the normality assumption, OPTION 2</a></li>
+<li class="chapter" data-level="8.4.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>8.4.3</b> Homogeneity of Variance</a></li>
+<li class="chapter" data-level="8.4.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#what-to-do-if-the-assumptions-are-violated"><i class="fa fa-check"></i><b>8.4.4</b> What to do if the assumptions are violated?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#running-the-anova-in-r"><i class="fa fa-check"></i><b>8.5</b> Running the ANOVA in R:</a></li>
+<li class="chapter" data-level="8.6" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reporting-your-data"><i class="fa fa-check"></i><b>8.6</b> Reporting your data</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reporting-in-the-text"><i class="fa fa-check"></i><b>8.6.1</b> Reporting in the text</a></li>
+<li class="chapter" data-level="8.6.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#what-the-omnibus-anova-tells-you"><i class="fa fa-check"></i><b>8.6.2</b> What the omnibus ANOVA tells you</a></li>
+<li class="chapter" data-level="8.6.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#plots"><i class="fa fa-check"></i><b>8.6.3</b> Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#digging-deeper-anova-and-regression"><i class="fa fa-check"></i><b>8.7</b> DIGGING DEEPER: ANOVA and Regression</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#regression-method-v.-means-method"><i class="fa fa-check"></i><b>8.7.1</b> Regression method v. means method</a></li>
+<li class="chapter" data-level="8.7.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#comparing-two-models"><i class="fa fa-check"></i><b>8.7.2</b> Comparing two models</a></li>
+<li class="chapter" data-level="8.7.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#means-method-calculations"><i class="fa fa-check"></i><b>8.7.3</b> Means method calculations</a></li>
+<li class="chapter" data-level="8.7.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#bringing-it-together-its-all-about-the-residuals-baby"><i class="fa fa-check"></i><b>8.7.4</b> Bringing it together: it’s all about the residuals, baby</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><i class="fa fa-check"></i><b>9</b> Analysis of Variance II: Multiple comparisons in One-way ANOVA</a><ul>
+<li class="chapter" data-level="9.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#getting-started-loading-packages-and-data"><i class="fa fa-check"></i><b>9.1</b> Getting started (loading packages and data)</a></li>
+<li class="chapter" data-level="9.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#running-the-one-way-anova"><i class="fa fa-check"></i><b>9.2</b> Running the One-way ANOVA</a></li>
+<li class="chapter" data-level="9.3" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#post-hoc-tests"><i class="fa fa-check"></i><b>9.3</b> Post-hoc tests</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#bonferonni-dunn-and-holm-tests"><i class="fa fa-check"></i><b>9.3.1</b> Bonferonni-Dunn and Holm tests</a></li>
+<li class="chapter" data-level="9.3.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#tukey-hsd-and-regwq-tests"><i class="fa fa-check"></i><b>9.3.2</b> Tukey HSD and REGWQ tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#the-logic-of-planned-contrasts"><i class="fa fa-check"></i><b>9.4</b> The logic of Planned contrasts</a></li>
+<li class="chapter" data-level="9.5" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#performing-planned-contrasts-in-r"><i class="fa fa-check"></i><b>9.5</b> Performing planned contrasts in R</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#making-the-output-easier-to-read"><i class="fa fa-check"></i><b>9.5.1</b> Making the output easier to read</a></li>
+<li class="chapter" data-level="9.5.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#calculating-your-effect-size"><i class="fa fa-check"></i><b>9.5.2</b> Calculating your effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#reporting-your-results"><i class="fa fa-check"></i><b>9.6</b> Reporting your results</a></li>
+<li class="chapter" data-level="9.7" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#a-note-on-using-the-multcomp-package-v.-using-the-base-stats-method"><i class="fa fa-check"></i><b>9.7</b> A note on using the <code>multcomp</code> package v. using the base stats method</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html"><i class="fa fa-check"></i><b>10</b> Analysis of Varience III: Factorial ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#main-effect-main-effect-and-interactions-oh-my"><i class="fa fa-check"></i><b>10.1</b> Main effect, main effect, and interactions… oh my!</a></li>
+<li class="chapter" data-level="10.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#example-a-22-anova"><i class="fa fa-check"></i><b>10.2</b> Example: a 2×2 ANOVA</a></li>
+<li class="chapter" data-level="10.3" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#making-sense-of-plots"><i class="fa fa-check"></i><b>10.3</b> Making sense of plots</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plots"><i class="fa fa-check"></i><b>10.3.1</b> Interaction plots</a></li>
+<li class="chapter" data-level="10.3.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#plotting-main-effects"><i class="fa fa-check"></i><b>10.3.2</b> Plotting main effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-lm-method"><i class="fa fa-check"></i><b>10.4</b> Running the ANOVA <code>lm()</code> method</a></li>
+<li class="chapter" data-level="10.5" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-in-the-afexaov_ez-method"><i class="fa fa-check"></i><b>10.5</b> Running the ANOVA in the <code>afex::aov_ez()</code> method:</a></li>
+<li class="chapter" data-level="10.6" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#getting-cell-means"><i class="fa fa-check"></i><b>10.6</b> Getting cell means</a></li>
+<li class="chapter" data-level="10.7" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#more-examples-a-2-3-anova"><i class="fa fa-check"></i><b>10.7</b> More examples: a 2 × 3 ANOVA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova"><i class="fa fa-check"></i><b>10.7.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="10.7.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#apa-plotting"><i class="fa fa-check"></i><b>10.7.2</b> APA plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#anova-howell-13.1"><i class="fa fa-check"></i><b>10.8</b> 2 × 5 ANOVA (Howell 13.1)</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-1"><i class="fa fa-check"></i><b>10.8.1</b> Running the ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#one-last-example"><i class="fa fa-check"></i><b>10.9</b> One last example,</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-2"><i class="fa fa-check"></i><b>10.9.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="10.9.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plot"><i class="fa fa-check"></i><b>10.9.2</b> Interaction plot</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-v.-no-interaction"><i class="fa fa-check"></i><b>10.10</b> Interaction v. no interaction</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#no-interaction-how-about-some-posthocs"><i class="fa fa-check"></i><b>10.10.1</b> No interaction? How about some posthocs?</a></li>
+<li class="chapter" data-level="10.10.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#what-to-do-if-you-do-have-an-interaction"><i class="fa fa-check"></i><b>10.10.2</b> what to do if you DO have an interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="10.11" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#what-about-planned-contrasts"><i class="fa fa-check"></i><b>10.11</b> What about planned contrasts?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html"><i class="fa fa-check"></i><b>11</b> ANOVA IV: Interactions &amp; simple Effects</a><ul>
+<li class="chapter" data-level="11.1" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#the-data-set"><i class="fa fa-check"></i><b>11.1</b> the data set</a></li>
+<li class="chapter" data-level="11.2" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#plotting-the-data-and-descriptive-stats"><i class="fa fa-check"></i><b>11.2</b> Plotting the data and descriptive stats</a></li>
+<li class="chapter" data-level="11.3" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#the-omnibus-anova-and-assumption-tests"><i class="fa fa-check"></i><b>11.3</b> the Omnibus ANOVA (and assumption tests)</a></li>
+<li class="chapter" data-level="11.4" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#running-the-simple-effects-anova-in-6-steps"><i class="fa fa-check"></i><b>11.4</b> Running the simple effects ANOVA in 6 steps:</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-1-get-the-omnibus-anova"><i class="fa fa-check"></i><b>11.4.1</b> step 1: get the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="11.4.2" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova"><i class="fa fa-check"></i><b>11.4.2</b> step 2: get the MSError, Error df, and Error SS from omnibus ANOVA</a></li>
+<li class="chapter" data-level="11.4.3" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-3-subset-your-data-accordingly"><i class="fa fa-check"></i><b>11.4.3</b> step 3: subset your data accordingly</a></li>
+<li class="chapter" data-level="11.4.4" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-4-run-your-one-way-simple-effects-anovas"><i class="fa fa-check"></i><b>11.4.4</b> step 4: run your One-way simple effects ANOVA(s)</a></li>
+<li class="chapter" data-level="11.4.5" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova"><i class="fa fa-check"></i><b>11.4.5</b> step 5: get the treatment MS, df, SS, and F-value from your simple ANOVA</a></li>
+<li class="chapter" data-level="11.4.6" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-6-make-our-corrections"><i class="fa fa-check"></i><b>11.4.6</b> step 6: make our corrections</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#building-a-function-to-ninja-this-for-us"><i class="fa fa-check"></i><b>11.5</b> Building a function to ninja this for us</a></li>
+<li class="chapter" data-level="11.6" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#post-hoc-tests-1"><i class="fa fa-check"></i><b>11.6</b> Post hoc tests</a></li>
+<li class="chapter" data-level="11.7" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#interpreting-these-results"><i class="fa fa-check"></i><b>11.7</b> Interpreting these results:</a></li>
+<li class="chapter" data-level="11.8" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#example-write-up"><i class="fa fa-check"></i><b>11.8</b> Example write-up:</a></li>
+<li class="chapter" data-level="11.9" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#performing-this-in-spss-video"><i class="fa fa-check"></i><b>11.9</b> Performing this in SPSS (video)</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html"><i class="fa fa-check"></i><b>12</b> ANOVA V: Higher Order Factorial ANOVA</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#packages-and-data"><i class="fa fa-check"></i><b>12.1</b> Packages and data</a></li>
+<li class="chapter" data-level="12.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-1-no-three-way-interaction-single-two-way-interaction"><i class="fa fa-check"></i><b>12.2</b> EXAMPLE 1: no three-way interaction, single two way interaction</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#first-plot-3-way-interaction-plot"><i class="fa fa-check"></i><b>12.2.1</b> First plot: 3 way interaction plot</a></li>
+<li class="chapter" data-level="12.2.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-anova-3"><i class="fa fa-check"></i><b>12.2.2</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="12.2.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#replotting-the-2-way-interaction"><i class="fa fa-check"></i><b>12.2.3</b> Replotting the 2-way interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions"><i class="fa fa-check"></i><b>12.3</b> EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#plotting-the-data-1"><i class="fa fa-check"></i><b>12.3.1</b> plotting the data</a></li>
+<li class="chapter" data-level="12.3.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-omnibus-anova"><i class="fa fa-check"></i><b>12.3.2</b> running the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="12.3.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#testing-the-lecturepresentation-interaction"><i class="fa fa-check"></i><b>12.3.3</b> testing the <code>Lecture:Presentation</code> interaction:</a></li>
+<li class="chapter" data-level="12.3.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#testing-the-lecturegrade-interaction"><i class="fa fa-check"></i><b>12.3.4</b> testing the <code>Lecture:Grade</code> interaction:</a></li>
+<li class="chapter" data-level="12.3.5" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#simple-effect-anovas-1"><i class="fa fa-check"></i><b>12.3.5</b> simple effect ANOVAs:</a></li>
+<li class="chapter" data-level="12.3.6" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#main-takeaways-write-up"><i class="fa fa-check"></i><b>12.3.6</b> Main takeaways / write-up</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way"><i class="fa fa-check"></i><b>12.4</b> EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#plotting"><i class="fa fa-check"></i><b>12.4.1</b> Plotting:</a></li>
+<li class="chapter" data-level="12.4.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-anova-4"><i class="fa fa-check"></i><b>12.4.2</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="12.4.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#fifth-graders-lecturepresentation-interaction."><i class="fa fa-check"></i><b>12.4.3</b> Fifth Graders, Lecture:Presentation interaction.</a></li>
+<li class="chapter" data-level="12.4.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#eighth-graders-lecturepresentation-interaction."><i class="fa fa-check"></i><b>12.4.4</b> Eighth Graders, Lecture:Presentation interaction.</a></li>
+<li class="chapter" data-level="12.4.5" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#constructing-a-narrative"><i class="fa fa-check"></i><b>12.4.5</b> Constructing a narrative:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html"><i class="fa fa-check"></i><b>13</b> ANOVA6: Within-Subjects</a><ul>
+<li class="chapter" data-level="13.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#within-subject-v.-between-subjects"><i class="fa fa-check"></i><b>13.1</b> Within-Subject v. Between Subjects</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#within-v-between-anova"><i class="fa fa-check"></i><b>13.1.1</b> Within v Between ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-1"><i class="fa fa-check"></i><b>13.2</b> EXAMPLE 1</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data"><i class="fa fa-check"></i><b>13.2.1</b> loading in the data:</a></li>
+<li class="chapter" data-level="13.2.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-2"><i class="fa fa-check"></i><b>13.2.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-a-within-anova-afex"><i class="fa fa-check"></i><b>13.2.3</b> running a within ANOVA (afex):</a></li>
+<li class="chapter" data-level="13.2.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#planned-contrasts"><i class="fa fa-check"></i><b>13.2.4</b> planned contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-2"><i class="fa fa-check"></i><b>13.3</b> EXAMPLE 2</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data-1"><i class="fa fa-check"></i><b>13.3.1</b> loading in the data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-3"><i class="fa fa-check"></i><b>13.3.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-anova-5"><i class="fa fa-check"></i><b>13.3.3</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="13.3.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#post-hocs"><i class="fa fa-check"></i><b>13.3.4</b> post-hocs</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-3"><i class="fa fa-check"></i><b>13.4</b> EXAMPLE 3</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data-2"><i class="fa fa-check"></i><b>13.4.1</b> loading in the data:</a></li>
+<li class="chapter" data-level="13.4.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-4"><i class="fa fa-check"></i><b>13.4.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.4.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-omnibus-anova-1"><i class="fa fa-check"></i><b>13.4.3</b> running the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="13.4.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-simple-effects-anovas"><i class="fa fa-check"></i><b>13.4.4</b> running the simple effects ANOVAs</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#how-to-perform-a-within-subjects-analysis-in-spss"><i class="fa fa-check"></i><b>13.5</b> How to perform a within subjects analysis in SPSS:</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html"><i class="fa fa-check"></i><b>14</b> ANOVA VI: Mixed-effects ANOVA (BS + WS)</a><ul>
+<li class="chapter" data-level="14.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#example-1-1"><i class="fa fa-check"></i><b>14.1</b> Example 1:</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#data-import-and-wrangling"><i class="fa fa-check"></i><b>14.1.1</b> data import and wrangling</a></li>
+<li class="chapter" data-level="14.1.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#plotting-the-data-5"><i class="fa fa-check"></i><b>14.1.2</b> plotting the data</a></li>
+<li class="chapter" data-level="14.1.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#running-our-anova"><i class="fa fa-check"></i><b>14.1.3</b> Running our ANOVA:</a></li>
+<li class="chapter" data-level="14.1.4" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#simple-effects"><i class="fa fa-check"></i><b>14.1.4</b> simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#example-2-1"><i class="fa fa-check"></i><b>14.2</b> Example 2:</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#data-import-and-wrangling-1"><i class="fa fa-check"></i><b>14.2.1</b> data import and wrangling</a></li>
+<li class="chapter" data-level="14.2.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#plotting-the-data-6"><i class="fa fa-check"></i><b>14.2.2</b> plotting the data</a></li>
+<li class="chapter" data-level="14.2.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#run-your-omnibus-anova"><i class="fa fa-check"></i><b>14.2.3</b> Run your omnibus ANOVA:</a></li>
+<li class="chapter" data-level="14.2.4" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#simple-effects-1"><i class="fa fa-check"></i><b>14.2.4</b> simple effects:</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#to-pool-or-not-to-pool-this-is-the-yada-yada-yada"><i class="fa fa-check"></i><b>14.3</b> to pool or not to pool, this is the yada yada yada</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html"><i class="fa fa-check"></i><b>A</b> Plotting histograms and probability distributions</a><ul>
+<li class="chapter" data-level="A.1" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#the-basics"><i class="fa fa-check"></i><b>A.1</b> The Basics</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-1-building-the-canvas"><i class="fa fa-check"></i><b>A.1.1</b> Step 1: Building the canvas</a></li>
+<li class="chapter" data-level="A.1.2" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-2-tell-ggplot-what-kind-of-plot-to-make."><i class="fa fa-check"></i><b>A.1.2</b> Step 2: Tell <code>ggplot</code> what kind of plot to make.</a></li>
+<li class="chapter" data-level="A.1.3" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-3-adjust-the-axes-and-labels"><i class="fa fa-check"></i><b>A.1.3</b> Step 3: Adjust the axes and labels</a></li>
+<li class="chapter" data-level="A.1.4" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-4-adjusting-for-apa"><i class="fa fa-check"></i><b>A.1.4</b> Step 4: Adjusting for APA</a></li>
+<li class="chapter" data-level="A.1.5" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-5-add-and-adjust-the-legend"><i class="fa fa-check"></i><b>A.1.5</b> Step 5: Add and adjust the legend</a></li>
+<li class="chapter" data-level="A.1.6" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-6-save-the-ggplot."><i class="fa fa-check"></i><b>A.1.6</b> Step 6: Save the <code>ggplot</code>.</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#a-note-about-your-bonus-on-week-4."><i class="fa fa-check"></i><b>A.2</b> A note about your BONUS on Week 4.</a></li>
+<li class="chapter" data-level="A.3" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#advanced-stuff"><i class="fa fa-check"></i><b>A.3</b> Advanced stuff</a></li>
+</ul></li>
+<li class="divider"></li>
+<li></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">musings of the Professor</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova" class="section level1">
+<h1><span class="header-section-number">Week 9</span> Analysis of Variance II: Multiple comparisons in One-way ANOVA</h1>
+<p>In last weeks vignette we covered One-Way ANOVA. ANOVA is useful when we are comparing 3 or more group means such that the null hypothesis is:</p>
+<p><span class="math display">\[\mu_1=\mu_2=\mu_3...=\mu_n\]</span>.</p>
+<p>In this case, if a single mean is revealed to be significantly different from the others, then the null is rejected. However, rejecting the null only tells us that at least one mean was different from the others; it does not tell us which one or how many. For example with just three means, it could be the case that:</p>
+<ul>
+<li><span class="math inline">\(\mu_1≠\mu_2=\mu_3\)</span></li>
+<li><span class="math inline">\(\mu_1=\mu_2≠\mu_3\)</span></li>
+<li><span class="math inline">\(\mu_1=\mu_3≠\mu_2\)</span></li>
+<li><span class="math inline">\(\mu_1≠\mu_2≠\mu_3\)</span></li>
+</ul>
+<p>Simply getting a significant <em>F</em>-value does not tell us this at all. In order to suss out any differences in our groups we are going to need to make direct comparisons between them.</p>
+<p>Enter multiple contrasts. Multiple contrasts are a way of testing the potential inequalities between group means like those above. As always, both Howell (Chapter 12) and Field (Chapter 10, specifically 10.4+) do wonderful jobs of laying out the mathematics and logic of multiple comparisons. As with last week I focus on practical implementation and spend some time focusing a bit on potential landmines and theoretical concerns as I see them.</p>
+<div id="getting-started-loading-packages-and-data" class="section level2">
+<h2><span class="header-section-number">9.1</span> Getting started (loading packages and data)</h2>
+<p>This vignette assumes that you have the following packages installed and loaded in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check to make your computer has pacman installed, if not install</span>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(pacman)) {
+    <span class="kw">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)
+}
+
+<span class="co"># use pacman to check, install, and load necessary packages</span>
+pacman<span class="op">::</span><span class="kw">p_load</span>(agricolae, cowplot, tidyverse, multcomp, psych)</code></pre></div>
+<p>To start, lets download Siegel’s (1975) data set on Morphine Tolerance. This data set can be found on Howell’s website. Please check the Howell text for background info:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># grab data from online location:</span>
+dataset &lt;-<span class="st"> </span><span class="kw">read_table2</span>(<span class="st">&quot;https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab12-1.dat&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   ID = col_character(),
+##   Group = col_integer(),
+##   Time = col_integer()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert dataset$Group dummycodes to named factor levels:</span>
+dataset<span class="op">$</span>Group &lt;-<span class="st"> </span><span class="kw">recode_factor</span>(dataset<span class="op">$</span>Group, <span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> &quot;MS&quot;</span>, <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> &quot;MM&quot;</span>, <span class="st">`</span><span class="dt">3</span><span class="st">`</span> =<span class="st"> &quot;SS&quot;</span>, 
+    <span class="st">`</span><span class="dt">4</span><span class="st">`</span> =<span class="st"> &quot;SM&quot;</span>, <span class="st">`</span><span class="dt">5</span><span class="st">`</span> =<span class="st"> &quot;McM&quot;</span>)
+
+<span class="co"># get descriptive stats for this data by Group</span>
+psych<span class="op">::</span><span class="kw">describeBy</span>(dataset<span class="op">$</span>Time, dataset<span class="op">$</span>Group)</code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: MS
+##    vars n mean   sd median trimmed  mad min max range skew kurtosis   se
+## X1    1 8    4 3.16    3.5       4 3.71   1   9     8 0.43    -1.59 1.12
+## -------------------------------------------------------- 
+## group: MM
+##    vars n mean   sd median trimmed  mad min max range skew kurtosis   se
+## X1    1 8   10 5.13   10.5      10 4.45   2  19    17 0.15    -0.99 1.81
+## -------------------------------------------------------- 
+## group: SS
+##    vars n mean   sd median trimmed  mad min max range skew kurtosis   se
+## X1    1 8   11 6.72   10.5      11 8.15   3  21    18 0.23    -1.69 2.38
+## -------------------------------------------------------- 
+## group: SM
+##    vars n mean   sd median trimmed  mad min max range skew kurtosis   se
+## X1    1 8   24 6.37     23      24 5.93  17  36    19 0.59    -1.07 2.25
+## -------------------------------------------------------- 
+## group: McM
+##    vars n mean   sd median trimmed  mad min max range skew kurtosis   se
+## X1    1 8   29 6.16   28.5      29 5.93  20  40    20 0.28    -1.07 2.18</code></pre>
+<p>And a quick peek at this data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset, <span class="kw">aes</span>(<span class="dt">x =</span> Group, <span class="dt">y =</span> Time)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_se, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="kw">aes</span>(<span class="dt">width =</span> <span class="fl">0.25</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, 
+    <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">35</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_cowplot</span>()</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-267-1.png" width="672" /></p>
+</div>
+<div id="running-the-one-way-anova" class="section level2">
+<h2><span class="header-section-number">9.2</span> Running the One-way ANOVA</h2>
+<p>Now that our data is properly coded we can run our omnibus ANOVA. My own personal preference is to run the ANOVA using <code>lm()</code>. This makes like a lot easier when dealing with contrasts, especially if you decide to employ the method that Field suggests in his guide. I’ll mention more on this alternative below. That said. recall from last week that using the aov() function gives you the same result. Depending on which you choose, you can use the <code>summary(lm.model)</code> or <code>anova(lm.model)</code> to switch back and forth to get the info that you desire:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># running the ANOVA using lm:</span>
+lm.model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)
+<span class="co"># using the summary.aov() function to display as ANOVA table</span>
+<span class="kw">anova</span>(lm.model)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Time
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Group      4 3497.6   874.4  27.325 2.443e-10 ***
+## Residuals 35 1120.0    32.0                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># summary(lm.model) # alternative output</span></code></pre></div>
+<p>So we see here that we have: <span class="math inline">\(F(4,35)=27.33,p&lt;.001,\eta_p^2=.75\)</span></p>
+<p>Remember again that the <strong>only</strong> thing that the omnibus ANOVA tells us is that there is an inequality in our means. In this respect, the omnibus begs more questions than it answers—which means are different from which. In order to get this answer we need to run direct comparisons between our means. There are two ways of going about this, we can either <em>(1)</em> plan beforehand what differences in means are especially relevant for us and focus on those, or <em>(2)</em> take a look at all potential differences without any specified predictions. In Case 1, we are performing <strong>planned contrasts</strong>; in Case 2, we use <strong>post hoc</strong> tests. More often than not, you will see researchers analyzing differences in means using post hoc tests—that is they run the ANOVA, find that it is significant, and run a battery of pairwise comparisons. It is sometimes the case that of that battery of comparisons, only a select few are actually theoretically relevant. However, if there is a theory-driven case to be made that you are predicting differences between a few select means in your data, then there is an argument to be made that you should run your planned contrasts independent of your ANOVA. That is, you are technically only permitted to run post-hoc tests if your ANOVA is significant (you can only go looking for differences in means if your ANOVA tells you that they exist), whereas planned contrasts can be run regardless of the outcome of the omnibus ANOVA (indeed, some argue that they obviate the need to run the omnibus ANOVA altogether).</p>
+<p>My guess is that most of you have experience with post-hoc tests. They are more commonly performed tend to be touched upon in introductory stats courses. So we will spend a little time on these first before proceeding to a more in depth treatment of planned contrasts.</p>
+</div>
+<div id="post-hoc-tests" class="section level2">
+<h2><span class="header-section-number">9.3</span> Post-hoc tests</h2>
+<p><strong>We use a post-hoc test when we want to test for differences in means that we have not explicitly predicted prior to conducting our experiment</strong>. As a result, whenever we perform a post-hoc test, we need to adjust our critical p-values to correct for inflation of Type 1 error. Recall from earlier discussions that the odds of committing a Type 1 error (falsely rejecting the null) is <span class="math inline">\(1-(1-\alpha)^c\)</span> where <span class="math inline">\(\alpha\)</span> is you critical p-value and <span class="math inline">\(c\)</span> is the number of comparisons that are to be performed. Typically we keep this at .05, so when conducting a single test, the likelihood of committing a Type 1 error is: <span class="math inline">\(1-(1-.05)^1=1-0.95^1=0.05\)</span></p>
+<p>However as we increase the number of comparisons, assuming an <span class="math inline">\(\alpha\)</span> of 0.05:</p>
+<ul>
+<li>2 comparisons = <span class="math inline">\(1-.95^2=0.0975\)</span></li>
+<li>3 comparisons = <span class="math inline">\(1-.95^3=0.1426\)</span></li>
+<li>4 comparisons = <span class="math inline">\(1-.95^4=0.1855\)</span></li>
+<li>5 comparisons = <span class="math inline">\(1-.95^5=0.2262\)</span></li>
+</ul>
+<p>Obviously, we need to control for this. The post-hoc methods that were introduced this week are all similar in that they involve comparing two means (<em>a la t</em>-test) but differ in how the error is controlled. For example a Bonferroni-Dunn correction (which is often used as a post-hoc correction, although initially intended for correcting planned comparisons) adjusts for this by partitioning the significance (by diving your original alpha by the number of comparisons). A popular variant of this method, the Holm test, is a multistage test. It proceeds by ordering the obtained <em>t</em>-values from smallest to largest. We then evaluate the largest <em>t</em> according to the Bonferroni-Dunn correction <span class="math inline">\(\alpha/c\)</span>. Each subsequent comparison <em>t</em> value, <span class="math inline">\(n\)</span> is evaluated against the correction <span class="math inline">\(\alpha/(c-n)\)</span>. Please note I mention the these two methods with post-hoc analyses, although in true they are intended for planned comparisons. However, in instances in which the number of comparisons is relatively small, I’ve often seen them employed as post-hocs.</p>
+<p>So how many comparisons is relatively small? I’d suggest best form is to use the above methods when you have 5 or fewer comparisons, meaning that your critical <span class="math inline">\(\alpha\)</span> is .01. That said, with a post hoc test, you really do not have a choice in the number of comparisons you can make, you need to test for all possible comparisons on the IV. Why? well if not you are simply cherry picking your data. For example it would be poor form to run our ANOVA and plot your data like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset, <span class="kw">aes</span>(<span class="dt">x =</span> Group, <span class="dt">y =</span> Time)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, 
+    <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_se, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="kw">aes</span>(<span class="dt">width =</span> <span class="fl">0.25</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">35</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_cowplot</span>()
+<span class="kw">show</span>(p)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-269-1.png" width="672" /></p>
+<p>and then decide that you only want to compare ‘McM’ to ‘MS’ because that’s where you see the greatest differences. Or that you simply want to take a look at “MM” and “SS” without considering the rest. Since you did not plan for or explicitly predict these differences from the outset, you are simply banking on what I like to say might be a “historical accident”, that you simply stumbled into these results. As such, it’s deemed as proper for to test <em>all</em> contingencies.</p>
+<p>In the case above there are <span class="math inline">\((5!)/(2!)(5-2)!\)</span> = 10 combinations. If we were to run a Bonferroni correction in this case or critical <em>p</em> would need to be <span class="math inline">\(.05/10=.005\)</span> which is an extremely conservative value, and thus dramatically inflates the likelihood of Type II error. In cases like this Tukey’s HSD is the traditionally preferred method, as it takes into account the characteristics of your data (in particular the standard error of the distribution) when calculating the critical <em>p</em> value. As such in cases where many post-hoc, pairwise comparisons are made, Tukey’s HSD is less conservative than a Bonferroni adjustment.</p>
+<p>One final method that is becoming more <em>en vogue</em> is the Ryan, Einot, Gabriel, Welsch method (REGWQ). Whereas Tukey’s method holds the critical <em>p</em> constant for all comparisons (at the loss of power) the REGWQ allows for an adjustment for the number of comparisons. It is currently being promoted as the most desirable post-hoc method.</p>
+<div id="bonferonni-dunn-and-holm-tests" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Bonferonni-Dunn and Holm tests</h3>
+<p>In R there are several ways in which we can call post hoc corrections. For example we can call the Bonferonni and Holm adjustments using <code>pairwise.t.test()</code> function from the <code>base</code> package (already installed). The <code>pairwise.t.test()</code> method asks you to input:</p>
+<ul>
+<li><code>x</code> = your DV</li>
+<li><code>g</code> = your grouping factor</li>
+<li><code>p.adjust.method</code> = the name of your desired correction in string format</li>
+</ul>
+<p>First let’s run the pairwise.t.tests with no adjustment (akin to uncorrected <em>p</em> values):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Time, <span class="dt">g =</span> dataset<span class="op">$</span>Group, <span class="dt">p.adjust.method =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dataset$Time and dataset$Group 
+## 
+##     MS      MM      SS      SM   
+## MM  0.041   -       -       -    
+## SS  0.018   0.726   -       -    
+## SM  3.1e-08 1.9e-05 5.4e-05 -    
+## McM 1.9e-10 8.9e-08 2.6e-07 0.086
+## 
+## P value adjustment method: none</code></pre>
+<p>You see above that we get a cross-matrix containing the <em>p</em> values for each cross pair (row × column). Remember this is something we would never do in a post hoc (no corrections) but I wanted to first run this to illustrate a point. Now let’s run the the Bonferroni and Holm corrections:</p>
+<div id="bonferroni-example-pairwise.t.test" class="section level4">
+<h4><span class="header-section-number">9.3.1.1</span> Bonferroni example (pairwise.t.test())</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Time, <span class="dt">g =</span> dataset<span class="op">$</span>Group, <span class="dt">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dataset$Time and dataset$Group 
+## 
+##     MS      MM      SS      SM     
+## MM  0.41051 -       -       -      
+## SS  0.18319 1.00000 -       -      
+## SM  3.1e-07 0.00019 0.00054 -      
+## McM 1.9e-09 8.9e-07 2.6e-06 0.85818
+## 
+## P value adjustment method: bonferroni</code></pre>
+</div>
+<div id="holm-example-pairwise.t.test" class="section level4">
+<h4><span class="header-section-number">9.3.1.2</span> Holm example (pairwise.t.test())</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(<span class="dt">x =</span> dataset<span class="op">$</span>Time, <span class="dt">g =</span> dataset<span class="op">$</span>Group, <span class="dt">p.adjust.method =</span> <span class="st">&quot;holm&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dataset$Time and dataset$Group 
+## 
+##     MS      MM      SS      SM     
+## MM  0.12315 -       -       -      
+## SS  0.07327 0.72579 -       -      
+## SM  2.8e-07 0.00011 0.00027 -      
+## McM 1.9e-09 7.1e-07 1.8e-06 0.17164
+## 
+## P value adjustment method: holm</code></pre>
+<p>As you can see in the remaining tables, R actually adjusts the <em>p</em> values for you. This is different from (but analogous to) the critical <em>t</em>-value method described in Howell’s text. What this means is that you may interpret the output against your original (familywise) <span class="math inline">\(\alpha\)</span>. So here, any values that are still less than .05 after the corrections are significant.</p>
+</div>
+</div>
+<div id="tukey-hsd-and-regwq-tests" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> Tukey HSD and REGWQ tests</h3>
+<p>In order to run Tukey’s HSD and REGWQ methods we call upon the <code>agricolae</code> package. In this case, we need to input our <code>lm() model</code> into the function, as well as identify our “treatment” (in this case our “Group” factor). For example:</p>
+<div id="tukey-hsd-example-agricolae" class="section level4">
+<h4><span class="header-section-number">9.3.2.1</span> Tukey HSD example (agricolae)</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm.model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)  <span class="co"># from above</span>
+agricolae<span class="op">::</span><span class="kw">HSD.test</span>(lm.model, <span class="dt">trt =</span> <span class="st">&quot;Group&quot;</span>, <span class="dt">group =</span> T, <span class="dt">console =</span> T)</code></pre></div>
+<pre><code>## 
+## Study: lm.model ~ &quot;Group&quot;
+## 
+## HSD Test for Time 
+## 
+## Mean Square Error:  32 
+## 
+## Group,  means
+## 
+##     Time      std r Min Max
+## McM   29 6.164414 8  20  40
+## MM    10 5.126960 8   2  19
+## MS     4 3.162278 8   1   9
+## SM    24 6.369571 8  17  36
+## SS    11 6.718843 8   3  21
+## 
+## Alpha: 0.05 ; DF Error: 35 
+## Critical Value of Studentized Range: 4.065949 
+## 
+## Minimun Significant Difference: 8.131899 
+## 
+## Treatments with the same letter are not significantly different.
+## 
+##     Time groups
+## McM   29      a
+## SM    24      a
+## SS    11      b
+## MM    10      b
+## MS     4      b</code></pre>
+<p>Note that the <code>group</code> and <code>console</code> arguments pertain to the output. You typically will want to keep console set to <code>TRUE</code> as that simply prints the output of your test. The <code>group</code> argument controls how the output is presented. Above we set it to TRUE. This results in an output that groups the treatment means into subsets where treatments with the same letter are not significantly different from one another (i.e., <em>a</em>s are not significantly different from each other, <em>b</em>s are not significantly different from each other, <strong>but</strong> <em>a</em>s are different from <em>b</em>s). Conversely if you wanted to see each comparison you can set this to <code>FALSE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">agricolae<span class="op">::</span><span class="kw">HSD.test</span>(lm.model, <span class="dt">trt =</span> <span class="st">&quot;Group&quot;</span>, <span class="dt">group =</span> <span class="ot">FALSE</span>, <span class="dt">console =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Study: lm.model ~ &quot;Group&quot;
+## 
+## HSD Test for Time 
+## 
+## Mean Square Error:  32 
+## 
+## Group,  means
+## 
+##     Time      std r Min Max
+## McM   29 6.164414 8  20  40
+## MM    10 5.126960 8   2  19
+## MS     4 3.162278 8   1   9
+## SM    24 6.369571 8  17  36
+## SS    11 6.718843 8   3  21
+## 
+## Alpha: 0.05 ; DF Error: 35 
+## Critical Value of Studentized Range: 4.065949 
+## 
+## Comparison between treatments means
+## 
+##          difference pvalue signif.        LCL        UCL
+## McM - MM         19 0.0000     ***  10.868101  27.131899
+## McM - MS         25 0.0000     ***  16.868101  33.131899
+## McM - SM          5 0.4078          -3.131899  13.131899
+## McM - SS         18 0.0000     ***   9.868101  26.131899
+## MM - MS           6 0.2340          -2.131899  14.131899
+## MM - SM         -14 0.0002     *** -22.131899  -5.868101
+## MM - SS          -1 0.9965          -9.131899   7.131899
+## MS - SM         -20 0.0000     *** -28.131899 -11.868101
+## MS - SS          -7 0.1198         -15.131899   1.131899
+## SM - SS          13 0.0005     ***   4.868101  21.131899</code></pre>
+<p>Finally, if you do decide to group (<code>group=TRUE</code>), you can take the outcome of this function and use it to generate a nice group plot. This is useful for quick visual inspection.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">agricolae<span class="op">::</span><span class="kw">HSD.test</span>(lm.model, <span class="dt">trt =</span> <span class="st">&quot;Group&quot;</span>, <span class="dt">group =</span> T, <span class="dt">console =</span> T) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
+<pre><code>## 
+## Study: lm.model ~ &quot;Group&quot;
+## 
+## HSD Test for Time 
+## 
+## Mean Square Error:  32 
+## 
+## Group,  means
+## 
+##     Time      std r Min Max
+## McM   29 6.164414 8  20  40
+## MM    10 5.126960 8   2  19
+## MS     4 3.162278 8   1   9
+## SM    24 6.369571 8  17  36
+## SS    11 6.718843 8   3  21
+## 
+## Alpha: 0.05 ; DF Error: 35 
+## Critical Value of Studentized Range: 4.065949 
+## 
+## Minimun Significant Difference: 8.131899 
+## 
+## Treatments with the same letter are not significantly different.
+## 
+##     Time groups
+## McM   29      a
+## SM    24      a
+## SS    11      b
+## MM    10      b
+## MS     4      b</code></pre>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-275-1.png" width="672" /></p>
+</div>
+<div id="regwq-example-agricolae" class="section level4">
+<h4><span class="header-section-number">9.3.2.2</span> REGWQ example (agricolae)</h4>
+<p>The same applies to REGW, using the <code>REGW.test()</code> function (with <code>group=F</code>, I’m showing all of the comparisons):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">agricolae<span class="op">::</span><span class="kw">REGW.test</span>(lm.model, <span class="dt">trt =</span> <span class="st">&quot;Group&quot;</span>, <span class="dt">group =</span> F, <span class="dt">console =</span> T)</code></pre></div>
+<pre><code>## 
+## Study: lm.model ~ &quot;Group&quot;
+## 
+## Ryan, Einot and Gabriel and Welsch multiple range test
+## for Time 
+## 
+## Mean Square Error:  32 
+## 
+## Group,  means
+## 
+##     Time      std r Min Max
+## McM   29 6.164414 8  20  40
+## MM    10 5.126960 8   2  19
+## MS     4 3.162278 8   1   9
+## SM    24 6.369571 8  17  36
+## SS    11 6.718843 8   3  21
+## 
+## Comparison between treatments means
+## 
+##          difference pvalue signif.         LCL        UCL
+## McM - MM         19 0.0000     ***  12.1234674  25.876533
+## McM - MS         25 0.0000     ***  17.4611210  32.538879
+## McM - SM          5 0.3056          -2.6279930  12.627993
+## McM - SS         18 0.0000     ***   9.8681013  26.131899
+## MM - MS           6 0.0995       .  -0.8765326  12.876533
+## MM - SM         -14 0.0001     *** -21.5388790  -6.461121
+## MM - SS          -1 0.9846          -8.6279930   6.627993
+## MS - SM         -20 0.0000     *** -26.8765326 -13.123467
+## MS - SS          -7 0.0771       . -14.5388790   0.538879
+## SM - SS          13 0.0001     ***   6.1234674  19.876533</code></pre>
+</div>
+</div>
+</div>
+<div id="the-logic-of-planned-contrasts" class="section level2">
+<h2><span class="header-section-number">9.4</span> The logic of Planned contrasts</h2>
+<p>If you have reasons to predict differences between particular sets of group means that are theory-driven, then you may perform <em>a priori</em> or planned contrasts. Logically, planned contrasts are similar to post-hoc tests in that we are comparing against two means, but there are some differences that make planned contrasts more powerful.</p>
+<ul>
+<li><p>Since your predictions are made prior to collecting data you, technically do not need to get a significant result on the omnibus ANOVA to run your contrasts. Remember, when doing post-hoc tests, if the omnibus ANOVA fails to reject the null, you are not permitted to run follow-up post hoc tests.</p></li>
+<li><p>Since you are making predictions prior to seeing the outcome of your observed data, then you are safe to make a limited number of comparisons without the charge of cherry-picking. For example, if you have predicted-ahead that there would be differences between groups “MS” and “McM”, or groups “MM” and “MS” then you are free to run those comparisons and those comparisons-only. This is especially useful, since by limiting the number of comparisons, you can effectively reduce the problem of Type I error inflation while limiting the possibiliy of Type II error, keeping the required corrections relatively minimal. For example, recall that using a Bonferonni correction on this data in the post-hoc case mandates that I use an adjusted <span class="math inline">\(\alpha\)</span> of .005 (.05/10 comparisons), even if I was only really interested in these two comparisons. Here, I am allowed to only perform these two, so my adjusted <em>p</em> is .025.</p></li>
+<li><p>Depending on the number of comparisons, you may be justified in not performing any <em>p</em> correction at all. For example some recommend no need for correction if the number of contrasts is low or when the comparisons are complementary (e.g. orthogonal). See <a href="http://jrp.icaap.org/index.php/jrp/article/view/514/417">here</a>, <a href="https://www.graphpad.com/support/faqid/1390/">here</a>, and <a href="http://pirun.ku.ac.th/~faasatp/734462/data/06_contrasts2.pdf">here</a> for discussion of this issue.</p></li>
+<li><p>We can easily perform a variety of comparisons using planned contrasts. For example, say we are interested in whether MS is different from the mean of the remaining groups (McM+MM+SM+SS), or that MM+MS is different from McM+SM+SS. We can test this using planned contrasts.</p></li>
+</ul>
+</div>
+<div id="performing-planned-contrasts-in-r" class="section level2">
+<h2><span class="header-section-number">9.5</span> Performing planned contrasts in R</h2>
+<p>As outlined in both Howell and Field, planned contrasts begin by creating contrast weights. The idea with contrast weights is that the groups that are being compared should sum to equal -1 and +1 respectively, resulting in a null test against 0 (i.e. the two weighted means are equal). Any groups that are not being included in the comparison should be assigned coefficients of 0. For example assume we are comparing “MS” to “MM” and were not concerned with the remaining groups. Then our contrast weights would be:</p>
+<ul>
+<li>MS = +1</li>
+<li>MM = -1</li>
+<li>McM = SM = SS = 0</li>
+</ul>
+<p>How about we want to compare McM + MM against the remaining three groups?</p>
+<ul>
+<li>MS + MM = 1</li>
+<li>McM + SM + SS = -1</li>
+</ul>
+<p>From there we distribute the weight equally between the number of groups on each side of the contrast, so</p>
+<ul>
+<li>MS = +1/2; MM = +1/2</li>
+<li>McM = -1/3; SM = -1/3; SS = -1/3</li>
+</ul>
+<p>in R we can construct each of these contrasts like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># checking the order of groups:</span>
+<span class="kw">levels</span>(dataset<span class="op">$</span>Group)</code></pre></div>
+<pre><code>## [1] &quot;MS&quot;  &quot;MM&quot;  &quot;SS&quot;  &quot;SM&quot;  &quot;McM&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># building contrasts</span>
+
+<span class="co"># MS v. MM</span>
+contrast1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+
+<span class="co"># MS + MM v. SS + SM + McM</span>
+contrast2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)</code></pre></div>
+<p>When performing planned contrasts in <code>R</code> I recommend using the <code>multicomp</code> package rather than the <code>base</code> package examples in the Field text. For those that are interested as to why, in my experience the <code>base</code> method has a hard time dealing with non-orthogonal contrasts. To perform the contrast requires 3 steps:</p>
+<ul>
+<li>run your omnibus ANOVA <code>lm()</code> model and save it as an object</li>
+<li>input your <code>lm()</code> model into the <code>glht()</code> function, specifying the name of your IV and planned contrasts; save this object</li>
+<li>run a summary() of your object from step 2, including any desired adjustments.</li>
+</ul>
+<p>For example, say I wanted to run <code>contrast1</code> from my data, Comparing “MS” to “MM”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm.model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)
+contrast.model &lt;-<span class="st"> </span>multcomp<span class="op">::</span><span class="kw">glht</span>(lm.model, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">Group =</span> contrast1))
+<span class="co"># where Group is the name of my IV, and contrast1 are my planned contrasts from</span>
+<span class="co"># above</span>
+<span class="kw">summary</span>(contrast.model, <span class="dt">test =</span> <span class="kw">adjusted</span>(<span class="st">&quot;bonferroni&quot;</span>))</code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Multiple Comparisons of Means: User-defined Contrasts
+## 
+## 
+## Fit: lm(formula = Time ~ Group, data = dataset)
+## 
+## Linear Hypotheses:
+##        Estimate Std. Error t value Pr(&gt;|t|)  
+## 1 == 0   -6.000      2.828  -2.121   0.0411 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## (Adjusted p values reported -- bonferroni method)</code></pre>
+<p>The above result tells me:</p>
+<ul>
+<li><code>Estimate</code>: the difference in means between my contrasted groups</li>
+<li><code>Std. Error</code>: a measure of variability</li>
+<li><code>t-value</code>: obtained from the t-test between groups</li>
+<li><code>Pr(&gt;|t|)</code>: the resulting p-value</li>
+<li>You’ll also note in the output the specified correction method is mentioned (in this case Bonferroni)</li>
+</ul>
+<p>Based upon these results I conclude that “MS” and “MM” are significantly different from one another.</p>
+<p>Suppose I wanted to run both simultaneously? My preferred method is to create a contrast matrix by <code>rbind()</code> my contrasts. You can then place that matrix object into <code>glht()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create contrast matrix</span>
+contrast.matrix &lt;-<span class="st"> </span><span class="kw">rbind</span>(contrast1, contrast2)
+
+<span class="co"># run contrasts</span>
+lm.model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)
+contrast.model &lt;-<span class="st"> </span>multcomp<span class="op">::</span><span class="kw">glht</span>(lm.model, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">Group =</span> contrast.matrix))
+<span class="co"># where Group is my IV, and contrast.matrix are my planned contrasts</span>
+<span class="kw">summary</span>(contrast.model, <span class="dt">test =</span> <span class="kw">adjusted</span>(<span class="st">&quot;bonferroni&quot;</span>))</code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Multiple Comparisons of Means: User-defined Contrasts
+## 
+## 
+## Fit: lm(formula = Time ~ Group, data = dataset)
+## 
+## Linear Hypotheses:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## contrast1 == 0   -6.000      2.828  -2.121   0.0821 .  
+## contrast2 == 0  -14.333      1.826  -7.851 6.32e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## (Adjusted p values reported -- bonferroni method)</code></pre>
+<p>You’ll note that the reported p.value for <code>contrast1</code> has changed from the previous example, due to the Bonferroni correction (in this case we have 2 tests). To get a list and description of accepted adjustment methods type <code>? adjusted</code> in your console.</p>
+<div id="making-the-output-easier-to-read" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> Making the output easier to read</h3>
+<p>One thing you may have noticed above is that your contrasts aren’t labelled very transparently. Looking at the output you would have to remember what was being contrasted in <code>contrast1</code> and <code>contrast2</code>. You can save yourself a little headache if you label your contrasts while constructing the matrix. For example, here I’m performing the linear contrasts from the Howell text:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contrast1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)
+contrast2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+contrast3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+contrast4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</code></pre></div>
+<p>From here you can modify the previous code to assign names to the rows in your contrast matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contrast.matrix &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="st">`</span><span class="dt">MM v. McM</span><span class="st">`</span> =<span class="st"> </span>contrast1, <span class="st">`</span><span class="dt">MS v. SS</span><span class="st">`</span> =<span class="st"> </span>contrast2, <span class="st">`</span><span class="dt">MM v. SS</span><span class="st">`</span> =<span class="st"> </span>contrast3, 
+    <span class="st">`</span><span class="dt">MS+MM+SS v. SM+McM</span><span class="st">`</span> =<span class="st"> </span>contrast4)</code></pre></div>
+<p>And now running these contrasts (this time using a Holm adjustment):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm.model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)
+contrast.model &lt;-<span class="st"> </span>multcomp<span class="op">::</span><span class="kw">glht</span>(lm.model, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">Group =</span> contrast.matrix))
+<span class="co"># where Group is my IV, and contrast1 are my planned contrasts from above</span>
+<span class="kw">summary</span>(contrast.model, <span class="dt">test =</span> <span class="kw">adjusted</span>(<span class="st">&quot;holm&quot;</span>))</code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Multiple Comparisons of Means: User-defined Contrasts
+## 
+## 
+## Fit: lm(formula = Time ~ Group, data = dataset)
+## 
+## Linear Hypotheses:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## MM v. McM == 0            19.000      2.828   6.718 2.66e-07 ***
+## MS v. SS == 0              7.000      2.828   2.475   0.0366 *  
+## MM v. SS == 0             -1.000      2.828  -0.354   0.7258    
+## MS+MM+SS v. SM+McM == 0   18.167      1.826   9.950 3.86e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## (Adjusted p values reported -- holm method)</code></pre>
+<p>For practice, try re-running this last analysis but using the Bonferroni adjustment instead of Holm. Note how that changes the p-values for some of your contrasts.</p>
+</div>
+<div id="calculating-your-effect-size" class="section level3">
+<h3><span class="header-section-number">9.5.2</span> Calculating your effect size</h3>
+<p>Typically when reporting the effect size off the difference between two means we use Cohen’s D. However, calculating Cohen’s D in a planned contrast is slighly more involved than the method used for a regular t-test. This is because with a regular t-test you only have 2 means from 2 samples that you have collected. In the case of Planned Contrasts in ANOVA, while you are only comparing two means, those means are nested within a larger group (e.g., comparing MS and MM, we still need to account for the fact that we also collected samples from SS, SM, and McM) or may be derived from multiple samples (e.g., contrasting the mean of MS + MM against the mean of SS + SM + McM). Simply put, in our calculations we need to account for the influence of all of our collected groups. This is done by placing the contrasted difference in the context of the Root Mean Square Error, or the square root of the Mean Square Error of the residuals in our ANOVA model. To do this we need two things:</p>
+<ul>
+<li>a vector containing our contrasts— e.g., <code>c(-1/2,-1/2,1/3,1/3,1/3)</code></li>
+<li>the mean of each group</li>
+<li>the Mean Square Error of the residuals from <code>anova()</code></li>
+</ul>
+<p>So to calculate Cohen’s d for the contrast of our first two groups (MS + SM) against our last three groups (SS + SM + McM):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># contrast vector: MS + MM + SS v. SM + McM</span>
+contrast_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)
+
+<span class="co"># using by() to create a vactor of means</span>
+means &lt;-<span class="st"> </span><span class="kw">by</span>(<span class="dt">data =</span> dataset<span class="op">$</span>Time, <span class="dt">INDICES =</span> dataset<span class="op">$</span>Group, <span class="dt">FUN =</span> mean)
+
+<span class="co"># running an anova() of the omnibus model</span>
+aov.table &lt;-<span class="st"> </span>lm.model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anova</span>()
+
+<span class="co"># get the sqrt of the `Mean Sq` of residuals</span>
+RMSE &lt;-<span class="st"> </span><span class="kw">sqrt</span>(aov.table[<span class="st">&quot;Residuals&quot;</span>, <span class="st">&quot;Mean Sq&quot;</span>])
+
+<span class="co"># calculate d from formula see Howell, Ch. 12</span>
+d &lt;-<span class="st"> </span><span class="kw">sum</span>(contrast_vector <span class="op">*</span><span class="st"> </span>means)<span class="op">/</span>RMSE
+
+<span class="kw">print</span>(d)</code></pre></div>
+<pre><code>## [1] 3.211443</code></pre>
+<p>Easy as that. You’ll notice above that I pulled out the <code>Mean Sq</code> of the <code>Residuals</code> from my <code>aov.table</code> using the indexing method instead of the names method. In the past we’ve covered how to call rows and columns by their index numbers. If the rows and columns also have names assigned to them you can use those as well.</p>
+<p>To see the associated names, try:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(aov.table)</code></pre></div>
+<pre><code>## [1] &quot;Group&quot;     &quot;Residuals&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(aov.table)</code></pre></div>
+<pre><code>## [1] &quot;Df&quot;      &quot;Sum Sq&quot;  &quot;Mean Sq&quot; &quot;F value&quot; &quot;Pr(&gt;F)&quot;</code></pre>
+<p>In this case I prefer this method as it always ensures that I get the correct value. In contrast, depending on the number of factors the Residuals may be on the 2nd row (as in this case), 3rd, 4th, or 5th row of the <code>Mean Sq</code> column.</p>
+</div>
+</div>
+<div id="reporting-your-results" class="section level2">
+<h2><span class="header-section-number">9.6</span> Reporting your results</h2>
+<p>When reporting your results, we typically report:</p>
+<ul>
+<li>the omnibus ANOVA</li>
+<li>a statement on what multiple comparisons were run and how corrected</li>
+<li>note which comparisons were significant.</li>
+</ul>
+<p>Since our comparisons, if corrected, rely on adjusted p.values its kosher to simply state that <span class="math inline">\(p&lt;\alpha\)</span>. <em>If you elect to use the actual p values, then you need to note that they are corrected.</em></p>
+<p>So for post hocs, something analogous to:</p>
+<blockquote>
+<p>…To test our hypothesis, we conducted a One-way ANOVA assessing latency as a function of morphine group. This ANOVA was significant—<span class="math inline">\(F(4,35)=27.33,p&lt;.001,\eta_p^2=.75\)</span>. As can be seen in Figure 1, pairwise Tukey HSD tests revealed that SS, MM, and MS groups were not significantly different from one another, but were significantly less than McM and SM (p&lt;.05).</p>
+</blockquote>
+<p>For planned comparisons, we might say:</p>
+<blockquote>
+<p>Our prevailing hypothesis predicted that response latency for groups SS, MM, and MS would be significantly less than groups SM and McM. To test this hypothesis we performed a planned contrast (no corrections). Our results revealed statistically significant difference between these groups, <em>t</em>(35) = 9.95, <em>p</em> &lt; .001, <em>d</em> = 3.21, where the responce latency in MS, MM, and SS was lower than SM and McM.</p>
+</blockquote>
+<p>Note that the <em>df</em> in the t-test are the error <em>df</em> from the omnibus model (35).</p>
+</div>
+<div id="a-note-on-using-the-multcomp-package-v.-using-the-base-stats-method" class="section level2">
+<h2><span class="header-section-number">9.7</span> A note on using the <code>multcomp</code> package v. using the base stats method</h2>
+<p>You may have noticed as you were moving through the Field text that he recommends a different method for constructing contrasts. The base method that he uses has you apply the contrast matrix directly to the factor, then re-run the ANOVA in <code>lm()</code> as opposed to the method I’ve outline above. Of course, Field’s is appropriate and conceptually it may give you a better understanding of what is going on.</p>
+<p>In what follows I briefly walk through othe considerations if you use the <code>stats::contrasts()</code> method. For most of you, you can simply stop right here and things will be fine. For those interested in an alternative, press on…</p>
+<p>There is one crucial factor that you must consider when using the <code>stats::contrasts()</code> method—your number of contrasts cannot be larger that the number of IV levels minus 1. If you have too many contrasts (can only happen if using non-orthogonal contrasts) then you have to go through several steps to derive the inverse of the matrix using the Moore-Penrose inversion method, which depending on how constructed may still not work if the determinant of your matrix = 0. In other words, you don’t want to do that!</p>
+<p><code>R</code> automatically defaults to creating (number of IV levels) minus 1 contrasts. So if you intend to run fewer, then you need to be wary that you can only trust the contrasts that you specified. To see what I’m getting at, let’s use the <code>stats::contrasts()</code> method (no need to load <code>stats</code>, it’s already loaded when you start R). To demonstrate the issue at hand let’s start with only one contrast. But first let’s run a regular ANOVA</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># creating lm.model for comparison:</span>
+lm.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)
+<span class="kw">summary</span>(lm.model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Time ~ Group, data = dataset)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -9.00  -3.25   0.00   3.00  12.00 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    4.000      2.000   2.000   0.0533 .  
+## GroupMM        6.000      2.828   2.121   0.0411 *  
+## GroupSS        7.000      2.828   2.475   0.0183 *  
+## GroupSM       20.000      2.828   7.071 3.09e-08 ***
+## GroupMcM      25.000      2.828   8.839 1.93e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.657 on 35 degrees of freedom
+## Multiple R-squared:  0.7574, Adjusted R-squared:  0.7297 
+## F-statistic: 27.32 on 4 and 35 DF,  p-value: 2.443e-10</code></pre>
+<p>And now let’s re-run after applying our contrasts to <code>Group</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create contrast</span>
+contrast1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># MM v McM</span>
+
+<span class="co"># assign that contrast to our IV:</span>
+<span class="kw">contrasts</span>(dataset<span class="op">$</span>Group) &lt;-<span class="st"> </span>contrast1
+
+<span class="co"># re-running lm model after assigning contrasts:</span>
+contrast.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Time <span class="op">~</span><span class="st"> </span>Group, <span class="dt">data =</span> dataset)
+<span class="kw">summary</span>(contrast.model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Time ~ Group, data = dataset)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -9.00  -3.25   0.00   3.00  12.00 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  15.6000     0.8944  17.441  &lt; 2e-16 ***
+## Group1        9.5000     1.4142   6.718 8.87e-08 ***
+## Group2       -1.0154     2.0000  -0.508    0.615    
+## Group3       11.9846     2.0000   5.992 7.90e-07 ***
+## Group4       10.5848     2.0000   5.292 6.62e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.657 on 35 degrees of freedom
+## Multiple R-squared:  0.7574, Adjusted R-squared:  0.7297 
+## F-statistic: 27.32 on 4 and 35 DF,  p-value: 2.443e-10</code></pre>
+<p>When comparing or original <code>lm.model</code> to the model run after applying the contrasts we see that the latter gives us a different result—the contrasts that we requested. Actually, as you can see it give us more that we requested. We only requested 1 contrast, it supplies us with 4. To see what has happened here let’s take a look at what contrasts we indeed applied to <code>Group</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># setting contrasts</span>
+<span class="kw">contrasts</span>(dataset<span class="op">$</span>Group) &lt;-<span class="st"> </span>contrast1
+
+<span class="co"># looking at the set contrast matrix</span>
+<span class="kw">attributes</span>(dataset<span class="op">$</span>Group)</code></pre></div>
+<pre><code>## $levels
+## [1] &quot;MS&quot;  &quot;MM&quot;  &quot;SS&quot;  &quot;SM&quot;  &quot;McM&quot;
+## 
+## $class
+## [1] &quot;factor&quot;
+## 
+## $contrasts
+##     [,1]       [,2]       [,3]       [,4]
+## MS     0 -0.4472136 -0.4472136 -0.6324555
+## MM    -1 -0.1381966 -0.1381966  0.5116673
+## SS     0  0.8618034 -0.1381966 -0.1954395
+## SM     0 -0.1381966  0.8618034 -0.1954395
+## McM    1 -0.1381966 -0.1381966  0.5116673</code></pre>
+<p>Column 1 contains the contrast that we requested. Columns 2-4 contain non-orthogonal contrasts that R has generated. So, when reading the resulting <code>lm()</code> output, you should only focus on the first contrast that is reported.</p>
+<p><br><br><br></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analysis-of-variance-i-the-one-way-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-of-varience-iii-factorial-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Vignettes.pdf", "Vignettes.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
