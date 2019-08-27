@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="analysis-of-varience-iii-factorial-anova.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Words from the Professor</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html"><i class="fa fa-check"></i><b>1</b> Analysis of Varience III: Factorial ANOVA</a><ul>
+<li class="chapter" data-level="1.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#main-effect-main-effect-and-interactions-oh-my"><i class="fa fa-check"></i><b>1.1</b> Main effect, main effect, and interactions… oh my!</a></li>
+<li class="chapter" data-level="1.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#example-a-22-anova"><i class="fa fa-check"></i><b>1.2</b> Example: a 2×2 ANOVA</a></li>
+<li class="chapter" data-level="1.3" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#making-sense-of-plots"><i class="fa fa-check"></i><b>1.3</b> Making sense of plots</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plots"><i class="fa fa-check"></i><b>1.3.1</b> Interaction plots</a></li>
+<li class="chapter" data-level="1.3.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#plotting-main-effects"><i class="fa fa-check"></i><b>1.3.2</b> Plotting main effects</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-lm-method"><i class="fa fa-check"></i><b>1.4</b> Running the ANOVA <code>lm()</code> method</a></li>
+<li class="chapter" data-level="1.5" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-in-the-afexaov_ez-method"><i class="fa fa-check"></i><b>1.5</b> Running the ANOVA in the <code>afex::aov_ez()</code> method:</a></li>
+<li class="chapter" data-level="1.6" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#getting-cell-means"><i class="fa fa-check"></i><b>1.6</b> Getting cell means</a></li>
+<li class="chapter" data-level="1.7" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#more-examples-a-2-3-anova"><i class="fa fa-check"></i><b>1.7</b> More examples: a 2 × 3 ANOVA</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova"><i class="fa fa-check"></i><b>1.7.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#apa-plotting"><i class="fa fa-check"></i><b>1.7.2</b> APA plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#anova-howell-13.1"><i class="fa fa-check"></i><b>1.8</b> 2 × 5 ANOVA (Howell 13.1)</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-1"><i class="fa fa-check"></i><b>1.8.1</b> Running the ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#one-last-example"><i class="fa fa-check"></i><b>1.9</b> One last example,</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-2"><i class="fa fa-check"></i><b>1.9.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="1.9.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plot"><i class="fa fa-check"></i><b>1.9.2</b> Interaction plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="interaction-v-no-interaction.html"><a href="interaction-v-no-interaction.html"><i class="fa fa-check"></i><b>2</b> Interaction v. no interaction</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="interaction-v-no-interaction.html"><a href="interaction-v-no-interaction.html#no-interaction-how-about-some-posthocs"><i class="fa fa-check"></i><b>2.0.1</b> No interaction? How about some posthocs?</a></li>
+<li class="chapter" data-level="2.0.2" data-path="interaction-v-no-interaction.html"><a href="interaction-v-no-interaction.html#what-to-do-if-you-do-have-an-interaction"><i class="fa fa-check"></i><b>2.0.2</b> what to do if you DO have an interaction</a></li>
+<li class="chapter" data-level="2.1" data-path="interaction-v-no-interaction.html"><a href="interaction-v-no-interaction.html#what-about-planned-contrasts"><i class="fa fa-check"></i><b>2.1</b> What about planned contrasts?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interaction-v.-no-interaction" class="section level1">
+<h1><span class="header-section-number">Week 2</span> Interaction v. no interaction</h1>
+<p>Why is the fact that there is no interaction here important? Of all of the examples that we’ve covered to this point, the last example was the only example that we can trust our main effects at face value. This re-enforces the point I made earlier: <strong>Look at your interaction FIRST!!!</strong> Consider what the interaction means— that your observed main effects are contingent on certain conditions. If you have a significant interaction, you must run <strong>simple effects</strong> analysis to elucidate these contingencies. For example, looking at our very first example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset_2by2, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Smkgrp,<span class="dt">y=</span>score,<span class="dt">group=</span>Task))
+
+interaction_p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>,<span class="dt">fun.data =</span> <span class="st">&quot;mean_cl_normal&quot;</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">25</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">25</span>), <span class="kw">aes</span>(<span class="dt">linetype=</span>Task)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_cowplot</span>()
+
+<span class="kw">show</span>(interaction_p)</code></pre></div>
+<p><img src="11week_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a PartID column and number</span>
+dataset_2by2<span class="op">$</span>PartID &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dataset_2by2)
+
+<span class="co"># run the ANOVA</span>
+afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;PartID&quot;</span>,<span class="dt">dv =</span> <span class="st">&quot;score&quot;</span>,<span class="dt">data =</span> dataset_2by2,<span class="dt">between =</span> <span class="kw">c</span>(<span class="st">&quot;Smkgrp&quot;</span>,<span class="st">&quot;Task&quot;</span>),<span class="dt">within =</span> <span class="ot">NULL</span>,<span class="dt">covariate =</span> <span class="ot">NULL</span>,<span class="dt">observed =</span> <span class="ot">NULL</span>,<span class="dt">fun_aggregate =</span> <span class="ot">NULL</span>,<span class="dt">type =</span> <span class="dv">3</span>,<span class="dt">factorize =</span> <span class="ot">TRUE</span>,<span class="dt">check_contrasts =</span> <span class="ot">TRUE</span>,<span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>,<span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>))</code></pre></div>
+<pre><code>## Contrasts set to contr.sum for the following variables: Smkgrp, Task</code></pre>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: score
+##        Effect    df   MSE        F pes p.value
+## 1      Smkgrp 1, 56 21.44 11.57 ** .17    .001
+## 2        Task 1, 56 21.44  8.73 ** .13    .005
+## 3 Smkgrp:Task 1, 56 21.44  8.73 ** .13    .005
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The ANOVA reveals a main effect for smoking group. However, looking at the plot, we know that this is not the entire story. That is, the means change from one smoking group to another for the Driving simulation task, but not for the Pattern recognition group. Our main effect for Smoking group <strong>is contingent</strong> on task. This is what I mean by “you can’t trust your main effects when you have an interaction”—they don’t tell the entire story.</p>
+<div id="no-interaction-how-about-some-posthocs" class="section level3">
+<h3><span class="header-section-number">2.0.1</span> No interaction? How about some posthocs?</h3>
+<p>If you don’t have an interaction, you may simply proceed to run post-hoc analyses on any significant main effects in the manner you would with a One-way ANOVA. Easy, peasy, right. One thing to note, you need to make the appropriate multiple comparison corrections. The easy way to do this is to perform a Bonferroni correction on the number of post-hoc comparisons that you intend. For example, returning to our data with no interaction:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a PartID column and number</span>
+dataset_no_inter<span class="op">$</span>PartID &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dataset_no_inter)
+
+<span class="co"># run the ANOVA</span>
+afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;PartID&quot;</span>,<span class="dt">dv =</span> <span class="st">&quot;Score&quot;</span>,<span class="dt">data =</span> dataset_no_inter,<span class="dt">between =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>,<span class="st">&quot;Presentation&quot;</span>),<span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>,<span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>))</code></pre></div>
+<pre><code>## Contrasts set to contr.sum for the following variables: Lecture, Presentation</code></pre>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: Score
+##                 Effect    df   MSE         F pes p.value
+## 1              Lecture 2, 30 49.09    4.95 * .25     .01
+## 2         Presentation 1, 30 49.09 31.25 *** .51  &lt;.0001
+## 3 Lecture:Presentation 2, 30 49.09      0.32 .02     .73
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># setting original parameters</span>
+p &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> dataset_no_inter, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Lecture,<span class="dt">y=</span>Score,<span class="dt">group=</span>Presentation))
+
+<span class="co"># making a basic line plot</span>
+line_p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>,<span class="dt">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="dt">size=</span><span class="fl">0.75</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">25</span>), <span class="kw">aes</span>(<span class="dt">shape=</span>Presentation)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">25</span>), <span class="kw">aes</span>(<span class="dt">linetype=</span>Presentation))
+
+<span class="co"># adding APA elements</span>
+line_p &lt;-<span class="st"> </span>line_p <span class="op">+</span><span class="st"> </span><span class="kw">theme_cowplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(
+    <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">lineheight =</span> .<span class="dv">55</span>),
+    <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>),
+    <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),
+    <span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">75</span>,.<span class="dv">85</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Lecture type&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylab</span> (<span class="st">&quot;Performance score&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">unit</span>(<span class="kw">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),<span class="st">&quot;in&quot;</span>))
+
+<span class="kw">show</span>(line_p)</code></pre></div>
+<p><img src="11week_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>We need to test for differences in both the <code>Lecture</code> and <code>Presentation</code> main effects.</p>
+<ul>
+<li>Presentation: This one is easy. We only have two levels of <code>Presentation</code>, so the omnibus <code>Ftest</code> tells us that our two groups are different. Nothing else to do here other than note which mean (Computer v. Standard) is greater than the other.</li>
+<li>Lecture: We have three levels of lecture, so were are going to need to run a post-hoc analysis. In this case, we may call upon our old standbys, Bonferroni, and Tukey. For example, a <code>pairwise.t.test()</code> with a “bonferroni” adjustment reveals:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(dataset_no_inter<span class="op">$</span>Score,dataset_no_inter<span class="op">$</span>Lecture, <span class="dt">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dataset_no_inter$Score and dataset_no_inter$Lecture 
+## 
+##      Phys Soc 
+## Soc  0.16 -   
+## Hist 0.17 1.00
+## 
+## P value adjustment method: bonferroni</code></pre>
+<p>You may now be confused that the post hoc for <code>Lecture</code> revealed no differences even though we had an overall main effect. Don’t worry, these two do not contradict one another. The main effect is examining the overall trend in the data (think of the slope of the regression line) while the post-hoc pairwise comparisons are examining differences in means. In some cases the two are in agreement with one another. In others they don’t match up. In this case you may simply say that “while the main effect for Lecture type indicated an overall trend that performance was different by lecture, pairwise comparisons revealed no significant differences between individual lecture types.”</p>
+<p>That said… remember that the Bonferroni adjustment is the most conservative of the three. Let’s see what happends if we run a Tukey HSD. To run a Tukey you need the ANOVA model to be saved to an object. Here I’m saving it to the object <code>aov.model</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aov.model &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(<span class="dt">id =</span> <span class="st">&quot;PartID&quot;</span>,<span class="dt">dv =</span> <span class="st">&quot;Score&quot;</span>,<span class="dt">data =</span> dataset_no_inter,<span class="dt">between =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>,<span class="st">&quot;Presentation&quot;</span>),<span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">return =</span> <span class="st">&quot;afex_aov&quot;</span>,<span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&quot;pes&quot;</span>))</code></pre></div>
+<pre><code>## Contrasts set to contr.sum for the following variables: Lecture, Presentation</code></pre>
+<p>From here you may call upon the <code>emmeans()</code> function to derive your posthocs. By itself, emmeans produces the comparision of differences between cell means. It takes the <code>afex_aov</code> model as a first arguments, and the IVs of interest as the second.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># input your model into the emmeans,</span>
+<span class="co"># interested in Lecture</span>
+
+<span class="kw">emmeans</span>(aov.model,<span class="dt">specs =</span> <span class="st">&quot;Lecture&quot;</span>)</code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  Lecture   emmean       SE df lower.CL upper.CL
+##  Phys    40.00000 2.022672 30 35.86915 44.13085
+##  Soc     32.16667 2.022672 30 28.03582 36.29751
+##  Hist    32.25000 2.022672 30 28.11915 36.38085
+## 
+## Results are averaged over the levels of: Presentation 
+## Confidence level used: 0.95</code></pre>
+<p><code>emmeans()</code> allows another method for making contrasts (planned and posthoc). If you want to perform a Tukey test follow this procedure you can simply pipe the previous (or save to an object and submit) to <code>pairs()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">emmeans</span>(aov.model,<span class="dt">specs =</span> <span class="st">&quot;Lecture&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pairs</span>()</code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  contrast       estimate       SE df t.ratio p.value
+##  Phys - Soc   7.83333333 2.860491 30   2.738  0.0270
+##  Phys - Hist  7.75000000 2.860491 30   2.709  0.0289
+##  Soc - Hist  -0.08333333 2.860491 30  -0.029  0.9995
+## 
+## Results are averaged over the levels of: Presentation 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<p>While this method doesn’t provide the nice grouping plots from <code>agricolae</code> you can, if you choose, get the grouping letters by adding <code>CLD()</code> to your pipe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">emmeans</span>(aov.model,<span class="dt">specs =</span> <span class="st">&quot;Lecture&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pairs</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">CLD</span>()</code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  contrast       estimate       SE df t.ratio p.value .group
+##  Soc - Hist  -0.08333333 2.860491 30  -0.029  0.9995  1    
+##  Phys - Hist  7.75000000 2.860491 30   2.709  0.0289   2   
+##  Phys - Soc   7.83333333 2.860491 30   2.738  0.0270  12   
+## 
+## Results are averaged over the levels of: Presentation 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## significance level used: alpha = 0.05</code></pre>
+<p>It appears that our Tukey does reveal differences between means, when performance of those getting Psychical Science Lectures is greater than both History and Social, but Social and History are not difference from one another.</p>
+</div>
+<div id="what-to-do-if-you-do-have-an-interaction" class="section level3">
+<h3><span class="header-section-number">2.0.2</span> what to do if you DO have an interaction</h3>
+<p>Well, for this week, you stop. Next week we will see how to press on!</p>
+</div>
+<div id="what-about-planned-contrasts" class="section level2">
+<h2><span class="header-section-number">2.1</span> What about planned contrasts?</h2>
+<p>You need to be careful when running planned contrasts in factorial ANOVA. In genral I would recommend only running planned contrasts on a single main effect, or a planned contrast on the effects of one of your factors at a single level of your other (though you still need to proceed with caution here).</p>
+<p>For example, using the data from the last section, I would only run a planned contrast related to the main effect of <code>Lecture Type</code>, or a contrast of <code>Lecture Type</code> means only in <code>Computer presentation</code> conditions (or <code>Standard presentation</code>). DO NOT, I repeat DO NOT run contrasts that go across levels of your other factors. Well, truthfully, you can do whatever you want, but you may find that your ability to meaningfully interpret your results in such cases is extremely limited.</p>
+<p>We can run planned contrasts using <code>emmeans()</code> as well. In this case, we need to specify the contrasts.</p>
+<p>First we need to obtain the <code>emmeans()</code> of the model including all cells (all factors). Using <code>aov.model</code> from the previous example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>))</code></pre></div>
+<pre><code>##  Lecture Presentation   emmean       SE df lower.CL upper.CL
+##  Phys    Comp         46.00000 2.860491 30 40.15810 51.84190
+##  Soc     Comp         40.00000 2.860491 30 34.15810 45.84190
+##  Hist    Comp         38.00000 2.860491 30 32.15810 43.84190
+##  Phys    Stand        34.00000 2.860491 30 28.15810 39.84190
+##  Soc     Stand        24.33333 2.860491 30 18.49143 30.17523
+##  Hist    Stand        26.50000 2.860491 30 20.65810 32.34190
+## 
+## Confidence level used: 0.95</code></pre>
+<p>OK. From here let’s build two custom contrasts. First lecture contrast on the main effect. In this case let’s assume I want to contrast <code>Phys</code> with the combined other two conditions. Using the output above, I identify which rows contain <code>Phys</code> and I ensure that the summation of those rows is 1. In this case there are two rows so each gets <code>0.5</code>. My remaining conditions must also equal <code>-1</code>. In this case there are four, so each is <code>-0.25</code>. Following the output above, then my contrast vector is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">main_eff_contrast &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">5</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>,.<span class="dv">5</span>,<span class="op">-</span>.<span class="dv">25</span>,<span class="op">-</span>.<span class="dv">25</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">list</span>()</code></pre></div>
+<p>You’ll note that I piped my contrast into a list. This is required and a quirk of using <code>emmeans()</code>. From here I simply call <code>contrast()</code> contrast matrix as an argument. So the entire pipe goes from:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">contrast</span>(.,main_eff_contrast)</code></pre></div>
+<pre><code>##  contrast                                estimate       SE df t.ratio
+##  c(0.5, -0.25, -0.25, 0.5, -0.25, -0.25) 7.791667 2.477258 30   3.145
+##  p.value
+##   0.0037</code></pre>
+<p>Assuming that I want to run a similar contrast, but only on lectures done via computer, I would reaquaint myself with the cell means:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>))</code></pre></div>
+<pre><code>##  Lecture Presentation   emmean       SE df lower.CL upper.CL
+##  Phys    Comp         46.00000 2.860491 30 40.15810 51.84190
+##  Soc     Comp         40.00000 2.860491 30 34.15810 45.84190
+##  Hist    Comp         38.00000 2.860491 30 32.15810 43.84190
+##  Phys    Stand        34.00000 2.860491 30 28.15810 39.84190
+##  Soc     Stand        24.33333 2.860491 30 18.49143 30.17523
+##  Hist    Stand        26.50000 2.860491 30 20.65810 32.34190
+## 
+## Confidence level used: 0.95</code></pre>
+<p>And do my contrasts like so (see if you can follow the coding logic):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># built my contrast</span>
+computer_only_contrast &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span>.<span class="dv">5</span>,<span class="op">-</span>.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">list</span>()
+
+<span class="co"># run the planned contrast</span>
+<span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">contrast</span>(.,computer_only_contrast)</code></pre></div>
+<pre><code>##  contrast                  estimate       SE df t.ratio p.value
+##  c(1, -0.5, -0.5, 0, 0, 0)        7 3.503371 30   1.998  0.0548</code></pre>
+<p>Assuming I wanted to perfom a set of orthoginal contrasts:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Phys v. Soc and Hist and</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Soc v Hist</li>
+</ol></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build the contrast matrix</span>
+contrast1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="op">-</span>.<span class="dv">5</span>, <span class="op">-</span>.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+contrast2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+contrast_matrix &lt;-<span class="st"> </span><span class="kw">list</span>(contrast1,contrast2)
+
+<span class="co"># run the contrasts</span>
+<span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">contrast</span>(.,contrast_matrix)</code></pre></div>
+<pre><code>##  contrast                  estimate       SE df t.ratio p.value
+##  c(1, -0.5, -0.5, 0, 0, 0)        7 3.503371 30   1.998  0.0548
+##  c(0, -1, 1, 0, 0, 0)            -2 4.045345 30  -0.494  0.6246</code></pre>
+<p>In both cases, my p-values are unadjusted. I can add an adjustment to the contrast() argument like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">contrast</span>(.,contrast_matrix, <span class="dt">adjust =</span> <span class="st">&quot;holm&quot;</span>)</code></pre></div>
+<pre><code>##  contrast                  estimate       SE df t.ratio p.value
+##  c(1, -0.5, -0.5, 0, 0, 0)        7 3.503371 30   1.998  0.1097
+##  c(0, -1, 1, 0, 0, 0)            -2 4.045345 30  -0.494  0.6246
+## 
+## P value adjustment: holm method for 2 tests</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or </span>
+<span class="kw">emmeans</span>(aov.model, <span class="dt">specs =</span> <span class="kw">c</span>(<span class="st">&quot;Lecture&quot;</span>, <span class="st">&quot;Presentation&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">contrast</span>(.,contrast_matrix, <span class="dt">adjust =</span> <span class="st">&quot;bonferroni&quot;</span>)</code></pre></div>
+<pre><code>##  contrast                  estimate       SE df t.ratio p.value
+##  c(1, -0.5, -0.5, 0, 0, 0)        7 3.503371 30   1.998  0.1097
+##  c(0, -1, 1, 0, 0, 0)            -2 4.045345 30  -0.494  1.0000
+## 
+## P value adjustment: bonferroni method for 2 tests</code></pre>
+<p>That’s all for this week.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analysis-of-varience-iii-factorial-anova.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

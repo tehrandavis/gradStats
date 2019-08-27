@@ -1,0 +1,332 @@
+# Testing differences in means: t-test
+
+This week we covered when and how to conduct a $t-test$. We use a t-test to assess whether the observed difference between sample means is greater than would be predicted be chance. Both the Field text and Howell text do a wonderful job of explaining t-tests conceptually so I will defer to those experts on matters of the underlying their statistical basis. Instead my goal this week is to walk through some examples on performing, interpreting, and reporting t-tests using `R`. 
+
+This walkthough assumes that the following packages are installed and loaded on your computer:
+```{r}
+pacman::p_load(tidyverse, car, cowplot, lsr)
+```
+
+
+## Things to consider before running the t-test
+
+Before running a `t.test` there are a few practical and statistical considerations that must be taken. In fact, these considerations extend to every type of analysis that we will encounter for the remainder of the semester (and indeed the rest of your career) so it would be good to get in the habit of running through your checks. In what proceeds here I will walk step by step with how I condunct a `t.test` (while also highlighting certain decision points as they come up).
+
+### What is the nature of your sample data?
+
+In other words where is the data coming from? Is it coming from a single sample of participants? Is it coming from multiple samples of the SAME participants? Is it coming from multiple groups of participants. This will not only determine what analysis you choose to run, but in also how you go about the business of preparing to run this analysis. Of course, truth be told this information should already be known before you even start collecting your data, which reinforces an important point, your central analyses should already be selected BEFORE you start collecting data! As you design your experiments you should do so in a way in which the statistics that you run are built into the design, not settled upon afterwards. This enables you to give the tests you perform the most power, as you are making predictions about the outcomes of your test _a priori_. This will become a major theme on the back half of the class, but best to introduce it now.
+
+For this week, it will determine what test we will elect to perform. Let's grab some sample data from the Howell text (Table 7.3):
+
+
+> Description from Howell: Everitt, in Hand, et al., 1994, reported on family therapy as a treatment for anorexia. There were 17 girls in this experiment, and they were weighed before and after treatment. The weights of the girls, in pounds, is provided in the data below:
+
+```{r}
+Tab7_3 <- read_delim("https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab7-3.dat", 
+                     "\t", escape_double = FALSE, trim_ws = TRUE)
+```
+
+So what is known: we have 17 total participants from (hypothetically) the same population that are measured twice (once Before treatment, and once After treatment). Based upon the experimental question we need to run a paired-sample (matched-sample) test. (Although I'll use this data to provide an example of a one-sample test later on).
+
+### What is the structure of your data file?
+
+Before doing anything you should always take a look at your data:
+
+```{r}
+show(Tab7_3)
+```
+
+So what do we have here, three columns:
+
+- `ID`: the participant number
+- `Before`: participants' weights before treatment
+- `After`: participants' weights after treatment
+
+Most important for present purposes this data is in `WIDE` format—each line represents a participant. While this might be intuitve for tabluar visualization, many statistical softwares prefer when `LONG` format, where each line represents a single *observation* (or some mixed of WIDE and LONG like SPSS).
+
+** [See this page for a run down of WIDE v. LONG format] (https://www.theanalysisfactor.com/wide-and-long-data/)
+
+** More, for those that are interested I suggest taking a look at these two wonderful courses on DataCamp:
+
+- [Working with Data in the Tidyverse](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse)
+- [Cleaning Data in R](https://www.datacamp.com/courses/cleaning-data-in-r)
+
+#### Getting data from WIDE to LONG
+
+So the data are in wide format, each line has multiple observations of data that are being compared. Here both `Before` scores and `After` scores are on the same line. In order to make life easier for analysis and plotting in `ggplot`, we need to get the data into long format (`Before` scores and `After` scores are on different lines). This can be done using the `gather()` function from the `tidyr` package. We touched briefly on this function in this week's lecture. Here we go into a little more detail.
+
+Before gathering, one thing to consider is whether or not you have a column that defines each subject. In this case we have `ID`. This tells `R` that these data are coming from the same subject and will allow `R` to connect these data when performing analysis. That said, for `t.test()` this is not crucially important—`t.test()` assumes that the order of lines represents the order of subjects, e.g., the first `Before` line is matched to the first `After` line. Later on when we are doing ANOVA, however, this participant column will be important an we will need to add if it is missing.
+
+**Using `gather()`:** It may first make sense to talk a bit about the terminology that this function uses. For every data point you have a `key` and a `value`. Think of the `key` as how the data point is defined or described, while the `value` is the measure of the data point. Typically in research we describe the data in terms of the condition under which it was collected—so if it helps, think of the `key` as your IV(s) and the `value` as your DV. 
+
+With this data, our `values` would be the weights of each participant. The `keys` would be how they are differentiated, `Before` and `After`. So for value I would input "weight" and for key I might choose "treatment" noting that the levels are Before-treatment and After-treatmemt. 
+
+One other thing that I have to consider is that I don't want every column of my data gathered. For example in this case I don't want my `ID` column gathered, but rather duplicated. Let's look at what happens if I just gather:
+
+```{r}
+gather(data = Tab7_3,key = "treatment",value = "weight")
+```
+
+That's not right! In order to overcome this I need to exclude the column(s) that I don't want gathered. What `R` will do is copy those appropriately. This can be accomplished by stating with columns for the original data set you do not want gathered at the end of the `gather()` function, placing a "-" (negative sign) in front of them. In this case I don't want the first column, `ID` gathered, so:
+
+```{r}
+# "-1" here means exclude the first column
+gather(data = Tab7_3,key = "treatment",value = "weight",-1)
+
+# or, "-ID" means exclude the column named ID, both will work. 
+# note that I'm just making this output invisible to avoid duplicates:
+gather(data = Tab7_3,key = "treatment",value = "weight",-ID) %>% invisible()
+```
+
+Ok data is structured correctly, on to the next step.
+
+### Testing assumptions
+
+Remember that you should always test to see if the data fit the assumptions of the test you intend to perform. In this case, we need to assess two things:
+
+#### Is the data normally distributed?
+
+Knowing the design of your experiment also has implications for testing your assumptions. For example, whether you have a paired (matched) sample design (e.g., two samples from the same participants) or an independent sample design (e.g., two groups) determines how you go about the business of testing the normality assumption. If you have an independent samples test, you test each sample seperately, noting measures of skew, kurtosis, inspecting the qqPlot, and Shapiro-Wilkes test (though acknowledging that SW is very sensitive). However, if you are running a paired (matched) samples test, you need to be concerned with the distribution of the difference scores. In the present example we are comparing participants' weights `Before` treatment to their weight `After`. 
+
+First, let me save my gathered data to a data_frame `Tab7_3_gathered` and then `filter()` accordingly for `Before` and `After` (though note that you could elect to gather after this step and simply use the `Before` and `After` columns for the original dataset):
+
+```{r}
+Tab7_3_gathered <- gather(data = Tab7_3,key = "treatment",value = "weight",-ID)
+beforeTreatment <- filter(Tab7_3_gathered, treatment=="Before") 
+afterTreatment <- filter(Tab7_3_gathered, treatment=="After") 
+```
+
+And now compute the difference scores, and run my assumption tests:
+```{r}
+diffWeights <- beforeTreatment$weight - afterTreatment$weight
+
+psych::describe(diffWeights)
+car::qqPlot(diffWeights)
+shapiro.test(diffWeights)
+```
+
+
+#### Is the data variability homogeneous?
+
+Another important assumption is that the variablility within each sample is similar. For a t-test this can be tested by using the `leveneTest()` from the `car` package:
+
+```{r}
+# using long-format enter as a formula:
+car::leveneTest(weight~treatment, data=Tab7_3_gathered, center="mean")
+```
+
+You'll note above I elected to mean center my samples. This is consistent with typical practive although "median" centering may be more robust (both Field and Howell reading this week get into the particulars of this test).
+
+Given that my obtained `Pr(>F)`, or p-value of Levene's F-test, is greater than .05 I may elect to assume that my variances are equal. However, if you remained skeptical, there are adjustments that you may make. This includes adjusting the degrees of freedom according to the Welch-Satterthwaite. Recall later on that we are looking at our obtained $t$ value with respect to the number of $df$. This adjustment effectively reduces the $df$ in turn making your test more conservative.
+
+### Getting the descriptive stats and plotting the means.
+
+Finally, as we will be performing a test of difference in means, it would be a good idea to get descriptive measures of means and variability for each group. Indeed, these data were already obatined when we used `psych::describe()` to assess the normailty of each sample. Here I'll just do it again to get these values:
+
+```{r}
+psych::describeBy(Tab7_3_gathered$weight,group = Tab7_3_gathered$treatment)
+```
+
+Typically along with the mean, you need to report a measure of variability of your sample. This can be either the SD, SEM, or if you choose the 95% CI, although this is more rare in the actual report. See the supplied HW example and APA examples on BOX for conventions on how to report these in your results section.
+
+* Plotting in ggplot *
+
+I've mentioned several times the limits and issues with plotting bar plots, but they remain a standard, so we will simply proceed using these plots. But I'll note that boxplots, violin plots, bean plots, and pirate plots are all modern alteratives to bar plots and are easy to execute in `ggplot()`. Try a Google search. 
+
+In the meantime, to produce a bar plot in `R` we simply modify a few of the arguments that we are familiar width. 
+
+Here is the code for plotting these two groups:
+
+```{r}
+ggplot(data = Tab7_3_gathered, aes(x=treatment, y=weight)) +
+  stat_summary(fun.y = "mean", geom = "col") + 
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
+  scale_y_continuous(expand = c(0,0)) + 
+  theme_cowplot()
+
+```
+
+Breaking this down line-by-line:
+
+- `ggplot(data = Tab7_3_gathered, aes(x=treatment, y=weight))`: standard fare for starting a `ggplot`. See the Appendix treatment on intro to `ggplot` to refresh your memory (or the DataCamp course).
+
+- `stat_summary(fun.y = "mean", geom = "col")`: `stat_summary()` gets summary statistics and projects them onto the geom of your choice. In this case we are getting the mean values, `fun.y = "mean"` and using them to create a column plot `geom = "col"` . 
+
+- `stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1)` : here we are greating error bars, `geom = "errorbar"`. Important to note here is that error bars require knowing three values: mean, upper limit, and lower limit. Whenever you are asking for a single value, like a mean, you use `fun.y`. When multiple values are needed you use `fun.data`. Here "mean_se" requests Standard error bars. Other alternatives include 95% CI "mean_cl_normal" and Standard deviation "mean_sdl". The `width` argument adjusts the width of the error bars.
+
+- `scale_y_continuous(expand = c(0,0))`: Typically `R` will do this strange thing where it places a gap bewteen the data and the `x-axis`. This line is a hack to remove this default. It says along the y-axis add `0` expansion (or gap).
+
+- `theme_cowplot()`: quick APA aesthetics.
+
+You may also feel that the zooming factor is off. This may especially be true in cases where there is little visual discrepency between the bars. To "zoom in" on the data you can use `coord_cartesian()`. For example, you might want to only show the range between 70 lbs and 100 lbs. When doing this, be careful not to truncate the upper limits of your bars and importantly your error bars. 
+
+```{r}
+ggplot(data = Tab7_3_gathered, aes(x=treatment, y=weight)) +
+  stat_summary(fun.y = "mean", geom = "col") + 
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
+  scale_y_continuous(expand = c(0,0)) + 
+  theme_cowplot() +
+  coord_cartesian(ylim = c(70,100))
+```
+
+Additionally, to get this into true APA format I would need to adjust my axis labels. Here capitalization is needed. Also, because the weight has a unit measure, I need to be specific about that:
+
+```{r}
+ggplot(data = Tab7_3_gathered, aes(x=treatment, y=weight)) +
+  stat_summary(fun.y = "mean", geom = "col") + 
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
+  scale_y_continuous(expand = c(0,0)) + 
+  theme_cowplot() +
+  coord_cartesian(ylim = c(70,100)) +
+  xlab("Treatment") + 
+  ylab("Weight (lbs)")
+```
+
+Finally, you may have notice that the order of Treatment on the plot is opposite of what we might like to logically present. In this case the "After" data comes prior to the "Before" data on the x-axis. This is because `R` defaults to alphabetical order when loading in data. To correct this I can use `scale_x_discrete()` and specify the order that I want in `limits`:
+
+```{r}
+ggplot(data = Tab7_3_gathered, aes(x=treatment, y=weight)) +
+  stat_summary(fun.y = "mean", geom = "col") + 
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
+  scale_y_continuous(expand = c(0,0)) + 
+  theme_cowplot() +
+  coord_cartesian(ylim = c(70,100)) +
+  xlab("Treatment") + 
+  ylab("Weight (lbs)") + 
+  scale_x_discrete(limits=c("Before","After"))
+```
+
+All good (well maybe check with Sierra first)! One other thing to consider (although please do not worry about it here) is the recent argument that when dealing with repeated measures data you need to adjust you error bars. See [this pdf]( http://www.tqmp.org/Content/vol04-2/p061/p061.pdf) by Richard Morey (2005) for more information on this issue.
+
+## Performing the t-test (Paired sample t-test)
+
+Okay, now that we've done all of our preparation, we're now ready to perform the test. We can do so using the `t.test()` function. In this case, the experimental question warrants a `paired` samples t-test. Given that our Levene's test failed to reject the null, we will assume that our variances are equal. 
+
+Again, since we've got long-format data we will use the formula syntax:
+
+```{r}
+t.test(weight~treatment,data=Tab7_3_gathered,paired=T, var.equal=T)
+```
+
+The output provides us with our $t$ value, the $df$ and the $p$ value. It also includes a measure of the 95% CI, and the mean difference. Remember that the null hypothesis is that there is no difference between our two samples. In the case of repeated measures especially, it makes sense to think of this in terms of a difference score of change, where the null is 0. The resulting interpretation is that on average participants' weight increased 7.26 pounds due to the treatment, with a 95% likelihood that the true mean change is between 3.58 lbs and 10.95 lbs. Important for us is that 0 is not in the 95% CI, reinforcing that there was indeed a non-zero change (rejecting the null).
+
+## Measuring effect size
+
+As always, rejecting the null due to a significant $p$ value is not the end of the story. The absolute null is almost always guarenteed to be false. The question is whether or not you have compelling evidence to demonstrate it so. For example I likely could have collected data from 1000 participants here and found a "significant" difference with a weight gain of 0.5 lbs ($p<.05$). Would we feel like that was compelling evidence of the effect of the treatment? Probably not!
+
+Whenever you report any statistic, you need to report an effect size. For $t$ tests, the appropriate effect size measure is Cohen's D. Cohen's D expresses the observed difference as a ratio of the standard deviation of the sample(s)—in this respect its conceptually similar to our understanding of the standard distribution where we understand the magnitude of any score as expressed in the number of standatd deviations away from a 0 mean. Here, the mean difference betweem means (7.26) is divided by either the pooled standard deviations of both samples (weighted average) or the standard deviation of one of the samples. For example using the Before group SD:
+
+$$D = \frac{\mid \bar{X}_{before}-\bar{X}_{after} \mid}{SD_{before}} = 
+\frac{7.26}{5.02}$$
+
+Typically you will use the pooled standard deviation, though in some circumstances it may make sense to use the standard deviation of a single group. For example if your variences are unequal you may elect to use the SD of the control group, that way you understand the observed change in scores in scales of magnitude to the control.
+
+Let's calculate Cohen's D the pooled variance, and only using the varience of a single group. We use `lsr::cohensD()` with the formula syntax:
+
+```{r}
+# pooled SD
+lsr::cohensD(weight~treatment,data = Tab7_3_gathered,method = "pooled")
+
+# using SD of the first group (alphabetical order): After
+lsr::cohensD(weight~treatment,data = Tab7_3_gathered,method = "x.sd")
+
+# using SD of the first group (alphabetical order): Before
+lsr::cohensD(weight~treatment,data = Tab7_3_gathered,method = "y.sd")
+```
+
+As you can see you end up with very different values depending on what you choose. As I said, the default is the "pool" your variences. If you elect to do otherwise you'll need to mention it in your report.
+
+## Other $t$ tests:
+
+### One sample:
+
+The data in our example warranted running a paired t-test. However, as noted we can run a `t.test()` to compare a single sample to a single value. For example it might be reasonable to ask whether or not the 17 adolescent girls that Hand, et al., 1994 treated were different from what would be considered the average weight of a teenaged girl. A quick Google search suggests that the average weight of girls 12-17 in 2002 was 130 lbs. How does this compare to Hand et al.'s participants `Before` treatment? We can run a one sample t-test to answer this question:
+
+```{r}
+beforeTreatment <- filter(Tab7_3_gathered,treatment=="Before")
+t.test(beforeTreatment$weight, mu = 130)
+```
+
+Yes, this group of girls was significantly underweight compared to the national average.
+
+### Independent samples example
+
+We run an independent samples t-test when we have no reason to believe that the data in the two samples is meaningfully related in any fashion. Consider this example from Howell, Table 7.7 regarding Joshua Aronson's work on stereotype threat:
+
+> Joshua Aronson has done extensive work on what he refers to as “stereotype threat,” which refers to the fact that “members of stereotyped groups often feel extra pressure in situations where their behavior can confirm the negative reputation that their group lacks a valued ability” (Aronson, Lustina, Good, Keough, Steele, & Brown, 1998). This feeling of stereo- type threat is then hypothesized to affect performance, generally by lowering it from what it would have been had the individual not felt threatened. Considerable work has been done with ethnic groups who are stereotypically reputed to do poorly in some area, but Aronson et al. went a step further to ask if stereotype threat could actually lower the performance of white males—a group that is not normally associated with stereotype threat.
+
+> Aronson et al. (1998) used two independent groups of college students who were known to excel in mathematics, and for whom doing well in math was considered impor- tant. They assigned 11 students to a control group that was simply asked to complete a difficult mathematics exam. They assigned 12 students to a threat condition, in which they were told that Asian students typically did better than other students in math tests, and that the purpose of the exam was to help the experimenter to understand why this difference exists. Aronson reasoned that simply telling white students that Asians did better on math tests would arousal feelings of stereotype threat and diminish the students’ performance.
+
+Here we have two mutually exclusive groups of white men, those controls and those under induced threat.. Importantly we have no reason to believe that any one control man's score is more closely tied to any individual experimental group counterpart than any others (we'll return to this idea in a bit).
+
+Here is the data:
+
+```{r}
+Tab7_7 <- read_delim("https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab7-7.dat", delim = "\t")
+```
+
+As before, let's take a look at the file structure:
+
+```{r}
+show(Tab7_7)
+```
+
+I want to look at this example as it give is an opportunity to deal with another common issue in data cleaning. If you take a look at `Group` you see it's either `1` or `2`. Based upon Howell Table 7.7 we can deduce that `Group 1` are the control subjects and `Group 2` are the threat subjects. Using numbers instead of names to identify levels of a factor is a convention from older methods and software. In more modern software you don't need to do this sort of dummy coding (the software works this out in the background).
+
+If you want to change this, you can use the `recode()` function from `dplyr` package in the `tidyverse` (https://dplyr.tidyverse.org/reference/recode.html). For what it's worth there are several other ways to do this including a `recode()` function in car. See http://rprogramming.net/recode-data-in-r/ for examples.
+
+Here I'm just going to overwrite the `Group` column with the recoded names:
+
+```{r}
+Tab7_7$Group <- dplyr::recode(Tab7_7$Group, "1"="Control", "2"="Threat")
+show(Tab7_7)
+```
+
+An now to run the requisite assumption tests. Note that in this case I am running an Indepednent samples tet, so I need to test the assumptions on each sample seperately:
+
+*Control:*
+```{r}
+controlGroup <- filter(Tab7_7, Group=="Control")
+qqPlot(controlGroup$Score)
+```
+
+*Threat:*
+```{r}
+threatGroup <- filter(Tab7_7, Group=="Threat")
+qqPlot(threatGroup$Score)
+```
+
+*Homogeniety of Variance:*
+
+```{r}
+car::leveneTest(data=Tab7_7, Score~Group)
+```
+
+*T-test*
+
+The Levene's test failed to reject the null so I may proceed with my `t.test` assuming variances are equal. Note that `paired=FALSE` for independent sample tests:
+
+```{r}
+t.test(data=Tab7_7, Score~Group, paired=FALSE, var.equal=T)
+```
+
+This output gives us the $t$-value, $df$ and $p$-value. Based on this output I may conclude that the mean score in the Control group is significantly greater than the Threat group.
+
+Just as an example, let's set `var.equal` to `FALSE`:
+```{r}
+t.test(data=Tab7_7, Score~Group, paired=FALSE, var.equal=F)
+```
+
+Comparing the outputs you see that in this case `R` has indicated that it has run the test with the Welsh correction. Note that this changes the $df$ and consequently the resulting $p$ value. That this change was neglible reinforces that the variances were very similar to one another. However in cases where they are not close to one another you may see dramatic changes in $df$.
+
+In `R`, the `t.test()` function sets `var.equal=FALSE` by default. Why you ask? Well, you can make the argument that the variances are ALWAYS unequal, its only a matter of degree. Assuming variances are unequal makes your test more conservative, meaning that if the test suggests that you should reject the null, you can be slightly more confident that you are not committing Type I error. At the same time, it could be argued that setting your `var.equal=TRUE` in this case (where the Levene test failed to reject the null) makes your test more powerful, and you should take advantage of that power to avoid Type II error.
+
+## Independent or Paired Sample?
+
+It is safe to assume that anytime that you are collecting data samples from the same person at two different points in time that you need to run a paired-samples test. However, it would not be safe to assume that if the samples are coming from different groups of people that you always run an independent samples test. Remember the important qualifier mentioned above: That there no reason to believe that any one participant in the first group is is more closely related to any single counterpart in the second group than the remaining of others. In our Independent test example we have no reason to assume this is the case, we assume that members of the Control and Threat groups were randomly selected. But what if we instead recruited brothers or twins? In this case, it may make sense to treat members of the two groups as paired; brothers have a shared history (education, socio-economic level, family dymanic, etc) that would make their scores more likely to be related to one another than by random chance. Howell makes a similar point in Exercise Question 7.19 at the end of the chapter.
+
+
+
+OK. That's it for this week. Be sure to check the Appendix for an additional write-up connecting t-test (and ultimately ANOVA) to the General Linear Model and regression analyses that we performed last week.
+
+

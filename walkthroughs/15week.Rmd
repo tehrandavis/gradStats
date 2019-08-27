@@ -1,0 +1,418 @@
+# ANOVA VI: Mixed-effects ANOVA (BS + WS)
+
+For our final trick, we will be covering mixed effects designs. Mixed models sometimes go by many names (mixed effects model, multi-level model, growth-curve models) depending on the structure of the data that is being analyzed. For this week we will be focusing on Mixed effects ANOVA.
+
+This walk-though assumes the following packages:
+
+```{r}
+pacman::p_load(tidyverse, cowplot, readr, plyr, afex, multcomp,multcompView, Rmisc)
+```
+
+In terms of new concepts, we are continuing our theme of "well, nothing terribly new being raised this week". You've done between-subjects (BS) ANOVA, you've done within-subjects (WS) ANOVA, you've done simple linear regression... now we are simply combining what you know.
+We will use the two examples from Howell's text (Chapter 14):
+
+## Example 1:
+
+### data import and wrangling
+
+First we import the data, this data and background is presented in Table 14.4 of your Howell text:
+
+```{r}
+example1 <- read_delim("https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab14-4.dat", delim="\t")
+
+example1
+```
+
+The data above is in wide format. I need to get it into long format before submitting it for further analysis. Before doing so, however, I also need to add a `SubjectID` to let `R` know which data belongs to which subject. If you are presented with this sort of situation it makes sense to create your `SubjectID` column BEFORE you `gather()`:
+
+```{r}
+# create subject column
+example1$SubjectID <- 1:nrow(example1)
+
+# data is in wide format, needs to be long format for R,
+# notice that I only need to collapse the "Interval" columns (2-7):
+
+example1_long <- tidyr::gather(data = example1, key = "Interval", value = "Activity", 2:7)
+
+# convert 'Interval' to factor:
+example1_long$Interval <- as.factor(example1_long$Interval)
+
+# Name the dummy variables for 'Group' & convert to factor:
+example1_long$Group <- recode_factor(example1_long$Group,"1" = "Control","2" = "Same","3" = "Different")
+
+print(example1_long)
+```
+
+
+### plotting the data
+
+Now we can plot (not worrying about APA here). Given that interval is a within subjects variable we need to make the appropriate corrections to the error bars. For this we call on Morey (2008) recommendations. Corrections can easily be made by calling a customized version of `summarySEwithin2` (author: Hause Lin). Running this function on our data yields the following data.table (note that I specify BOTH `betweenvars` and `withinvars` in this case:
+
+```{r}
+
+# grabbing custom function
+source("https://gist.githubusercontent.com/hauselin/a83b6d2f05b0c90c0428017455f73744/raw/38e03ea4bf658d913cf11f4f1c18a1c328265a71/summarySEwithin2.R")
+
+# creating a summary table
+repdata <- summarySEwithin2(data = example1_long,measurevar = "Activity",betweenvars = "Group",withinvars = "Interval",idvar = "SubjectID")
+
+show(repdata)
+```
+
+This contains the means (`Activity`), normed means (`ActivityNormed`), and estimates of distribution for each Group × Interval Condition. The normed means are calculated by removing the between-subject variability. This is accomplished be ensuring that each participant have the same average (see this link for background and calculations [link](http://www.cogsci.nl/blog/tutorials/156-an-easy-way-to-create-graphs-with-within-subject-error-bars)
+and re-plot). Values of se, ci, and sd are then calculated on this normed data. For or resulting plot, we use the raw data for our means and the corrected sd, se, or ci for our error bars.
+
+Using ggplot, this can be accomplished by using the data from our summary table `repdata` and using direct calls instead of `summary_stat`:
+
+```{r}
+# create universal position dodge
+dodge_all <- position_dodge(.3)
+
+# now plot:
+
+p <- ggplot(data = repdata,mapping = aes(x=Interval,y=Activity,group=Group)) + 
+  geom_pointrange(aes(shape=Group, ymin=repdata$Activity-repdata$se, ymax=repdata$Activity+repdata$se), size=.5, position = dodge_all) +
+  geom_line(aes(linetype=Group), size=1, position = dodge_all) 
+show(p)
+```
+
+Now THESE are the error bars we're looking for!
+
+Rememeber however, when reporting the error values, you need to use the actual values and NOT the corrected ones from this plot. For this you could call upon the `psych::describeBy` function. You could also built your own table using the `by()` function.
+
+My personal preference is a custom tweak of the `summarySEwithin2.R` that I call `withinSummary()`:
+
+```{r}
+source("https://raw.githubusercontent.com/tehrandavis/statsRepo/master/statsScripts/withinSummary.R")
+```
+
+You can take a look at what modifications I'm made by comparing both code sources on their respective Github sites. Using this function is the same as `summarySEwithin2`:
+
+```{r}
+repdata <- withinSummary(data = example1_long,measurevar = "Activity",betweenvars = "Group",withinvars = "Interval",idvar = "SubjectID")
+repdata
+```
+
+This gives me both the `$Actual` and `$Corrected` values. I can use the `repdata$Corrected` data for plotting, for example:
+
+```{r}
+p <- ggplot(data = repdata$Corrected,mapping = aes(x=Interval,y=Activity,group=Group)) + 
+  geom_pointrange(aes(shape=Group, ymin=Activity-se, ymax=Activity+se), size=.5, position = dodge_all) +
+  geom_line(aes(linetype=Group), size=1, position = dodge_all) 
+show(p)
+```
+
+and use the values from `repdata$Actual` when writing my results.
+
+### Running our ANOVA:
+
+Running the ANOVA in `afex` is same as before, we just specify BOTH `within` and `between` IVs:
+
+```{r}
+ex1.aov <- afex::aov_ez(id = "SubjectID",dv = "Activity",data = example1_long,between = "Group",within = "Interval",type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+
+ex1.aov
+
+summary(ex1.aov)
+```
+
+Note that sphericity has been violated. I therefore need to make the appropriate corrections for my ANOVA (see ANOVA 5 vignette). In this case a simple re-run of the `aov_ez` setting `correction="GG"` should suffice.
+
+### simple effects
+
+There are two ways that I can attack the interaction. I can take a look at Group effects on the different levels of Interval; or I can take a look at Interval effects on the different levels of Group. In the first scenario, I'm looking for between effects (Group) on a level of a within factor (Interval). In the second scenario I'm looking for within effects on a level of a between factor. How my simple effects ANOVA nests my within and between factors has implications for how I do my follow-up.
+
+#### by groups (repeated measures)
+
+If I'm looking at a within effect, nested within a single level of a between factor (scenario 2), then I only need to run simple within-subjects ANOVAs for each between level that I'm interested in. So, for example if I'm interested in the effect of interval in all three groups, then I just run the separate within subjects ANOVA(s) and call it a day.
+
+First we separate the data. You've been using `filter()` from the `tidyverse` to isolate different groups. You can also use `split()` like so:
+```{r}
+byGroup <- split(example1_long,example1_long$Group)
+```
+
+Running `names(byGroup)` reveals this object holds three groups named "Control", "Same", & "Different".
+
+Then we run each group separate (note that my output only looks at the ANOVA assuming spherecity. In your own work you should also check spherecity using `summary(aov.object)`)
+
+#### Control group (`byGroup$Control`)
+```{r}
+control.aov <- afex::aov_ez(id = "SubjectID",dv = "Activity",data = byGroup$Control,within = "Interval",type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none")) %>% print()
+```
+
+#### Same group (`byGroup$Same`)
+```{r}
+same.aov <- afex::aov_ez(id = "SubjectID",dv = "Activity",data = byGroup$Same,within = "Interval",type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none")) %>% print()
+```
+
+#### Different group (`byGroup$Different`)
+```{r}
+different.aov <- afex::aov_ez(id = "SubjectID",dv = "Activity",data = byGroup$Different,within = "Interval",type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none")) %>% print()
+```
+
+#### by intervals (between measures):
+
+In this case we are running between-subjects simple effects for Group on each level of Interval. So let's start with splitting the data:
+
+```{r}
+byInterval <- split(example1_long,example1_long$Interval)
+```
+
+As before, when running a simple effects BS ANOVA, we can make corrections to the F-ratio based upon the appropriate Mean Square Error (MSE). However, unlike our examples in the purely BS case, here we cannot simply reach back to our omnibus ANOVA and pluck out that MSE. This is because in the original ANOVA, our error term confounds our between factor `Group` with our within factor `Interval`. To conceptually see why this is an issue, I like to point out that within factors have (and are a part of) histories. So say, for example, you were interested in looking at a `Group` effect on the sixth `Interval`. I think most of us would agree that what happens on Interval 6 is in some part related to, and dare I say influenced by Intervals 1-5. So, we can't honestly take a look at Interval 6 without taking into account how individual subjects changed across intervals.
+
+Fear not, all is not lost. If we *choose* (more on this below) to make a correction we do have the means, but it's slightly more complicated than what we've done before.
+
+**Before proceeding I feel it important to note that I WOULD NOT RECOMMEND using the omnibus error term method for this data. Why? Violations of the spherecity assumptions abound, which under normal circumstances would preclude the following. Having said that, we will proceed for the sake of example.**
+
+##### making the correction
+
+As articulated in Howell, in order to make the correction we need to calculate the $MS_{w/in\space cell}$ where:
+
+$$SS_{w/in\space cell} = SS_{Ss\space w/in\space group} + SS_{I\times Ss\space w/in\space groups}$$
+
+and
+
+$$MS_{w/in\space cell} = \frac{SS_{w/in\space cell}}{df_{Ss\space w/in\space group}+df_{I\times Ss\space w/in\space groups}}$$
+
+To do this, we can simply grab the Error sum of squares of the between variable (Group) and interaction (Group:Interval) in the omnibus ANOVA. The SS can be accessed by performing a summary call on the `ex1.aov` object, and calling the 'univariate.tests' table (this could be found using the attributes function)
+
+```{r}
+summary(ex1.aov)$univariate.tests
+```
+
+And from here I can type in the values by hand:
+```{r}
+SSwincell <- 384722 + 281199
+
+MSwincell <- SSwincell / (21 + 105)
+print(MSwincell)
+```
+
+Alternatively, I can take what I know about this relationship, $SS=MS \times df$ and pull the values from `ex1.aov$anova_table`
+```{r}
+omnibus.aov <- ex1.aov$anova_table %>% print()
+```
+
+From here we can pull the appropriate values by using indexing. In this case we are indexing via the row names and column names:
+```{r}
+MSEgroup <- omnibus.aov['Group','MSE']
+MSEinter <- omnibus.aov['Group:Interval','MSE']
+
+Dfgroup <- omnibus.aov['Group','den Df']
+Dfinter <- omnibus.aov['Group:Interval','den Df']
+
+SSgroup <- (MSEgroup*Dfgroup)
+SSinter <- (MSEinter*Dfinter)
+
+
+## now run the calculations as above:
+SSwincell <- SSgroup + SSinter
+MSwincell <- SSwincell/(Dfgroup+Dfinter) 
+print(MSwincell)
+```
+
+This second method is useful as it potentially allows for me to create a function to automatically take care of this in the future (much like we did a few weeks aback). I may get around to that, someday...
+
+From here, we can now calculate our corrected F-ratios using this MSE and values obtained from the Simple effects AOV. Here I'm looking at Interval 1:
+
+```{r}
+int1.aov <- afex::aov_ez(id = "SubjectID",dv = "Activity",data = byInterval$Int1,between = "Group",type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+
+int1.aov$anova_table
+```
+
+, in particular that our $MS_{group}=MSE \times F$:
+
+```{r}
+MSgroup <- int1.aov$anova_table["Group","MSE"]*int1.aov$anova_table["Group","F"]
+```
+
+and recalculate the F-ratio:
+```{r}
+Fcorrected <- MSgroup/MSwincell
+print(Fcorrected)
+```
+
+Ok, not quite done yet, we also need to calculate the appropriate Df $(g,f\prime)$ (see Howell 14.7), where $g$ is the treatment Df and $$f\prime=\frac{(u+v)^2}{\frac{u^2}{df_u}+\frac{v^2}{df_v}}$$
+
+Fortunately, in the equation above, $u$ and $v$ are already known to us. They are the `SSgroup` and `SSinter` that we calculated from the omnibus ANOVA. So we can calculate $f\prime$ as:
+
+```{r}
+u <- SSgroup
+v <- SSinter
+f.prime <- (u+v)^2 / ((u^2/Dfgroup) + (v^2)/Dfinter)
+show(f.prime)
+```
+
+Finally we can calculate our appropriate p-value using `pf()`:
+```{r}
+p.corrected <- 1-pf(Fcorrected,2,f.prime)
+show(p.corrected)
+```
+
+And there it is. Now go back and do it for Intervals 2-6. Actually don't (see Type 1 error inflation). Choose another comparison that you think is important and run that one!
+
+
+## Example 2:
+
+Ok, let's ramp up our complexity here. This time we're using data from Howell (Table 14.7) with 1 within factor and 2 between factors.
+
+### data import and wrangling
+```{r}
+example2 <- read_delim("https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab14-7.dat", delim = "\t")
+example2
+```
+
+You note that this time around, there is a subject ID, `Person` so no need to add that. From here we can gather the data (in columns 4-7) into long format with Time as the created factor:
+
+```{r}
+example2_long <- tidyr::gather(data = example2, key="Time",value="Freq", 4:7)
+```
+
+and give names to our dummy variables:
+```{r}
+example2_long$Condition <- recode_factor(example2_long$Condition, "1"="BST", "2"="EC")
+
+example2_long$Sex <- recode_factor(example2_long$Sex, "1"="M", "2"="F")
+
+example2_long
+```
+
+Also, for some reason this data set wants to treat our Freq values as a character string. This was the case from the first import, but it's much easier to wait and address it now (only a single column call):
+
+```{r}
+example2_long$Freq <- as.numeric(example2_long$Freq)
+```
+
+
+### plotting the data
+
+First we need to create the data for the appropriate error bars
+
+```{r}
+repdata <- withinSummary(data = example2_long,measurevar = "Freq",betweenvars = c("Condition","Sex"), withinvars = "Time",idvar = "Person")
+show(repdata)
+```
+
+Now we can plot (let's do some APA here):
+```{r}
+
+# create universal position dodge
+dodge_all <- position_dodge(.3)
+
+# now plot:
+
+p <- ggplot(data = repdata$Corrected,mapping = aes(x=Time,y=Freq,group=interaction(Condition,Sex))) + 
+  geom_pointrange(aes(shape=Condition, ymin=Freq-se, ymax=Freq+se), size=.5, position = dodge_all) +
+  geom_line(aes(linetype=Sex), size=1, position = dodge_all) + 
+  theme_cowplot() +
+  # aesthetics
+  theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.20,.85)) +
+  scale_color_manual(values=c("black","grey50")) + 
+  xlab("\n Time") + 
+  ylab ("Freq \n") +
+  theme(plot.margin=unit(c(.1,.1,.1,.1),"in")) + 
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+The order along the x-axis is the reverse of what I'd like. Since I'm plotting using `repdata` I need to change the order of my levels there. I can change this by:
+```{r}
+repdata$Corrected$Time <- factor(repdata$Corrected$Time,levels = c("Pretest","Posttest","FU6","FU12"))
+```
+
+and now re-plot (adjusting the position of my legend accordingly):
+```{r}
+# create universal position dodge
+dodge_all <- position_dodge(.3)
+
+# now plot:
+
+p <- ggplot(data = repdata$Corrected,mapping = aes(x=Time,y=Freq,group=interaction(Condition,Sex))) + 
+  geom_pointrange(aes(shape=Condition, ymin=Freq-se, ymax=Freq+se), size=.5, position = dodge_all) +
+  geom_line(aes(linetype=Sex), size=1, position = dodge_all) + 
+  theme_cowplot() +
+  # APA ify
+  theme(
+    axis.title = element_text(size = 16, face = "bold", lineheight = .55),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.position = c(.20,.85)) +
+  scale_color_manual(values=c("black","grey50")) + 
+  xlab("\n Time") + 
+  ylab ("Freq \n") +
+  theme(plot.margin=unit(c(.1,.1,.1,.1),"in")) + 
+  
+  # stack legend boxes horizontally:
+  theme(legend.box = "horizontal")
+
+show(p)
+```
+
+On to our ANOVAs!!
+
+### Run your omnibus ANOVA:
+```{r}
+ex2.aov <- afex::aov_ez(id = "Person",dv = "Freq",data = example2_long,between = c("Sex", "Condition"), within = "Time",type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+ex2.aov$anova_table
+```
+
+And here we see a main effect for `Sex` and a `Condition:Time` interaction. Now to follow-up...
+
+### simple effects:
+
+Similar to our first example there are two ways in which we can address that Interaction. We can look for simple (within) effects for Time on each of the between factors (Condition) that we are interested in, or we can look at simple between effects for Condition on each Time level of interest.
+
+#### by condition (within nested in between):
+
+Here we're running a simple effects within ANOVA for Time on each level of Condition. **Importantly, as `Time` is also nested within `Sex`, we need to also include Sex in our simple effects follow-ups**:
+
+```{r}
+byCondition <- split(example2_long,example2_long$Condition)
+
+ex2.bst.aov <- afex::aov_ez(id = "Person",dv = "Freq",data = byCondition$BST, within = "Time", between="Sex", type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+ex2.bst.aov$anova_table
+```
+Our analysis of the `BST` group uncovers a simple main effect for `Sex`; this is in agreement with the result of our omnibus ANOVA. Simply, for the `BST` group, `Sex` matters.
+
+```{r}
+ex2.ec.aov <- afex::aov_ez(id = "Person",dv = "Freq",data = byCondition$EC,within = "Time",between="Sex", type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+ex2.ec.aov$anova_table
+```
+Our result for the `EC` group yields a Sex × Time interaction. Again, we needed to include `Sex` in this simple effects ANOVA as `Time` was nested underneath it. That is, we cannot take into account our `Time` effects without understanding that they are confounded with `Sex`. This actually ends up being important here as the interaction tells us that in the `EC` group, `Time` matters more for one `Sex` than it does another. You could then tease apart this interaction as you would typically do in a repeated measures ANOVA.
+
+
+#### by Time (between nested in within):
+
+Now to look at the alternative, our `Condition` effects on each level of `Time`. Here, for brevity I'm only running `Pretest`:
+```{r}
+byTime <- split(example2_long,example2_long$Time)
+
+ex2.pretest.aov <- afex::aov_ez(id = "Person",dv = "Freq",data = byTime$Pretest, between=c("Sex","Condition"), type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+summary(ex2.pretest.aov)
+```
+
+and `Posttest`:
+```{r}
+ex2.posttest.aov <- afex::aov_ez(id = "Person",dv = "Freq",data = byTime$Posttest, between=c("Sex","Condition"), type = 3,return = "afex_aov",anova_table = list(es="pes",correction="none"))
+summary(ex2.posttest.aov)
+```
+
+## to pool or not to pool, this is the yada yada yada
+
+At this point we have a decision to make. In Example 1, when taking a look at different levels of a between-factor (`Sex`, `Condition`) on a level of a within we elected to make corrections for our Error terms, and subsequently or F-ratio and degrees of freedom. We made this choice as we get more power if we pool our variances, and the omnibus ANOVA is a perfect source as it is the source for a subsequent analyses. With a between-subjects ANOVA we can feel safe about doing this as long as we have no serious violations of the homogeneity of variance. That is if all variances are (approximately) equal then we can feel comfortable about collapsing them to a single value. 
+
+However, if there are significant deviations (as reported in Levine's test) then it would be unwise to do so (even in the purely between-subjects ANOVA case). The week that we did within-subjects ANOVA, we noted that in this case we don't make a correction. At present, hopefully you see that the correction is a pooling of variance. In within-subject designs we are almost guaranteed to see some deviations in compound symmetry (and sphericity). In fact, the entire point of the analysis is too account for this. Put another way, the within-subjects ANOVA relaxes the homogeneity assumption, AND implicitly concedes that when conducting your within-subject simple effects follow-ups that you are not granted that variances are similar from one level to the next. So, in within subjects designs the recommendation is to NOT pool your variances and thus, no need for corrections on the simple effects ANOVA(s), see [Boik (1981)](https://link.springer.com/article/10.1007/BF02293733). This goes for post-hocs as well.
+
+So... when running purely between ANOVA you pool (assuming no homogeneity of varience violation), when running purely within ANOVA you don't pool—what to do when running a mixed ANOVA with between and within factor(s). Well when running a simple effects within ANOVA on each level of the between factor the answer is easy. As we noted in Example 1 above, you treat each analysis as a separate within-subjects and no pooling / correction necessary. 
+
+What about when taking a look at differences in the between factor(s) on each level of within? In Example 1 we pooled (made our corrections), noting the issues with pooling a between nested in within. The detailed process of our corrections is a best attempt to overcome this issue. Typically in simple designs (and assuming no serious violations of sphericity and homogeneity) this is the best option. 
+
+Our second example our design is slightly more complex. With more complex designs you are more likely to implicitly violate your assumptions of homogeneity. So what to do? As Howell notes, if the variances are indeed homogeneous, then you are well within your right to pool the between subjects variances. Again doing this essentially gives you a power boost making you more likely to uncover effects that are present. For example making our correction in related to `ex2.posttest.aov` might be enough to get that `Sex` effect below .05. BUT if homogeneity is violated then you should not pool.

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>musings of the Professor</title>
+  <meta name="description" content="Weekly examples and musings related to PSYC 7014.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="musings of the Professor" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Weekly examples and musings related to PSYC 7014." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="musings of the Professor" />
+  
+  <meta name="twitter:description" content="Weekly examples and musings related to PSYC 7014." />
+  
+
+<meta name="author" content="Tehran J. Davis">
+
+
+<meta name="date" content="2018-12-15">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="introduction-to-r-getting-to-know-your-data.html">
+<link rel="next" href="sampling-distributions-and-building-the-logic-of-nhst.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Words from the Professor</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Weekly musings</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html"><i class="fa fa-check"></i><b>1</b> Introduction to R / getting to know your data</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-and-loading-an-r-package"><i class="fa fa-check"></i><b>1.1</b> Installing and loading an R package:</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-a-package-using-the-gui"><i class="fa fa-check"></i><b>1.1.1</b> Installing a package using the GUI</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-packages-with-install.packages"><i class="fa fa-check"></i><b>1.1.2</b> Installing packages with <code>install.packages()</code></a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#an-important-note-on-knitting-with-install.packages"><i class="fa fa-check"></i><b>1.1.3</b> An IMPORTANT note on knitting with install.packages:</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-packages-with-library"><i class="fa fa-check"></i><b>1.1.4</b> Loading packages with <code>library()</code></a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-packages-with-require"><i class="fa fa-check"></i><b>1.1.5</b> Loading packages with <code>require()</code></a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#installing-and-loading-packages-like-a-ninja"><i class="fa fa-check"></i><b>1.1.6</b> Installing and loading packages like a ninja</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-in-data"><i class="fa fa-check"></i><b>1.2</b> Loading in data</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#loading-in-local-data-using-a-gui"><i class="fa fa-check"></i><b>1.2.1</b> Loading in local data using a GUI:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#importing-data-from-the-web"><i class="fa fa-check"></i><b>1.2.2</b> importing data from the web</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#downloading-data"><i class="fa fa-check"></i><b>1.2.3</b> Downloading data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-getting-to-know-your-data.html"><a href="introduction-to-r-getting-to-know-your-data.html#looking-ahead"><i class="fa fa-check"></i><b>1.3</b> Looking ahead…</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html"><i class="fa fa-check"></i><b>2</b> Measures of distribution, central tendency, PLOTS… oh my!</a><ul>
+<li class="chapter" data-level="2.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#getting-measures-of-central-tendency"><i class="fa fa-check"></i><b>2.1</b> Getting measures of central tendency</a></li>
+<li class="chapter" data-level="2.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-the-distribution-with-a-histogram"><i class="fa fa-check"></i><b>2.2</b> Plotting the distribution with a histogram</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#using-hist"><i class="fa fa-check"></i><b>2.2.1</b> Using <code>hist()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-a-histogram-with-ggplot"><i class="fa fa-check"></i><b>2.2.2</b> Plotting a histogram with <code>ggplot()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#plotting-your-data-in-a-boxplot"><i class="fa fa-check"></i><b>2.3</b> Plotting your data in a boxplot:</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#turning-numeric-data-into-categorical"><i class="fa fa-check"></i><b>2.3.1</b> turning numeric data into categorical</a></li>
+<li class="chapter" data-level="2.3.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#boxplotting-using-ggplot"><i class="fa fa-check"></i><b>2.3.2</b> boxplotting using <code>ggplot()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#assessing-the-data-for-normality"><i class="fa fa-check"></i><b>2.4</b> Assessing the data for normality</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#q-q-plots"><i class="fa fa-check"></i><b>2.4.1</b> Q-Q Plots</a></li>
+<li class="chapter" data-level="2.4.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#generating-a-theoretical-normal-distribution."><i class="fa fa-check"></i><b>2.4.2</b> Generating a theoretical normal distribution.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#subsetting-your-data"><i class="fa fa-check"></i><b>2.5</b> Subsetting your data</a></li>
+<li class="chapter" data-level="2.6" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#looking-ahead-means-and-better-models"><i class="fa fa-check"></i><b>2.6</b> Looking ahead: Means and better models</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-highest-probability"><i class="fa fa-check"></i><b>2.6.1</b> mean as highest probability:</a></li>
+<li class="chapter" data-level="2.6.2" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-fulcrum-point"><i class="fa fa-check"></i><b>2.6.2</b> mean as fulcrum point</a></li>
+<li class="chapter" data-level="2.6.3" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#mean-as-minimizing-random-error"><i class="fa fa-check"></i><b>2.6.3</b> mean as minimizing random error</a></li>
+<li class="chapter" data-level="2.6.4" data-path="measures-of-distribution-central-tendency-plots-oh-my.html"><a href="measures-of-distribution-central-tendency-plots-oh-my.html#but-we-can-do-better-than-that"><i class="fa fa-check"></i><b>2.6.4</b> but we can do better than that</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html"><i class="fa fa-check"></i><b>3</b> Sampling distributions and building the logic of NHST</a><ul>
+<li class="chapter" data-level="3.1" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-sampling-distribution"><i class="fa fa-check"></i><b>3.1</b> The sampling distribution</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>3.2</b> Standard error of the mean</a></li>
+<li class="chapter" data-level="3.3" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-difference-distribution"><i class="fa fa-check"></i><b>3.3</b> The difference distribution</a></li>
+<li class="chapter" data-level="3.4" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#the-null-distribution"><i class="fa fa-check"></i><b>3.4</b> The Null distribution</a></li>
+<li class="chapter" data-level="3.5" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#probabilty-of-observed-differences"><i class="fa fa-check"></i><b>3.5</b> Probabilty of observed differences</a></li>
+<li class="chapter" data-level="3.6" data-path="sampling-distributions-and-building-the-logic-of-nhst.html"><a href="sampling-distributions-and-building-the-logic-of-nhst.html#a-note-about-sample-size"><i class="fa fa-check"></i><b>3.6</b> A note about sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html"><i class="fa fa-check"></i><b>4</b> Probability and the Binomial Distribution</a><ul>
+<li class="chapter" data-level="4.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#a-few-words-on-where-we-are-at-so-far"><i class="fa fa-check"></i><b>4.1</b> A few words on where we are at so far…</a></li>
+<li class="chapter" data-level="4.2" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#okay-on-to-this-weeks-example-analyses"><i class="fa fa-check"></i><b>4.2</b> Okay on to this week’s example analyses:</a></li>
+<li class="chapter" data-level="4.3" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#classic-example-the-coin-flip"><i class="fa fa-check"></i><b>4.3</b> Classic example: The coin flip</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#how-many-heads-would-we-get-if-we-flipped-a-fair-coin-10-times"><i class="fa fa-check"></i><b>4.3.1</b> How many heads would we get if we flipped a fair coin 10 times?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#changing-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Changing the parameters</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#constructing-a-table-of-outcome-probabilities"><i class="fa fa-check"></i><b>4.4.1</b> Constructing a table of outcome probabilities:</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#assessing-cummulative-probability"><i class="fa fa-check"></i><b>4.4.2</b> Assessing cummulative probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#catching-a-cheat"><i class="fa fa-check"></i><b>4.5</b> Catching a cheat</a></li>
+<li class="chapter" data-level="4.6" data-path="probability-and-the-binomial-distribution.html"><a href="probability-and-the-binomial-distribution.html#one-last-thing-permutations-combinations-and-building-functions"><i class="fa fa-check"></i><b>4.6</b> One last thing… Permutations, combinations, and building functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html"><i class="fa fa-check"></i><b>5</b> Chi-square and associated methods</a><ul>
+<li class="chapter" data-level="5.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>5.1</b> Goodness of fit test</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#what-to-do-if-you-are-given-a-table-with-tallies"><i class="fa fa-check"></i><b>5.1.1</b> What to do if you are given a table with tallies</a></li>
+<li class="chapter" data-level="5.1.2" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#assuming-all-things-are-not-equal"><i class="fa fa-check"></i><b>5.1.2</b> Assuming all things are NOT equal</a></li>
+<li class="chapter" data-level="5.1.3" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#real-data-is-likely-not-pre-tallied"><i class="fa fa-check"></i><b>5.1.3</b> Real data is likely NOT pre-tallied</a></li>
+<li class="chapter" data-level="5.1.4" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#getting-counts-the-in-class-way-not-recommended"><i class="fa fa-check"></i><b>5.1.4</b> getting counts the in-class way (not recommended)</a></li>
+<li class="chapter" data-level="5.1.5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#getting-counts-the-table-way-my-new-recommendation"><i class="fa fa-check"></i><b>5.1.5</b> getting counts the <code>table()</code> way (my new recommendation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#contingency-table-analysis-in-r"><i class="fa fa-check"></i><b>5.2</b> Contingency Table Analysis in R</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#okay-but-what-about-with-real-data"><i class="fa fa-check"></i><b>5.2.1</b> Okay, but what about with REAL DATA:</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#effect-sizes-and-odds-ratios"><i class="fa fa-check"></i><b>5.3</b> Effect Sizes and Odds Ratios</a></li>
+<li class="chapter" data-level="5.4" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.4</b> Fisher’s exact test</a></li>
+<li class="chapter" data-level="5.5" data-path="chi-square-and-associated-methods.html"><a href="chi-square-and-associated-methods.html#cohens-kappa"><i class="fa fa-check"></i><b>5.5</b> Cohen’s kappa</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>6</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#the-relationship-btw-stress-and-health"><i class="fa fa-check"></i><b>6.1</b> The Relationship b/tw Stress and Health</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#testing-our-assumptions"><i class="fa fa-check"></i><b>6.1.1</b> Testing our assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#plotting-the-data"><i class="fa fa-check"></i><b>6.2</b> Plotting the data</a></li>
+<li class="chapter" data-level="6.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.3</b> Covariance and Correlation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#correlation"><i class="fa fa-check"></i><b>6.3.2</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#sigfnificance-testing-r"><i class="fa fa-check"></i><b>6.4</b> Sigfnificance testing <span class="math inline">\(r\)</span></a></li>
+<li class="chapter" data-level="6.5" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#fitting-the-data-to-a-model"><i class="fa fa-check"></i><b>6.5</b> Fitting the data to a model</a></li>
+<li class="chapter" data-level="6.6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-models-in-r"><i class="fa fa-check"></i><b>6.6</b> Linear models in R</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#attributes-of-class-lm"><i class="fa fa-check"></i><b>6.6.1</b> Attributes of class <code>lm</code>:</a></li>
+<li class="chapter" data-level="6.6.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#testing-the-residuals"><i class="fa fa-check"></i><b>6.6.2</b> Testing the residuals</a></li>
+<li class="chapter" data-level="6.6.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#using-your-lm-object-with-other-functions"><i class="fa fa-check"></i><b>6.6.3</b> Using your <code>lm</code> object with other functions</a></li>
+<li class="chapter" data-level="6.6.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#plotting-the-regression-line"><i class="fa fa-check"></i><b>6.6.4</b> Plotting the regression line</a></li>
+<li class="chapter" data-level="6.6.5" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#a-note-on-degrees-of-freedom-of-our-model"><i class="fa fa-check"></i><b>6.6.5</b> A note on degrees of freedom of our model</a></li>
+<li class="chapter" data-level="6.6.6" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#interpreting-the-output"><i class="fa fa-check"></i><b>6.6.6</b> Interpreting the output</a></li>
+<li class="chapter" data-level="6.6.7" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#the-coeff.-of-determination-as-index-of-explanatory-value"><i class="fa fa-check"></i><b>6.6.7</b> The coeff. of determination as index of explanatory value</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#write-up-and-presentaion"><i class="fa fa-check"></i><b>6.7</b> Write up and presentaion</a></li>
+<li class="chapter" data-level="6.8" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#advanced-plotting"><i class="fa fa-check"></i><b>6.8</b> Advanced plotting</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#adding-text-to-the-plot"><i class="fa fa-check"></i><b>6.8.1</b> Adding text to the plot</a></li>
+<li class="chapter" data-level="6.8.2" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#addnig-text-like-a-r-ninja"><i class="fa fa-check"></i><b>6.8.2</b> addnig text like a R-ninja:</a></li>
+<li class="chapter" data-level="6.8.3" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#placing-plots-side-by-side-in-a-grid"><i class="fa fa-check"></i><b>6.8.3</b> Placing plots side-by-side in a grid</a></li>
+<li class="chapter" data-level="6.8.4" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#two-series-on-the-same-damn-plot"><i class="fa fa-check"></i><b>6.8.4</b> Two series on the same damn plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html"><i class="fa fa-check"></i><b>7</b> Testing differences in means: t-test</a><ul>
+<li class="chapter" data-level="7.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#things-to-consider-before-running-the-t-test"><i class="fa fa-check"></i><b>7.1</b> Things to consider before running the t-test</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#what-is-the-nature-of-your-sample-data"><i class="fa fa-check"></i><b>7.1.1</b> What is the nature of your sample data?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#what-is-the-structure-of-your-data-file"><i class="fa fa-check"></i><b>7.1.2</b> What is the structure of your data file?</a></li>
+<li class="chapter" data-level="7.1.3" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#testing-assumptions"><i class="fa fa-check"></i><b>7.1.3</b> Testing assumptions</a></li>
+<li class="chapter" data-level="7.1.4" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#getting-the-descriptive-stats-and-plotting-the-means."><i class="fa fa-check"></i><b>7.1.4</b> Getting the descriptive stats and plotting the means.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#performing-the-t-test-paired-sample-t-test"><i class="fa fa-check"></i><b>7.2</b> Performing the t-test (Paired sample t-test)</a></li>
+<li class="chapter" data-level="7.3" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#measuring-effect-size"><i class="fa fa-check"></i><b>7.3</b> Measuring effect size</a></li>
+<li class="chapter" data-level="7.4" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#other-t-tests"><i class="fa fa-check"></i><b>7.4</b> Other <span class="math inline">\(t\)</span> tests:</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#one-sample"><i class="fa fa-check"></i><b>7.4.1</b> One sample:</a></li>
+<li class="chapter" data-level="7.4.2" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#independent-samples-example"><i class="fa fa-check"></i><b>7.4.2</b> Independent samples example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="testing-differences-in-means-t-test.html"><a href="testing-differences-in-means-t-test.html#independent-or-paired-sample"><i class="fa fa-check"></i><b>7.5</b> Independent or Paired Sample?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html"><i class="fa fa-check"></i><b>8</b> Analysis of Variance I: the One-way ANOVA</a><ul>
+<li class="chapter" data-level="8.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#required-packages"><i class="fa fa-check"></i><b>8.1</b> Required packages</a></li>
+<li class="chapter" data-level="8.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#anovas-for-comparing-means"><i class="fa fa-check"></i><b>8.2</b> ANOVAs for comparing means</a></li>
+<li class="chapter" data-level="8.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#pre-processing-the-data"><i class="fa fa-check"></i><b>8.3</b> Pre-processing the data:</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#recoding-the-factors-if-dummy-coded"><i class="fa fa-check"></i><b>8.3.1</b> Recoding the factors (if dummy coded)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#renaming-column-headers"><i class="fa fa-check"></i><b>8.3.2</b> Renaming column headers</a></li>
+<li class="chapter" data-level="8.3.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reordering-your-levels"><i class="fa fa-check"></i><b>8.3.3</b> Reordering your levels</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#assumptions-for-anova"><i class="fa fa-check"></i><b>8.4</b> Assumptions for ANOVA</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#checking-the-normality-assumption-option-1"><i class="fa fa-check"></i><b>8.4.1</b> Checking the normality assumption, OPTION 1</a></li>
+<li class="chapter" data-level="8.4.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#checking-the-normality-assumption-option-2"><i class="fa fa-check"></i><b>8.4.2</b> Checking the normality assumption, OPTION 2</a></li>
+<li class="chapter" data-level="8.4.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>8.4.3</b> Homogeneity of Variance</a></li>
+<li class="chapter" data-level="8.4.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#what-to-do-if-the-assumptions-are-violated"><i class="fa fa-check"></i><b>8.4.4</b> What to do if the assumptions are violated?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#running-the-anova-in-r"><i class="fa fa-check"></i><b>8.5</b> Running the ANOVA in R:</a></li>
+<li class="chapter" data-level="8.6" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reporting-your-data"><i class="fa fa-check"></i><b>8.6</b> Reporting your data</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#reporting-in-the-text"><i class="fa fa-check"></i><b>8.6.1</b> Reporting in the text</a></li>
+<li class="chapter" data-level="8.6.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#what-the-omnibus-anova-tells-you"><i class="fa fa-check"></i><b>8.6.2</b> What the omnibus ANOVA tells you</a></li>
+<li class="chapter" data-level="8.6.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#plots"><i class="fa fa-check"></i><b>8.6.3</b> Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#digging-deeper-anova-and-regression"><i class="fa fa-check"></i><b>8.7</b> DIGGING DEEPER: ANOVA and Regression</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#regression-method-v.-means-method"><i class="fa fa-check"></i><b>8.7.1</b> Regression method v. means method</a></li>
+<li class="chapter" data-level="8.7.2" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#comparing-two-models"><i class="fa fa-check"></i><b>8.7.2</b> Comparing two models</a></li>
+<li class="chapter" data-level="8.7.3" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#means-method-calculations"><i class="fa fa-check"></i><b>8.7.3</b> Means method calculations</a></li>
+<li class="chapter" data-level="8.7.4" data-path="analysis-of-variance-i-the-one-way-anova.html"><a href="analysis-of-variance-i-the-one-way-anova.html#bringing-it-together-its-all-about-the-residuals-baby"><i class="fa fa-check"></i><b>8.7.4</b> Bringing it together: it’s all about the residuals, baby</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><i class="fa fa-check"></i><b>9</b> Analysis of Variance II: Multiple comparisons in One-way ANOVA</a><ul>
+<li class="chapter" data-level="9.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#getting-started-loading-packages-and-data"><i class="fa fa-check"></i><b>9.1</b> Getting started (loading packages and data)</a></li>
+<li class="chapter" data-level="9.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#running-the-one-way-anova"><i class="fa fa-check"></i><b>9.2</b> Running the One-way ANOVA</a></li>
+<li class="chapter" data-level="9.3" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#post-hoc-tests"><i class="fa fa-check"></i><b>9.3</b> Post-hoc tests</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#bonferonni-dunn-and-holm-tests"><i class="fa fa-check"></i><b>9.3.1</b> Bonferonni-Dunn and Holm tests</a></li>
+<li class="chapter" data-level="9.3.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#tukey-hsd-and-regwq-tests"><i class="fa fa-check"></i><b>9.3.2</b> Tukey HSD and REGWQ tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#the-logic-of-planned-contrasts"><i class="fa fa-check"></i><b>9.4</b> The logic of Planned contrasts</a></li>
+<li class="chapter" data-level="9.5" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#performing-planned-contrasts-in-r"><i class="fa fa-check"></i><b>9.5</b> Performing planned contrasts in R</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#making-the-output-easier-to-read"><i class="fa fa-check"></i><b>9.5.1</b> Making the output easier to read</a></li>
+<li class="chapter" data-level="9.5.2" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#calculating-your-effect-size"><i class="fa fa-check"></i><b>9.5.2</b> Calculating your effect size</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#reporting-your-results"><i class="fa fa-check"></i><b>9.6</b> Reporting your results</a></li>
+<li class="chapter" data-level="9.7" data-path="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html"><a href="analysis-of-variance-ii-multiple-comparisons-in-one-way-anova.html#a-note-on-using-the-multcomp-package-v.-using-the-base-stats-method"><i class="fa fa-check"></i><b>9.7</b> A note on using the <code>multcomp</code> package v. using the base stats method</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html"><i class="fa fa-check"></i><b>10</b> Analysis of Varience III: Factorial ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#main-effect-main-effect-and-interactions-oh-my"><i class="fa fa-check"></i><b>10.1</b> Main effect, main effect, and interactions… oh my!</a></li>
+<li class="chapter" data-level="10.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#example-a-22-anova"><i class="fa fa-check"></i><b>10.2</b> Example: a 2×2 ANOVA</a></li>
+<li class="chapter" data-level="10.3" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#making-sense-of-plots"><i class="fa fa-check"></i><b>10.3</b> Making sense of plots</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plots"><i class="fa fa-check"></i><b>10.3.1</b> Interaction plots</a></li>
+<li class="chapter" data-level="10.3.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#plotting-main-effects"><i class="fa fa-check"></i><b>10.3.2</b> Plotting main effects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-lm-method"><i class="fa fa-check"></i><b>10.4</b> Running the ANOVA <code>lm()</code> method</a></li>
+<li class="chapter" data-level="10.5" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-in-the-afexaov_ez-method"><i class="fa fa-check"></i><b>10.5</b> Running the ANOVA in the <code>afex::aov_ez()</code> method:</a></li>
+<li class="chapter" data-level="10.6" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#getting-cell-means"><i class="fa fa-check"></i><b>10.6</b> Getting cell means</a></li>
+<li class="chapter" data-level="10.7" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#more-examples-a-2-3-anova"><i class="fa fa-check"></i><b>10.7</b> More examples: a 2 × 3 ANOVA</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova"><i class="fa fa-check"></i><b>10.7.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="10.7.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#apa-plotting"><i class="fa fa-check"></i><b>10.7.2</b> APA plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#anova-howell-13.1"><i class="fa fa-check"></i><b>10.8</b> 2 × 5 ANOVA (Howell 13.1)</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-1"><i class="fa fa-check"></i><b>10.8.1</b> Running the ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#one-last-example"><i class="fa fa-check"></i><b>10.9</b> One last example,</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#running-the-anova-2"><i class="fa fa-check"></i><b>10.9.1</b> Running the ANOVA</a></li>
+<li class="chapter" data-level="10.9.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-plot"><i class="fa fa-check"></i><b>10.9.2</b> Interaction plot</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#interaction-v.-no-interaction"><i class="fa fa-check"></i><b>10.10</b> Interaction v. no interaction</a><ul>
+<li class="chapter" data-level="10.10.1" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#no-interaction-how-about-some-posthocs"><i class="fa fa-check"></i><b>10.10.1</b> No interaction? How about some posthocs?</a></li>
+<li class="chapter" data-level="10.10.2" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#what-to-do-if-you-do-have-an-interaction"><i class="fa fa-check"></i><b>10.10.2</b> what to do if you DO have an interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="10.11" data-path="analysis-of-varience-iii-factorial-anova.html"><a href="analysis-of-varience-iii-factorial-anova.html#what-about-planned-contrasts"><i class="fa fa-check"></i><b>10.11</b> What about planned contrasts?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html"><i class="fa fa-check"></i><b>11</b> ANOVA IV: Interactions &amp; simple Effects</a><ul>
+<li class="chapter" data-level="11.1" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#the-data-set"><i class="fa fa-check"></i><b>11.1</b> the data set</a></li>
+<li class="chapter" data-level="11.2" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#plotting-the-data-and-descriptive-stats"><i class="fa fa-check"></i><b>11.2</b> Plotting the data and descriptive stats</a></li>
+<li class="chapter" data-level="11.3" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#the-omnibus-anova-and-assumption-tests"><i class="fa fa-check"></i><b>11.3</b> the Omnibus ANOVA (and assumption tests)</a></li>
+<li class="chapter" data-level="11.4" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#running-the-simple-effects-anova-in-6-steps"><i class="fa fa-check"></i><b>11.4</b> Running the simple effects ANOVA in 6 steps:</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-1-get-the-omnibus-anova"><i class="fa fa-check"></i><b>11.4.1</b> step 1: get the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="11.4.2" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-2-get-the-mserror-error-df-and-error-ss-from-omnibus-anova"><i class="fa fa-check"></i><b>11.4.2</b> step 2: get the MSError, Error df, and Error SS from omnibus ANOVA</a></li>
+<li class="chapter" data-level="11.4.3" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-3-subset-your-data-accordingly"><i class="fa fa-check"></i><b>11.4.3</b> step 3: subset your data accordingly</a></li>
+<li class="chapter" data-level="11.4.4" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-4-run-your-one-way-simple-effects-anovas"><i class="fa fa-check"></i><b>11.4.4</b> step 4: run your One-way simple effects ANOVA(s)</a></li>
+<li class="chapter" data-level="11.4.5" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-5-get-the-treatment-ms-df-ss-and-f-value-from-your-simple-anova"><i class="fa fa-check"></i><b>11.4.5</b> step 5: get the treatment MS, df, SS, and F-value from your simple ANOVA</a></li>
+<li class="chapter" data-level="11.4.6" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#step-6-make-our-corrections"><i class="fa fa-check"></i><b>11.4.6</b> step 6: make our corrections</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#building-a-function-to-ninja-this-for-us"><i class="fa fa-check"></i><b>11.5</b> Building a function to ninja this for us</a></li>
+<li class="chapter" data-level="11.6" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#post-hoc-tests-1"><i class="fa fa-check"></i><b>11.6</b> Post hoc tests</a></li>
+<li class="chapter" data-level="11.7" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#interpreting-these-results"><i class="fa fa-check"></i><b>11.7</b> Interpreting these results:</a></li>
+<li class="chapter" data-level="11.8" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#example-write-up"><i class="fa fa-check"></i><b>11.8</b> Example write-up:</a></li>
+<li class="chapter" data-level="11.9" data-path="anova-iv-interactions-simple-effects.html"><a href="anova-iv-interactions-simple-effects.html#performing-this-in-spss-video"><i class="fa fa-check"></i><b>11.9</b> Performing this in SPSS (video)</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html"><i class="fa fa-check"></i><b>12</b> ANOVA V: Higher Order Factorial ANOVA</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#packages-and-data"><i class="fa fa-check"></i><b>12.1</b> Packages and data</a></li>
+<li class="chapter" data-level="12.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-1-no-three-way-interaction-single-two-way-interaction"><i class="fa fa-check"></i><b>12.2</b> EXAMPLE 1: no three-way interaction, single two way interaction</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#first-plot-3-way-interaction-plot"><i class="fa fa-check"></i><b>12.2.1</b> First plot: 3 way interaction plot</a></li>
+<li class="chapter" data-level="12.2.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-anova-3"><i class="fa fa-check"></i><b>12.2.2</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="12.2.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#replotting-the-2-way-interaction"><i class="fa fa-check"></i><b>12.2.3</b> Replotting the 2-way interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-2-no-three-way-interaction-multiple-main-effects-multiple-2-way-interactions"><i class="fa fa-check"></i><b>12.3</b> EXAMPLE 2: No three-way interaction, multiple main effects, multiple 2 way interactions:</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#plotting-the-data-1"><i class="fa fa-check"></i><b>12.3.1</b> plotting the data</a></li>
+<li class="chapter" data-level="12.3.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-omnibus-anova"><i class="fa fa-check"></i><b>12.3.2</b> running the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="12.3.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#testing-the-lecturepresentation-interaction"><i class="fa fa-check"></i><b>12.3.3</b> testing the <code>Lecture:Presentation</code> interaction:</a></li>
+<li class="chapter" data-level="12.3.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#testing-the-lecturegrade-interaction"><i class="fa fa-check"></i><b>12.3.4</b> testing the <code>Lecture:Grade</code> interaction:</a></li>
+<li class="chapter" data-level="12.3.5" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#simple-effect-anovas-1"><i class="fa fa-check"></i><b>12.3.5</b> simple effect ANOVAs:</a></li>
+<li class="chapter" data-level="12.3.6" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#main-takeaways-write-up"><i class="fa fa-check"></i><b>12.3.6</b> Main takeaways / write-up</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#example-3-omg-multiple-two-way-interactions-and-a-nasty-three-way"><i class="fa fa-check"></i><b>12.4</b> EXAMPLE 3: OMG, multiple two way interactions and a nasty three-way!!!</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#plotting"><i class="fa fa-check"></i><b>12.4.1</b> Plotting:</a></li>
+<li class="chapter" data-level="12.4.2" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#running-the-anova-4"><i class="fa fa-check"></i><b>12.4.2</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="12.4.3" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#fifth-graders-lecturepresentation-interaction."><i class="fa fa-check"></i><b>12.4.3</b> Fifth Graders, Lecture:Presentation interaction.</a></li>
+<li class="chapter" data-level="12.4.4" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#eighth-graders-lecturepresentation-interaction."><i class="fa fa-check"></i><b>12.4.4</b> Eighth Graders, Lecture:Presentation interaction.</a></li>
+<li class="chapter" data-level="12.4.5" data-path="anova-v-higher-order-factorial-anova.html"><a href="anova-v-higher-order-factorial-anova.html#constructing-a-narrative"><i class="fa fa-check"></i><b>12.4.5</b> Constructing a narrative:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html"><i class="fa fa-check"></i><b>13</b> ANOVA6: Within-Subjects</a><ul>
+<li class="chapter" data-level="13.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#within-subject-v.-between-subjects"><i class="fa fa-check"></i><b>13.1</b> Within-Subject v. Between Subjects</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#within-v-between-anova"><i class="fa fa-check"></i><b>13.1.1</b> Within v Between ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-1"><i class="fa fa-check"></i><b>13.2</b> EXAMPLE 1</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data"><i class="fa fa-check"></i><b>13.2.1</b> loading in the data:</a></li>
+<li class="chapter" data-level="13.2.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-2"><i class="fa fa-check"></i><b>13.2.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-a-within-anova-afex"><i class="fa fa-check"></i><b>13.2.3</b> running a within ANOVA (afex):</a></li>
+<li class="chapter" data-level="13.2.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#planned-contrasts"><i class="fa fa-check"></i><b>13.2.4</b> planned contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-2"><i class="fa fa-check"></i><b>13.3</b> EXAMPLE 2</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data-1"><i class="fa fa-check"></i><b>13.3.1</b> loading in the data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-3"><i class="fa fa-check"></i><b>13.3.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-anova-5"><i class="fa fa-check"></i><b>13.3.3</b> running the ANOVA:</a></li>
+<li class="chapter" data-level="13.3.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#post-hocs"><i class="fa fa-check"></i><b>13.3.4</b> post-hocs</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#example-3"><i class="fa fa-check"></i><b>13.4</b> EXAMPLE 3</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#loading-in-the-data-2"><i class="fa fa-check"></i><b>13.4.1</b> loading in the data:</a></li>
+<li class="chapter" data-level="13.4.2" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#plotting-the-data-4"><i class="fa fa-check"></i><b>13.4.2</b> plotting the data</a></li>
+<li class="chapter" data-level="13.4.3" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-omnibus-anova-1"><i class="fa fa-check"></i><b>13.4.3</b> running the omnibus ANOVA:</a></li>
+<li class="chapter" data-level="13.4.4" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#running-the-simple-effects-anovas"><i class="fa fa-check"></i><b>13.4.4</b> running the simple effects ANOVAs</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="anova6-within-subjects.html"><a href="anova6-within-subjects.html#how-to-perform-a-within-subjects-analysis-in-spss"><i class="fa fa-check"></i><b>13.5</b> How to perform a within subjects analysis in SPSS:</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html"><i class="fa fa-check"></i><b>14</b> ANOVA VI: Mixed-effects ANOVA (BS + WS)</a><ul>
+<li class="chapter" data-level="14.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#example-1-1"><i class="fa fa-check"></i><b>14.1</b> Example 1:</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#data-import-and-wrangling"><i class="fa fa-check"></i><b>14.1.1</b> data import and wrangling</a></li>
+<li class="chapter" data-level="14.1.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#plotting-the-data-5"><i class="fa fa-check"></i><b>14.1.2</b> plotting the data</a></li>
+<li class="chapter" data-level="14.1.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#running-our-anova"><i class="fa fa-check"></i><b>14.1.3</b> Running our ANOVA:</a></li>
+<li class="chapter" data-level="14.1.4" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#simple-effects"><i class="fa fa-check"></i><b>14.1.4</b> simple effects</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#example-2-1"><i class="fa fa-check"></i><b>14.2</b> Example 2:</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#data-import-and-wrangling-1"><i class="fa fa-check"></i><b>14.2.1</b> data import and wrangling</a></li>
+<li class="chapter" data-level="14.2.2" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#plotting-the-data-6"><i class="fa fa-check"></i><b>14.2.2</b> plotting the data</a></li>
+<li class="chapter" data-level="14.2.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#run-your-omnibus-anova"><i class="fa fa-check"></i><b>14.2.3</b> Run your omnibus ANOVA:</a></li>
+<li class="chapter" data-level="14.2.4" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#simple-effects-1"><i class="fa fa-check"></i><b>14.2.4</b> simple effects:</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="anova-vi-mixed-effects-anova-bs-ws.html"><a href="anova-vi-mixed-effects-anova-bs-ws.html#to-pool-or-not-to-pool-this-is-the-yada-yada-yada"><i class="fa fa-check"></i><b>14.3</b> to pool or not to pool, this is the yada yada yada</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html"><i class="fa fa-check"></i><b>A</b> Plotting histograms and probability distributions</a><ul>
+<li class="chapter" data-level="A.1" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#the-basics"><i class="fa fa-check"></i><b>A.1</b> The Basics</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-1-building-the-canvas"><i class="fa fa-check"></i><b>A.1.1</b> Step 1: Building the canvas</a></li>
+<li class="chapter" data-level="A.1.2" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-2-tell-ggplot-what-kind-of-plot-to-make."><i class="fa fa-check"></i><b>A.1.2</b> Step 2: Tell <code>ggplot</code> what kind of plot to make.</a></li>
+<li class="chapter" data-level="A.1.3" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-3-adjust-the-axes-and-labels"><i class="fa fa-check"></i><b>A.1.3</b> Step 3: Adjust the axes and labels</a></li>
+<li class="chapter" data-level="A.1.4" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-4-adjusting-for-apa"><i class="fa fa-check"></i><b>A.1.4</b> Step 4: Adjusting for APA</a></li>
+<li class="chapter" data-level="A.1.5" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-5-add-and-adjust-the-legend"><i class="fa fa-check"></i><b>A.1.5</b> Step 5: Add and adjust the legend</a></li>
+<li class="chapter" data-level="A.1.6" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#step-6-save-the-ggplot."><i class="fa fa-check"></i><b>A.1.6</b> Step 6: Save the <code>ggplot</code>.</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#a-note-about-your-bonus-on-week-4."><i class="fa fa-check"></i><b>A.2</b> A note about your BONUS on Week 4.</a></li>
+<li class="chapter" data-level="A.3" data-path="plotting-histograms-and-probability-distributions.html"><a href="plotting-histograms-and-probability-distributions.html#advanced-stuff"><i class="fa fa-check"></i><b>A.3</b> Advanced stuff</a></li>
+</ul></li>
+<li class="divider"></li>
+<li></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">musings of the Professor</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="measures-of-distribution-central-tendency-plots-oh-my" class="section level1">
+<h1><span class="header-section-number">Week 2</span> Measures of distribution, central tendency, PLOTS… oh my!</h1>
+<p>We covered a lot of ground this week talking about measures of central tendency and introducing ourselves to distributions. When you get a chance be sure to check out some of the in-class workshopping code and examples as they are posted on Box. These will help you remember what we did in the workshop and you can compare them to your source and output.</p>
+<p>This week I want to expand upon a few things that were touched upon in the workshop and in lecture. This one might be a little lengthly, but it should serve to supplement your assigned readings and help you a little with the home work. Before jumping in, let’s install and load the necessary packages in R. This week we will make use of <code>psych</code> and several of the core packages of the <code>tidyverse</code>. I’ll also be using <code>data.table</code> which provides another way of importing data (in addition to the examples from last week). Using the <code>cheat code</code> from last week’s walkthrough</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 1. check to see if pacman is on your computer and if not, let&#39;s install it:</span>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;pacman&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;pacman&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>)
+
+<span class="co"># 2. install all other packages that we will be using:</span>
+pacman<span class="op">::</span><span class="kw">p_load</span>(psych, tidyverse, data.table)</code></pre></div>
+<div id="getting-measures-of-central-tendency" class="section level2">
+<h2><span class="header-section-number">2.1</span> Getting measures of central tendency</h2>
+<p>In this week’s workshop, we touched upon using <code>psych::describe()</code> to generate summary stats of data in a data frame, as well as generating a simple histogram using the <code>hist()</code> function. Our starting point was data from an example provided in the Howell textbook.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># importing data, here I&#39;m using data.table. I prefer data table as it produces</span>
+<span class="co"># truncated output.</span>
+exampleData &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&quot;https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab2-1.dat&quot;</span>)</code></pre></div>
+<p>Invoking <code>class(exampleData)</code> tells us that exampleData is a data frame. Invoking <code>names(exampleData)</code> provides us with the header names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(exampleData)</code></pre></div>
+<pre><code>## [1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(exampleData)</code></pre></div>
+<pre><code>## [1] &quot;Trial&quot;  &quot;RxTime&quot; &quot;NStim&quot;  &quot;YesNo&quot;</code></pre>
+<p>From here we discussed how to call upon a specific column in a data frame using the <code>$</code> operator:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># column of Trial(s):</span>
+exampleData<span class="op">$</span>Trial</code></pre></div>
+<pre><code>##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
+## [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+## [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
+## [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+## [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
+## [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
+## [188] 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204
+## [205] 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221
+## [222] 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238
+## [239] 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255
+## [256] 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272
+## [273] 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289
+## [290] 290 291 292 293 294 295 296 297 298 299 300</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># column of RxTime (reaction time)</span>
+exampleData<span class="op">$</span>RxTime</code></pre></div>
+<pre><code>##   [1]  40  41  47  38  40  37  38  47  45  61  54  67  49  43  52  39  46
+##  [18]  47  45  43  39  49  50  44  53  46  64  51  40  41  44  48  50  42
+##  [35]  90  51  55  60  47  45  41  42  72  36  43  94  45  51  46  52  52
+##  [52]  45  74  56  53  59  43  46  51  40  48  47  57  54  44  56  47  62
+##  [69]  44  53  48 104  50  58  52  57  66  49  59  56  71  76  54  71  44
+##  [86]  67  45  79  46  57  58  47  73  67  46  57  52  61  72 104  73  83
+## [103]  55  59  51  65  61  64  63  86  42  65  62  62  51  62  72  55  58
+## [120]  46  67  56  52  46  62  51  51  61  60  75  53  59  56  50  43  58
+## [137]  67  52  56  80  53  72  62  59  47  62  53  52  46  60  73  47  63
+## [154]  63  56  66  72  58  60  69  74  51  49  69  51  60  52  72  58  74
+## [171]  59  63  60  66  59  61  50  67  63  61  80  63  60  64  64  57  59
+## [188]  58  59  60  62  63  67  78  61  52  51  56  95  54  39  65  53  46
+## [205]  78  60  71  58  87  77  62  94  81  46  49  62  55  59  88  56  77
+## [222]  67  79  54  83  75  67  60  65  62  62  62  60  58  67  48  51  67
+## [239]  98  64  57  67  55  55  66  60  57  54  78  69  66  53  61  74  76
+## [256]  69  82  56  66  63  69  76  71  65  67  67  55  65  58  64  65  81
+## [273]  69  69  63  68  70  80  68 125  63  74  61  85  59  61  74  76  62
+## [290]  83  58  72  65  61  95  58  64  66  66  72</code></pre>
+<p>and how to get some important summary statistics on the entire data frame using <code>psych::describe</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(exampleData)</code></pre></div>
+<pre><code>##        vars   n   mean    sd median trimmed    mad min max range skew
+## Trial     1 300 150.50 86.75  150.5   150.5 111.19   1 300   299 0.00
+## RxTime    2 300  60.26 13.01   59.5    59.3  11.12  36 125    89 0.97
+## NStim     3 300   3.00  1.64    3.0     3.0   2.97   1   5     4 0.00
+## YesNo     4 300   1.50  0.50    1.5     1.5   0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial     -1.21 5.01
+## RxTime     2.12 0.75
+## NStim     -1.51 0.09
+## YesNo     -2.01 0.03</code></pre>
+<p>You may also get summary statistics for individual groups. In this case the <code>NStim</code> column represents experimental conditions (num. of stimuli = 1, num. of stimuli = 3, num. of stimuli = 5). To take a look at the summary stat by condition we used the <code>psych::describeBY()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describeBy</span>(exampleData, <span class="dt">group =</span> exampleData<span class="op">$</span>NStim)</code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: 1
+##        vars   n  mean    sd median trimmed   mad min max range skew
+## Trial     1 100 50.50 29.01   50.5   50.50 37.06   1 100    99  0.0
+## RxTime    2 100 53.27 13.36   50.0   51.27  8.90  36 104    68  1.7
+## NStim     3 100  1.00  0.00    1.0    1.00  0.00   1   1     0  NaN
+## YesNo     4 100  1.50  0.50    1.5    1.50  0.74   1   2     1  0.0
+##        kurtosis   se
+## Trial     -1.24 2.90
+## RxTime     3.34 1.34
+## NStim       NaN 0.00
+## YesNo     -2.02 0.05
+## -------------------------------------------------------- 
+## group: 3
+##        vars   n   mean    sd median trimmed   mad min max range skew
+## Trial     1 100 150.50 29.01  150.5  150.50 37.06 101 200    99 0.00
+## RxTime    2 100  60.65  9.41   60.0   60.01  7.41  42  95    53 0.78
+## NStim     3 100   3.00  0.00    3.0    3.00  0.00   3   3     0  NaN
+## YesNo     4 100   1.50  0.50    1.5    1.50  0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial     -1.24 2.90
+## RxTime     1.13 0.94
+## NStim       NaN 0.00
+## YesNo     -2.02 0.05
+## -------------------------------------------------------- 
+## group: 5
+##        vars   n   mean    sd median trimmed   mad min max range skew
+## Trial     1 100 250.50 29.01  250.5  250.50 37.06 201 300    99 0.00
+## RxTime    2 100  66.86 12.28   65.0   65.91  9.64  39 125    86 1.29
+## NStim     3 100   5.00  0.00    5.0    5.00  0.00   5   5     0  NaN
+## YesNo     4 100   1.50  0.50    1.5    1.50  0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial     -1.24 2.90
+## RxTime     4.03 1.23
+## NStim       NaN 0.00
+## YesNo     -2.02 0.05</code></pre>
+<p>We also noted that some summary stat information can be obtained using the <code>summary()</code> function. The basic install comes with the <code>summary()</code> function that, when applied to a data frame provides a minimal number of summary stats. NOTE: the summary() function is a jack-of-all trades and when used in other instances may provide drastically different outputs (e.g., it may summarize a linear model). For this data set:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(exampleData)</code></pre></div>
+<pre><code>##      Trial            RxTime           NStim       YesNo    
+##  Min.   :  1.00   Min.   : 36.00   Min.   :1   Min.   :1.0  
+##  1st Qu.: 75.75   1st Qu.: 51.00   1st Qu.:1   1st Qu.:1.0  
+##  Median :150.50   Median : 59.50   Median :3   Median :1.5  
+##  Mean   :150.50   Mean   : 60.26   Mean   :3   Mean   :1.5  
+##  3rd Qu.:225.25   3rd Qu.: 67.00   3rd Qu.:5   3rd Qu.:2.0  
+##  Max.   :300.00   Max.   :125.00   Max.   :5   Max.   :2.0</code></pre>
+<p>In general I prefer <code>psych::describe()</code> to <code>summary()</code> when getting descriptive stats, but introduce <code>summary()</code> here to use it provide an example further in this week’s chapter.</p>
+</div>
+<div id="plotting-the-distribution-with-a-histogram" class="section level2">
+<h2><span class="header-section-number">2.2</span> Plotting the distribution with a histogram</h2>
+<div id="using-hist" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Using <code>hist()</code></h3>
+<p>In class we used the <code>hist()</code> call on a vector of scores to produce a quick and dirty histogram. For example to produce a histogram of <code>RxTime</code> from our <code>exampleData</code> dataset we can:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(exampleData<span class="op">$</span>RxTime)  <span class="co"># R auto-selects number of bins</span></code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(exampleData<span class="op">$</span>RxTime, <span class="dt">breaks =</span> <span class="dv">5</span>)  <span class="co"># create 5 bins </span></code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<p>The second line above forces <code>R</code> to create 5 bins. If you recall from Howell, one rule of thumb for the number of bins (there are many) is to use the square root of the number of observations (N). To do that here we can first use the <code>length()</code> function to get the number of observations (i.e., the length of the <code>exampleData$RxTime</code> vector of scores):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(exampleData<span class="op">$</span>RxTime)  <span class="co"># length of vector</span></code></pre></div>
+<pre><code>## [1] 300</code></pre>
+<p><em>ASIDE:</em> Note that length works on vectors, but not on entire data frames (multiple columns of data). Vectors are 1 dinmensional… thing of a line of data. Data sets (or data frames) are 2D (colmuns and rows of data). Since each column contains our variables, the number of obervations corresponds to the number of rows in the data set. So, to get the “length” you just need to count the number of rows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(exampleData)  <span class="co"># number of rows in the data set (each row corresponds to an observation)</span></code></pre></div>
+<pre><code>## [1] 300</code></pre>
+<p>Returning to the ‘optimal’ number of bins, be can now put together the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="kw">length</span>(exampleData<span class="op">$</span>RxTime)
+<span class="kw">hist</span>(exampleData<span class="op">$</span>RxTime, <span class="dt">breaks =</span> <span class="kw">sqrt</span>(N))  <span class="co"># create square root of N bins </span></code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="plotting-a-histogram-with-ggplot" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Plotting a histogram with <code>ggplot()</code></h3>
+<p><em>This section assumes you have completed this week’s DataCamp assignment that includes a wonderful introduction to plotting with <code>ggplot()</code>. If you have yet to do so, please go there first.</em></p>
+<p>Now let’s try fitting a normal curve to our histogram. For this we are going to move into more complex ways of plotting data using <code>ggplot2</code> from the <code>tidyverse</code>. You’ll be introduced to the <code>tidyverse</code> in this week’s DataCamp homework assignments. I suggest looking there and at the Demos Ch. 10 &amp; 11 for another walkthrough. The Field text, Ch. 4 also covers ggplot extensively.</p>
+<p>Fisrt let’s use <code>ggplot()</code> to create a histogram. To get a feel for each step, run through this code line by line in RStudio:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load in tidyverse if you haven&#39;t already</span>
+pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse)
+
+<span class="co"># intiial step i identify data and grouping parameters:</span>
+histPlot1 &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> exampleData, <span class="kw">aes</span>(<span class="dt">x=</span>RxTime))
+histPlot1 <span class="co"># note that this produces a blank slate but the parameters are locked in.</span></code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take histPlot 1 (blank plot) and paint a layer on top of it</span>
+<span class="co"># tell ggplot what to do (this is where you actually build the graphics):</span>
+histPlot2 &lt;-<span class="st"> </span>histPlot1 <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, 
+                <span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="co"># what color is the outline of bars</span>
+                <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="co"># what color to fill the bars with</span>
+histPlot2 </code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
+<p>I intentially made a hideous looking plot above to show you what the additional arguments do. Also note that with <code>ggplot()</code> you modify the width of the bin <code>binwidth</code> rather than the number of bins, or <code>breaks</code> as in <code>hist()</code>.</p>
+<p>Okay, now to add a curve representing the normal distribution. One important thing to note is that the histogram that is ultimately produced here has probability density (think like % of scores) on the y-axis instead of frequency (# of scores).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take histPlot 1 (blank plot) and paint a layer on top of it tell ggplot what to</span>
+<span class="co"># do (this is where you actually build the graphics):</span>
+histPlot3 &lt;-<span class="st"> </span>histPlot1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, 
+    <span class="kw">aes</span>(<span class="dt">y =</span> ..density..))  <span class="co"># turns plot into density plot</span>
+histPlot3</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>notice that histPlot3 is a density plot rather frequency plot from above</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add a normal curve to density plot:</span>
+histPlot4 &lt;-<span class="st"> </span>histPlot3 <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span>
+                <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="co"># color the line red</span>
+                <span class="dt">args=</span><span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(exampleData<span class="op">$</span>RxTime), <span class="co"># build around mean </span>
+                <span class="dt">sd =</span> <span class="kw">sd</span>(exampleData<span class="op">$</span>RxTime))) <span class="co"># &amp; standard devation</span>
+
+histPlot4</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>Howell also mentions a better alternative to the normal curve, a kernel density plot. To fit a kernel density plot to our histogram we can invoke:</p>
+<p>Howell also mentions a better alternative to the normal curve, a kernel density plot. To fit a kernel density plot to our histogram (histPlot3) we can invoke:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hisPlot 3 was the base histogram without curve</span>
+histPlot3 <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>and let’s make the x-axis label a little more transparent with <code>xlab()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">histPlot3 <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Reaction time (ms)&quot;</span>)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Any guesses on how to change the y-axis label to “Percent of scores”?</p>
+</div>
+</div>
+<div id="plotting-your-data-in-a-boxplot" class="section level2">
+<h2><span class="header-section-number">2.3</span> Plotting your data in a boxplot:</h2>
+<p>Let’s recreate the boxplot from slide 7 of the lecture (Figure 2.15 - Howell). Before we proceed, I would like to draw you attention to a characteristic of the <code>NStim</code> column in our <code>exampleData</code> dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(exampleData)</code></pre></div>
+<pre><code>##        vars   n   mean    sd median trimmed    mad min max range skew
+## Trial     1 300 150.50 86.75  150.5   150.5 111.19   1 300   299 0.00
+## RxTime    2 300  60.26 13.01   59.5    59.3  11.12  36 125    89 0.97
+## NStim     3 300   3.00  1.64    3.0     3.0   2.97   1   5     4 0.00
+## YesNo     4 300   1.50  0.50    1.5     1.5   0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial     -1.21 5.01
+## RxTime     2.12 0.75
+## NStim     -1.51 0.09
+## YesNo     -2.01 0.03</code></pre>
+<div id="turning-numeric-data-into-categorical" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> turning numeric data into categorical</h3>
+<p>As you can see we get a mean, sd, median, etc for <code>NStim</code>, BUT SHOULD WE? The number of stimuli is not numerical properly… but instead represent experimental categories. The same can be said for the <code>YesNo</code> data. We need to tell <code>R</code> that these data are categories, or <em>factors</em> and not continuous numbers. To do so we can call on the <code>factor()</code> function as below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert a numeric to a categorical (i.e., make a factor)</span>
+<span class="kw">factor</span>(exampleData<span class="op">$</span>NStim)</code></pre></div>
+<pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [71] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3
+## [106] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [141] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [176] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 5 5 5 5 5 5 5 5 5 5
+## [211] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+## [246] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+## [281] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+## Levels: 1 3 5</code></pre>
+<p>When you run the line above you’ll note at the end of the output it mentions “Levels: 1 3 5”. This is telling you that in this vector, there are three levels, or conditions in this factor- number of stimuli = 1; number of stimuli = 3; number of stimuli = 5. To connect this factorized vector to your original data set, you can either create a new column in the data set or overwrite the original <code>NStim</code> column that you are replacing. For beginners I would recommend adding a new column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 1. create a new vector attached to the original data frame To do this you can</span>
+<span class="co"># create a blank column by invoking [dataset$newcolumn name] and then fill it</span>
+<span class="co"># with the factorized data:</span>
+
+exampleData<span class="op">$</span>categoricalNStim &lt;-<span class="st"> </span><span class="kw">factor</span>(exampleData<span class="op">$</span>NStim)
+psych<span class="op">::</span><span class="kw">describe</span>(exampleData)</code></pre></div>
+<pre><code>##                   vars   n   mean    sd median trimmed    mad min max
+## Trial                1 300 150.50 86.75  150.5   150.5 111.19   1 300
+## RxTime               2 300  60.26 13.01   59.5    59.3  11.12  36 125
+## NStim                3 300   3.00  1.64    3.0     3.0   2.97   1   5
+## YesNo                4 300   1.50  0.50    1.5     1.5   0.74   1   2
+## categoricalNStim*    5 300   2.00  0.82    2.0     2.0   1.48   1   3
+##                   range skew kurtosis   se
+## Trial               299 0.00    -1.21 5.01
+## RxTime               89 0.97     2.12 0.75
+## NStim                 4 0.00    -1.51 0.09
+## YesNo                 1 0.00    -2.01 0.03
+## categoricalNStim*     2 0.00    -1.51 0.05</code></pre>
+<p>The asterisk next to categoricalNStim lets you know it’s categorical. Aternatively you can use <code>summary()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(exampleData)</code></pre></div>
+<pre><code>##      Trial            RxTime           NStim       YesNo    
+##  Min.   :  1.00   Min.   : 36.00   Min.   :1   Min.   :1.0  
+##  1st Qu.: 75.75   1st Qu.: 51.00   1st Qu.:1   1st Qu.:1.0  
+##  Median :150.50   Median : 59.50   Median :3   Median :1.5  
+##  Mean   :150.50   Mean   : 60.26   Mean   :3   Mean   :1.5  
+##  3rd Qu.:225.25   3rd Qu.: 67.00   3rd Qu.:5   3rd Qu.:2.0  
+##  Max.   :300.00   Max.   :125.00   Max.   :5   Max.   :2.0  
+##  categoricalNStim
+##  1:100           
+##  3:100           
+##  5:100           
+##                  
+##                  
+## </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># also note that summary() now tells you the number of obsevations rather than</span>
+<span class="co"># trying to compute descriptive stats</span>
+
+
+<span class="co"># 3. or you can overwrite the original column Be careful doing this. Once you</span>
+<span class="co"># overwrite you can&#39;t go back</span>
+
+exampleData<span class="op">$</span>NStim &lt;-<span class="st"> </span><span class="kw">factor</span>(exampleData<span class="op">$</span>NStim)
+psych<span class="op">::</span><span class="kw">describe</span>(exampleData)  <span class="co"># star lets you know it&#39;s categorical</span></code></pre></div>
+<pre><code>##                   vars   n   mean    sd median trimmed    mad min max
+## Trial                1 300 150.50 86.75  150.5   150.5 111.19   1 300
+## RxTime               2 300  60.26 13.01   59.5    59.3  11.12  36 125
+## NStim*               3 300   2.00  0.82    2.0     2.0   1.48   1   3
+## YesNo                4 300   1.50  0.50    1.5     1.5   0.74   1   2
+## categoricalNStim*    5 300   2.00  0.82    2.0     2.0   1.48   1   3
+##                   range skew kurtosis   se
+## Trial               299 0.00    -1.21 5.01
+## RxTime               89 0.97     2.12 0.75
+## NStim*                2 0.00    -1.51 0.05
+## YesNo                 1 0.00    -2.01 0.03
+## categoricalNStim*     2 0.00    -1.51 0.05</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(exampleData)</code></pre></div>
+<pre><code>##      Trial            RxTime       NStim       YesNo     categoricalNStim
+##  Min.   :  1.00   Min.   : 36.00   1:100   Min.   :1.0   1:100           
+##  1st Qu.: 75.75   1st Qu.: 51.00   3:100   1st Qu.:1.0   3:100           
+##  Median :150.50   Median : 59.50   5:100   Median :1.5   5:100           
+##  Mean   :150.50   Mean   : 60.26           Mean   :1.5                   
+##  3rd Qu.:225.25   3rd Qu.: 67.00           3rd Qu.:2.0                   
+##  Max.   :300.00   Max.   :125.00           Max.   :2.0</code></pre>
+</div>
+<div id="boxplotting-using-ggplot" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> boxplotting using <code>ggplot()</code></h3>
+<p>To create a boxplot of the entire data set (regardless of <code>NStim</code>) we can:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boxPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> exampleData, <span class="kw">aes</span>(<span class="dt">y =</span> RxTime))
+
+boxPlot1 &lt;-<span class="st"> </span>boxPlot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()
+
+boxPlot1</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Note that the <code>x-axis</code> in this plot is meaningless.</p>
+<p>Now let’s take a look at the data that will be boxplotted as a function of <code>NStim</code> groups. Here I want to note that <code>psych::describeBy</code> has an additional argument to display the quantiles:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describeBy</span>(exampleData, <span class="dt">group =</span> exampleData<span class="op">$</span>NStim, <span class="dt">quant =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: 1
+##                   vars   n  mean    sd median trimmed   mad min max range
+## Trial                1 100 50.50 29.01   50.5   50.50 37.06   1 100    99
+## RxTime               2 100 53.27 13.36   50.0   51.27  8.90  36 104    68
+## NStim*               3 100  1.00  0.00    1.0    1.00  0.00   1   1     0
+## YesNo                4 100  1.50  0.50    1.5    1.50  0.74   1   2     1
+## categoricalNStim*    5 100  1.00  0.00    1.0    1.00  0.00   1   1     0
+##                   skew kurtosis   se Q0.25 Q0.75
+## Trial              0.0    -1.24 2.90 25.75 75.25
+## RxTime             1.7     3.34 1.34 45.00 57.25
+## NStim*             NaN      NaN 0.00  1.00  1.00
+## YesNo              0.0    -2.02 0.05  1.00  2.00
+## categoricalNStim*  NaN      NaN 0.00  1.00  1.00
+## -------------------------------------------------------- 
+## group: 3
+##                   vars   n   mean    sd median trimmed   mad min max range
+## Trial                1 100 150.50 29.01  150.5  150.50 37.06 101 200    99
+## RxTime               2 100  60.65  9.41   60.0   60.01  7.41  42  95    53
+## NStim*               3 100   2.00  0.00    2.0    2.00  0.00   2   2     0
+## YesNo                4 100   1.50  0.50    1.5    1.50  0.74   1   2     1
+## categoricalNStim*    5 100   2.00  0.00    2.0    2.00  0.00   2   2     0
+##                   skew kurtosis   se  Q0.25  Q0.75
+## Trial             0.00    -1.24 2.90 125.75 175.25
+## RxTime            0.78     1.13 0.94  53.75  64.25
+## NStim*             NaN      NaN 0.00   2.00   2.00
+## YesNo             0.00    -2.02 0.05   1.00   2.00
+## categoricalNStim*  NaN      NaN 0.00   2.00   2.00
+## -------------------------------------------------------- 
+## group: 5
+##                   vars   n   mean    sd median trimmed   mad min max range
+## Trial                1 100 250.50 29.01  250.5  250.50 37.06 201 300    99
+## RxTime               2 100  66.86 12.28   65.0   65.91  9.64  39 125    86
+## NStim*               3 100   3.00  0.00    3.0    3.00  0.00   3   3     0
+## YesNo                4 100   1.50  0.50    1.5    1.50  0.74   1   2     1
+## categoricalNStim*    5 100   3.00  0.00    3.0    3.00  0.00   3   3     0
+##                   skew kurtosis   se  Q0.25  Q0.75
+## Trial             0.00    -1.24 2.90 225.75 275.25
+## RxTime            1.29     4.03 1.23  59.75  72.50
+## NStim*             NaN      NaN 0.00   3.00   3.00
+## YesNo             0.00    -2.02 0.05   1.00   2.00
+## categoricalNStim*  NaN      NaN 0.00   3.00   3.00</code></pre>
+<p>To plot this we need to tell <code>R</code> to put different distributions at different points along the <code>x-axis</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boxPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> exampleData, <span class="kw">aes</span>(<span class="dt">y =</span> RxTime, <span class="dt">x =</span> categoricalNStim))
+
+boxPlot1 &lt;-<span class="st"> </span>boxPlot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()
+
+boxPlot1</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Before leaving I want to show what would’ve happended in the latter case if we didn’t correct <code>NStim</code> and left it as a numeric variable rather than converting to a categorical:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># re-importing original data</span>
+exampleData &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&quot;https://www.uvm.edu/~dhowell/methods8/DataFiles/Tab2-1.dat&quot;</span>)
+
+<span class="co"># creating the boxplot using exact code from chunk above:</span>
+boxPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> exampleData, <span class="kw">aes</span>(<span class="dt">y =</span> RxTime, <span class="dt">x =</span> NStim))
+
+boxPlot1 &lt;-<span class="st"> </span>boxPlot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()
+
+boxPlot1</code></pre></div>
+<pre><code>## Warning: Continuous x aesthetic -- did you forget aes(group=...)?</code></pre>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+</div>
+</div>
+<div id="assessing-the-data-for-normality" class="section level2">
+<h2><span class="header-section-number">2.4</span> Assessing the data for normality</h2>
+<p>As mentioned in class, one of the key underlying assumptions of our inferential stat is that the data being analyzed is normally distributed. For this example I’ll be using some data that I had intended to work from in this week’s workshop. This data is located on the Box drive in <code>weeklySchedule/week2/workshop/InClass_1.csv</code>. To proceed, you may download it from BOX drive to your computer and import, or you can access it directly from the shared folder…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">InClass_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;https://uc.box.com/shared/static/3u49i5zrtpz5pvtmv566eizobd01oqby.csv&quot;</span>, 
+    <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</code></pre></div>
+<p>and now plotting this data related to <code>BehaviorX</code> with a normal curve overlayed as in slide #19:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load in tidyverse if you haven&#39;t already</span>
+pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse)
+
+<span class="co"># identify data and grouping parameters:</span>
+histPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> InClass_<span class="dv">1</span>, <span class="kw">aes</span>(<span class="dt">x =</span> BehaviorX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, 
+    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="kw">aes</span>(<span class="dt">y =</span> ..density..)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, 
+    <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(InClass_<span class="dv">1</span><span class="op">$</span>BehaviorX), <span class="dt">sd =</span> <span class="kw">sd</span>(InClass_<span class="dv">1</span><span class="op">$</span>BehaviorX)))
+histPlot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>As you can see the distribution is approximately normal. We can get a further assessment of skew and kurtosis using <code>psych::describe()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(InClass_<span class="dv">1</span>)</code></pre></div>
+<pre><code>##           vars   n  mean    sd median trimmed   mad   min    max  range
+## BehaviorX    1 500 74.76 18.81  74.61   74.62 18.17 20.48 132.65 112.17
+## BehaviorY    2 500 37.31 24.17  34.53   35.68 27.15  0.79 110.02 109.23
+##           skew kurtosis   se
+## BehaviorX 0.09    -0.11 0.84
+## BehaviorY 0.53    -0.36 1.08</code></pre>
+<p>As conveyed here, our values for skew and kurtosis fall within ideal ranges.</p>
+<div id="q-q-plots" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Q-Q Plots</h3>
+<p>Another method of assessing normalitly is by using a quantile-quantile, or Q-Q plot. A Q-Q plot is the plot of the sample quantiles from your data against a theoretical normal distribution. Q-Q plots typically use a straight line <code>y=x</code> as an assessment device where any deviation away from the straight line indicates deviation from normality.</p>
+<p>To assess our data we can invoke both of following functions on our data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqnorm</span>(InClass_<span class="dv">1</span><span class="op">$</span>BehaviorX)
+<span class="kw">qqline</span>(InClass_<span class="dv">1</span><span class="op">$</span>BehaviorX)</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Looking pretty good! Check out <code>InClass_1$BehaviorY</code> on your own.</p>
+</div>
+<div id="generating-a-theoretical-normal-distribution." class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Generating a theoretical normal distribution.</h3>
+<p>We can also generate a random normal distribution using the <code>rnorm()</code> function. By filling in the appropriate arguments we can create a set of data of a desired length with a desired mean and standarad deviation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numSamples &lt;-<span class="st"> </span><span class="dv">20</span>
+<span class="kw">set.seed</span>(<span class="dv">1</span>) <span class="co"># we&#39;ll come back to this next class</span>
+randomGenerated &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> numSamples,<span class="dt">mean =</span> <span class="dv">45</span>,<span class="dt">sd =</span> <span class="fl">5.0</span>)
+ranGen_df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(randomGenerated) <span class="co"># coerce to a data frame for ggplot</span>
+
+<span class="co"># creating a histogram:</span>
+<span class="co"># note I did this all in one step:</span>
+
+normalPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> ranGen_df, <span class="kw">aes</span>(<span class="dt">x=</span>randomGenerated)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, 
+                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,
+                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,
+                 <span class="kw">aes</span>(<span class="dt">y=</span>..density..)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span>
+                <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="co"># color the line red</span>
+                <span class="dt">args=</span><span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(ranGen_df<span class="op">$</span>randomGenerated), <span class="co"># build around mean </span>
+                <span class="dt">sd =</span> <span class="kw">sd</span>(ranGen_df<span class="op">$</span>randomGenerated))) <span class="co"># &amp; standard devation</span>
+
+normalPlot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>see what happens as you increase the number of samples from 20 to 30 to 50, 100, 1000, 10000. What does this suggest about ideal sample size?</p>
+</div>
+</div>
+<div id="subsetting-your-data" class="section level2">
+<h2><span class="header-section-number">2.5</span> Subsetting your data</h2>
+<p>Your homework this week asks you to subset your data by condition and create a plot for each resulting condition (or group). For example in our <code>exampleData</code> there are 3 conditions by <code>NStim</code>: 1, 3, and 5. Using <code>psych::describeBy()</code> we can get summary data for each:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describeBy</span>(exampleData, <span class="dt">group =</span> exampleData<span class="op">$</span>NStim)</code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: 1
+##        vars   n  mean    sd median trimmed   mad min max range skew
+## Trial     1 100 50.50 29.01   50.5   50.50 37.06   1 100    99  0.0
+## RxTime    2 100 53.27 13.36   50.0   51.27  8.90  36 104    68  1.7
+## NStim     3 100  1.00  0.00    1.0    1.00  0.00   1   1     0  NaN
+## YesNo     4 100  1.50  0.50    1.5    1.50  0.74   1   2     1  0.0
+##        kurtosis   se
+## Trial     -1.24 2.90
+## RxTime     3.34 1.34
+## NStim       NaN 0.00
+## YesNo     -2.02 0.05
+## -------------------------------------------------------- 
+## group: 3
+##        vars   n   mean    sd median trimmed   mad min max range skew
+## Trial     1 100 150.50 29.01  150.5  150.50 37.06 101 200    99 0.00
+## RxTime    2 100  60.65  9.41   60.0   60.01  7.41  42  95    53 0.78
+## NStim     3 100   3.00  0.00    3.0    3.00  0.00   3   3     0  NaN
+## YesNo     4 100   1.50  0.50    1.5    1.50  0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial     -1.24 2.90
+## RxTime     1.13 0.94
+## NStim       NaN 0.00
+## YesNo     -2.02 0.05
+## -------------------------------------------------------- 
+## group: 5
+##        vars   n   mean    sd median trimmed   mad min max range skew
+## Trial     1 100 250.50 29.01  250.5  250.50 37.06 201 300    99 0.00
+## RxTime    2 100  66.86 12.28   65.0   65.91  9.64  39 125    86 1.29
+## NStim     3 100   5.00  0.00    5.0    5.00  0.00   5   5     0  NaN
+## YesNo     4 100   1.50  0.50    1.5    1.50  0.74   1   2     1 0.00
+##        kurtosis   se
+## Trial     -1.24 2.90
+## RxTime     4.03 1.23
+## NStim       NaN 0.00
+## YesNo     -2.02 0.05</code></pre>
+<p><em>but we cannot use this to generate a plot</em>. In order to do this we need to split the original data file into three parts, one for each <code>NStim</code> condition. DataCamp introduces you to the <code>dplyr::filter()</code> function this week, which extracts data from a larger set given some criteria. For example to pull our <code>NStim == 1</code> data from the <code>exampleData</code> data set we can:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr<span class="op">::</span><span class="kw">filter</span>(exampleData, exampleData<span class="op">$</span>NStim <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
+<pre><code>##     Trial RxTime NStim YesNo
+## 1       1     40     1     1
+## 2       2     41     1     1
+## 3       3     47     1     1
+## 4       4     38     1     1
+## 5       5     40     1     1
+## 6       6     37     1     1
+## 7       7     38     1     1
+## 8       8     47     1     1
+## 9       9     45     1     1
+## 10     10     61     1     1
+## 11     11     54     1     1
+## 12     12     67     1     1
+## 13     13     49     1     1
+## 14     14     43     1     1
+## 15     15     52     1     1
+## 16     16     39     1     1
+## 17     17     46     1     1
+## 18     18     47     1     1
+## 19     19     45     1     1
+## 20     20     43     1     1
+## 21     21     39     1     1
+## 22     22     49     1     1
+## 23     23     50     1     1
+## 24     24     44     1     1
+## 25     25     53     1     1
+## 26     26     46     1     1
+## 27     27     64     1     1
+## 28     28     51     1     1
+## 29     29     40     1     1
+## 30     30     41     1     1
+## 31     31     44     1     1
+## 32     32     48     1     1
+## 33     33     50     1     1
+## 34     34     42     1     1
+## 35     35     90     1     1
+## 36     36     51     1     1
+## 37     37     55     1     1
+## 38     38     60     1     1
+## 39     39     47     1     1
+## 40     40     45     1     1
+## 41     41     41     1     1
+## 42     42     42     1     1
+## 43     43     72     1     1
+## 44     44     36     1     1
+## 45     45     43     1     1
+## 46     46     94     1     1
+## 47     47     45     1     1
+## 48     48     51     1     1
+## 49     49     46     1     1
+## 50     50     52     1     1
+## 51     51     52     1     2
+## 52     52     45     1     2
+## 53     53     74     1     2
+## 54     54     56     1     2
+## 55     55     53     1     2
+## 56     56     59     1     2
+## 57     57     43     1     2
+## 58     58     46     1     2
+## 59     59     51     1     2
+## 60     60     40     1     2
+## 61     61     48     1     2
+## 62     62     47     1     2
+## 63     63     57     1     2
+## 64     64     54     1     2
+## 65     65     44     1     2
+## 66     66     56     1     2
+## 67     67     47     1     2
+## 68     68     62     1     2
+## 69     69     44     1     2
+## 70     70     53     1     2
+## 71     71     48     1     2
+## 72     72    104     1     2
+## 73     73     50     1     2
+## 74     74     58     1     2
+## 75     75     52     1     2
+## 76     76     57     1     2
+## 77     77     66     1     2
+## 78     78     49     1     2
+## 79     79     59     1     2
+## 80     80     56     1     2
+## 81     81     71     1     2
+## 82     82     76     1     2
+## 83     83     54     1     2
+## 84     84     71     1     2
+## 85     85     44     1     2
+## 86     86     67     1     2
+## 87     87     45     1     2
+## 88     88     79     1     2
+## 89     89     46     1     2
+## 90     90     57     1     2
+## 91     91     58     1     2
+## 92     92     47     1     2
+## 93     93     73     1     2
+## 94     94     67     1     2
+## 95     95     46     1     2
+## 96     96     57     1     2
+## 97     97     52     1     2
+## 98     98     61     1     2
+## 99     99     72     1     2
+## 100   100    104     1     2</code></pre>
+<p>To create plots related to this data you can save the above result to a new object and then create your plots as described above. For example, to get <code>RxTime</code> for <code>NStim == 1</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NStim1_data &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(exampleData,exampleData<span class="op">$</span>NStim<span class="op">==</span><span class="dv">1</span>)
+
+<span class="co"># you can use hist() here but I&#39;m going to do ggplot()</span>
+NStim1_plot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> NStim1_data, <span class="kw">aes</span>(<span class="dt">x=</span>RxTime)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, 
+                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,
+                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,
+                 <span class="kw">aes</span>(<span class="dt">y=</span>..density..)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span>
+                <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="co"># color the line red</span>
+                <span class="dt">args=</span><span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(NStim1_data<span class="op">$</span>RxTime), <span class="co"># build around mean </span>
+                <span class="dt">sd =</span> <span class="kw">sd</span>(NStim1_data<span class="op">$</span>RxTime))) <span class="co"># &amp; standard devation</span>
+
+NStim1_plot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>Go back and do this with <code>NStim==2</code> and <code>NStim==3</code> for practice. Be sure to create new objects for each subset (e.g. <code>NStim2_data</code>) and plot (`NStim2_plot) so that you don’t overwrite what you’ve done before.</p>
+<p>This is a good place to stop for this week. However if you want to continue on, in the next section I’m going to cash out all of that rambling about “the importance of means” that I’ve been doing</p>
+</div>
+<div id="looking-ahead-means-and-better-models" class="section level2">
+<h2><span class="header-section-number">2.6</span> Looking ahead: Means and better models</h2>
+<p>Hold this one in your back pocket for now. This is the 2nd week in a row that I’ve stressed the importance of the mean. Last week, I said that the mean is the best guess for any individual score if you know nothing else other than the data is normally distributed. BUT it’s a very limited predictor.</p>
+<p>Here we will use <code>R</code> to extend our in-class example of the mean as the best model if you’ve got nothing else going for you. We’ll also use this to get some more practice with variable assignment and working with vectors.</p>
+<p>Revisting our in class example from Week 1:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tehran &lt;-<span class="st"> </span><span class="dv">38</span>
+nabiha &lt;-<span class="st"> </span><span class="dv">28</span>
+james &lt;-<span class="st"> </span><span class="dv">24</span>
+chris &lt;-<span class="st"> </span><span class="dv">22</span>
+margaret &lt;-<span class="st"> </span><span class="dv">27</span>
+emily &lt;-<span class="st"> </span><span class="dv">22</span>
+sarah &lt;-<span class="st"> </span><span class="dv">24</span>
+nate &lt;-<span class="st"> </span><span class="dv">26</span>
+tyra &lt;-<span class="st"> </span><span class="dv">22</span>
+julia &lt;-<span class="st"> </span><span class="dv">24</span>
+angela &lt;-<span class="st"> </span><span class="dv">28</span>
+allie &lt;-<span class="st"> </span><span class="dv">24</span>
+daniel &lt;-<span class="st"> </span><span class="dv">29</span>
+sierra &lt;-<span class="st"> </span><span class="dv">24</span></code></pre></div>
+<p>Everyone’s age (numerical) is assigned to an object (their name). From here there are several ways to get a mean age for the class. You could just simply follow the formula, the <em>sum</em> of the individual ages divided by the number of people in the class:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(tehran, nabiha, james, chris, margaret, emily, sarah, nate, tyra, julia, angela, 
+    allie, daniel, sierra)<span class="op">/</span><span class="dv">14</span></code></pre></div>
+<pre><code>## [1] 25.85714</code></pre>
+<p>Alternatively, you could use the <code>mean()</code> function. However, mean requires that all of these number be bound together into a vector (see Demos online text, 1.6). This is simply accomplished by using the concationation function,<code>c()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first we concatonate our data:</span>
+ages &lt;-<span class="st"> </span><span class="kw">c</span>(tehran, nabiha, james, chris, margaret, emily, sarah, nate, tyra, julia, 
+    angela, allie, daniel, sierra)
+
+<span class="co"># now we get the mean:</span>
+<span class="kw">mean</span>(ages)</code></pre></div>
+<pre><code>## [1] 25.85714</code></pre>
+<p>Of the two options, the second is much more preferable. Once you get your individual data vectored (grouped) into assigned object you can perform functions on that object very easily, like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># doubling everyone&#39;s age:</span>
+ages <span class="op">*</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>##  [1] 76 56 48 44 54 44 48 52 44 48 56 48 58 48</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># getting the log of everyone&#39;s age:</span>
+<span class="kw">log</span>(ages)</code></pre></div>
+<pre><code>##  [1] 3.637586 3.332205 3.178054 3.091042 3.295837 3.091042 3.178054
+##  [8] 3.258097 3.091042 3.178054 3.332205 3.178054 3.367296 3.178054</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># getting the square root:</span>
+<span class="kw">sqrt</span>(ages)</code></pre></div>
+<pre><code>##  [1] 6.164414 5.291503 4.898979 4.690416 5.196152 4.690416 4.898979
+##  [8] 5.099020 4.690416 4.898979 5.291503 4.898979 5.385165 4.898979</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cubing:</span>
+ages<span class="op">^</span><span class="dv">3</span></code></pre></div>
+<pre><code>##  [1] 54872 21952 13824 10648 19683 10648 13824 17576 10648 13824 21952
+## [12] 13824 24389 13824</code></pre>
+<p>or perhaps most important for our present concerns, getting the mean, median, standard deviation, minimum value, maximum value, skew and kurtosis of our ages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(ages)  <span class="co"># gets both min and max</span></code></pre></div>
+<pre><code>##    vars  n  mean  sd median trimmed  mad min max range skew kurtosis   se
+## X1    1 14 25.86 4.2     24   25.17 2.97  22  38    16 1.58     2.17 1.12</code></pre>
+<div id="mean-as-highest-probability" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> mean as highest probability:</h3>
+<p>Okay, now we are going to demonstrate that if you know nothing else about your data, the mean is the best guess in terms of probability. We know that if your data are normally In this case we can plot our age data to a density histogram. I’m also going to create a vertical line on the plot indicating the mean age:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classAges_df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(ages) <span class="co"># coerce to a data frame for ggplot</span>
+
+<span class="co"># creating a histogram:</span>
+<span class="co"># note I did this all in one step:</span>
+
+classAgesPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> classAges_df, <span class="kw">aes</span>(<span class="dt">x=</span>ages)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>, 
+                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,
+                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>,
+                 <span class="kw">aes</span>(<span class="dt">y=</span>..density..)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="co"># generate theoretical norm data</span>
+                <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="co"># color the line red</span>
+                <span class="dt">args=</span><span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(classAges_df<span class="op">$</span>ages), <span class="co"># build around mean </span>
+                <span class="dt">sd =</span> <span class="kw">sd</span>(classAges_df<span class="op">$</span>ages))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">mean</span>(classAges_df<span class="op">$</span>ages),
+             <span class="dt">color=</span><span class="st">&quot;red&quot;</span>,
+             <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>)
+
+
+classAgesPlot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p>So not too far off from the actual best guess, mode = 24, which represents over 30% of our scores, but still pretty close.</p>
+<p>The next two sections involve a little bit of complex coding that will be rehearsed in next week’s workshop. For now I have two goals, to 1. demonstrate the mean produces the least amount of summed error and 2. by virtue of that minimized the sum-of-squared differences, or SS. The latter is arguably more important as SS is used to calculate variability and is most diectly used in assessing inferential models.</p>
+</div>
+<div id="mean-as-fulcrum-point" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> mean as fulcrum point</h3>
+<p>This week we also decribed the mean as the balance point for our data, that is that the sum of all deviation scores from the mean = 0: <span class="math inline">\(\sum{X-\bar{X}} = 0\)</span>. That is the mean values produces the least amount of summed error, 0.</p>
+<p>Again, imagine that you are encountering someone in class and are asked to guess their age (and WIN! WIN! WIN!). The only info that you have is the range of our ages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(ages)</code></pre></div>
+<pre><code>## [1] 22 38</code></pre>
+<p>In what follows, I’m going to iterate through each possible age (<code>guess</code>) within our range and get the sum of difference scores, or <code>sumDiff</code>. <code>sumDiff</code> is obtained by subtracting each age from a given value (see Howell 2.8). Typically this value is the mean. For example say I guessed 27:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 1. guessed age:</span>
+guess &lt;-<span class="st"> </span><span class="dv">27</span>
+<span class="co"># 2. resulting difference scores, squared</span>
+diffScores &lt;-<span class="st"> </span>(ages <span class="op">-</span><span class="st"> </span>guess)
+<span class="co"># 3. the sum of squares:</span>
+sumDiff &lt;-<span class="st"> </span><span class="kw">sum</span>(diffScores)
+
+<span class="co"># 4. show the sumDiff (example)</span>
+<span class="kw">show</span>(sumDiff)</code></pre></div>
+<pre><code>## [1] -16</code></pre>
+<p>Now, I’m going to iterate through every possible age in the range, and save the resulting <code>sumDiff</code>s to a vector, <code>sumDiffguess</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get ages, repeat of previous chunk:</span>
+ages &lt;-<span class="st"> </span><span class="kw">c</span>(tehran, nabiha, james, chris, margaret, emily, sarah, nate, tyra, julia, 
+    angela, allie, daniel, sierra)
+
+<span class="co"># create a vector of all possible integers within our range:</span>
+rangeAges &lt;-<span class="st"> </span><span class="kw">min</span>(ages)<span class="op">:</span><span class="kw">max</span>(ages)
+
+<span class="co"># create an empty vector to save our resulting sum of differences</span>
+sumDiffguess &lt;-<span class="st"> </span><span class="kw">vector</span>()
+guessedAge &lt;-<span class="st"> </span><span class="kw">vector</span>()
+
+<span class="co"># here &#39;i&#39; indexes which value from the range to pull, for example when i=1, we</span>
+<span class="co"># are pulling the first number in the sequence</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(rangeAges)) {
+    guess &lt;-<span class="st"> </span>rangeAges[i]
+    diffScores &lt;-<span class="st"> </span>(ages <span class="op">-</span><span class="st"> </span>guess)
+    sumDiff &lt;-<span class="st"> </span><span class="kw">sum</span>(diffScores)
+    <span class="co"># save results to sumDiffguess</span>
+    guessedAge[i] &lt;-<span class="st"> </span>guess
+    sumDiffguess[i] &lt;-<span class="st"> </span>sumDiff
+}
+
+diffAges_df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(guessedAge, sumDiffguess)  <span class="co">#combine the two vectors to single data frame</span>
+<span class="kw">show</span>(diffAges_df)</code></pre></div>
+<pre><code>## # A tibble: 17 x 2
+##    guessedAge sumDiffguess
+##         &lt;int&gt;        &lt;dbl&gt;
+##  1         22           54
+##  2         23           40
+##  3         24           26
+##  4         25           12
+##  5         26           -2
+##  6         27          -16
+##  7         28          -30
+##  8         29          -44
+##  9         30          -58
+## 10         31          -72
+## 11         32          -86
+## 12         33         -100
+## 13         34         -114
+## 14         35         -128
+## 15         36         -142
+## 16         37         -156
+## 17         38         -170</code></pre>
+<p>Now let’s plot the resulting sum of difference scores as a function of guessed age. The vertical line represents mean age. As you can see this is where our function crosses 0 on the y-axis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># note I did this all in one step:</span>
+
+sumDiffPlot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> diffAges_df, <span class="kw">aes</span>(<span class="dt">x=</span>guessedAge, <span class="dt">y=</span>sumDiffguess)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">mean</span>(ages), <span class="co"># using actual ages from </span>
+             <span class="dt">color=</span><span class="st">&quot;red&quot;</span>,
+             <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>)
+
+
+sumDiffPlot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+</div>
+<div id="mean-as-minimizing-random-error" class="section level3">
+<h3><span class="header-section-number">2.6.3</span> mean as minimizing random error</h3>
+<p>Of course, in our statistics the sum of squared-differences (or SS) <span class="math inline">\(\sum{(X-\bar{X})^2}\)</span> is our primary measure rather than the sum of difference in the last example. SS is used to calculate varience <span class="math inline">\(\frac{\sum{(X-\bar{X})^2}}{N-1}\)</span>and in turn standard deviation, which is just the square root of the variance. Both measures we use to describe variability in a distibution of data. When we know nothing about our data we assume that the scores, and therefore the resulting difference or <em>error</em> from the mean is <em>randomly</em> distributed. Hence the term <em>random error</em>.</p>
+<p>First, let’s calculate the resulting SS for each possible guess (similar to above):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a vector of all possible integers within our range:</span>
+rangeAges &lt;-<span class="st"> </span><span class="kw">min</span>(ages)<span class="op">:</span><span class="kw">max</span>(ages)
+
+<span class="co"># create an empty vector to save our resulting sum of differences</span>
+SSguess &lt;-<span class="st"> </span><span class="kw">vector</span>()
+guessedAge &lt;-<span class="st"> </span><span class="kw">vector</span>()
+
+<span class="co"># here &#39;i&#39; indexes which value from the range to pull, for example when i=1, we</span>
+<span class="co"># are pulling the first number in the sequence</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(rangeAges)) {
+    guess &lt;-<span class="st"> </span>rangeAges[i]
+    diffScores &lt;-<span class="st"> </span>(ages <span class="op">-</span><span class="st"> </span>guess)
+    SSDiff &lt;-<span class="st"> </span><span class="kw">sum</span>(diffScores<span class="op">^</span><span class="dv">2</span>)
+    <span class="co"># save SS to SSguess</span>
+    guessedAge[i] &lt;-<span class="st"> </span>guess
+    SSguess[i] &lt;-<span class="st"> </span>SSDiff
+}
+
+SS_Ages_df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(guessedAge, SSguess)  <span class="co">#combine the two vectors to single data frame</span>
+<span class="kw">show</span>(SS_Ages_df)</code></pre></div>
+<pre><code>## # A tibble: 17 x 2
+##    guessedAge SSguess
+##         &lt;int&gt;   &lt;dbl&gt;
+##  1         22     438
+##  2         23     344
+##  3         24     278
+##  4         25     240
+##  5         26     230
+##  6         27     248
+##  7         28     294
+##  8         29     368
+##  9         30     470
+## 10         31     600
+## 11         32     758
+## 12         33     944
+## 13         34    1158
+## 14         35    1400
+## 15         36    1670
+## 16         37    1968
+## 17         38    2294</code></pre>
+<p>Now, let’s see what happens when we plot the resulting SS as a function of guessed age:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SS_Plot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data =</span> SS_Ages_df, <span class="kw">aes</span>(<span class="dt">x=</span>guessedAge, <span class="dt">y=</span>SSguess)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">mean</span>(ages), <span class="co"># using actual ages from </span>
+             <span class="dt">color=</span><span class="st">&quot;red&quot;</span>,
+             <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>)
+
+
+SS_Plot</code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>As you can see we get parabola with a minima at our mean.</p>
+</div>
+<div id="but-we-can-do-better-than-that" class="section level3">
+<h3><span class="header-section-number">2.6.4</span> but we can do better than that</h3>
+<p>The mean is good as a stab in the dark, but as you can see our SS is still pretty high. If we have other useful information about the nature of our age data, then maybe we can use that to make better preditions. These extra bits of info are our <em>predictors</em>. For example, let’s combine our age data with info on how many years everyone has been out of undergraduate. For the purposes of this example, I’m just going to make this data up:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tehran &lt;-<span class="st"> </span><span class="dv">13</span>
+nabiha &lt;-<span class="st"> </span><span class="dv">5</span>
+james &lt;-<span class="st"> </span><span class="dv">2</span>
+chris &lt;-<span class="st"> </span><span class="dv">1</span>
+margaret &lt;-<span class="st"> </span><span class="dv">3</span>
+emily &lt;-<span class="st"> </span><span class="dv">1</span>
+sarah &lt;-<span class="st"> </span><span class="dv">4</span>
+nate &lt;-<span class="st"> </span><span class="dv">2</span>
+tyra &lt;-<span class="st"> </span><span class="dv">1</span>
+julia &lt;-<span class="st"> </span><span class="dv">3</span>
+angela &lt;-<span class="st"> </span><span class="dv">4</span>
+allie &lt;-<span class="st"> </span><span class="dv">4</span>
+daniel &lt;-<span class="st"> </span><span class="dv">5</span>
+sierra &lt;-<span class="st"> </span><span class="dv">3</span>
+
+<span class="co"># create a vector of years since UG:</span>
+yearsUG &lt;-<span class="st"> </span><span class="kw">c</span>(tehran, nabiha, james, chris, margaret, emily, sarah, nate, tyra, julia, 
+    angela, allie, daniel, sierra)</code></pre></div>
+<p>Lets combine <code>ages</code> to <code>yearsUG</code> into a single <code>data_frame</code> and create a scatterplot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(ages, yearsUG)
+
+<span class="co"># plot age as a function of yearsUG</span>
+model_plot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(model_df, <span class="kw">aes</span>(<span class="dt">x =</span> yearsUG, <span class="dt">y =</span> ages)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+
+model_plot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p>Keeping in mind that our focus this semester will be in linear models. As a simplification, this means that we are looking for an equation of the line that best fits our data (minimizes the resulting SS). The equation for the line that represents the <em>mean</em> would be:</p>
+<p><span class="math display">\[Y = mean\ age + 0 * yearsUG\]</span></p>
+<p>This means years since undergrad does not figure into the mean model (it gets multiplied by zero. This results in a horizontal line with mean age as the y-intercept.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_plot &lt;-<span class="st"> </span>model_plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">mean</span>(model_df<span class="op">$</span>ages), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)
+model_plot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p>Imagine the difference scores as a straight vertical lines connecting each data point to the means model line. Now compare the means model (blue line) to a model including <code>yearsUG</code> as a predictor (red):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_plot &lt;-<span class="st"> </span>model_plot <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)
+model_plot</code></pre></div>
+<p><img src="Vignettes_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p>As you may have intuited the <code>lm</code> in the above call stands for “linear model”. Congrats, you just plotted a linear regression!!!! The <code>se</code> adds an error ribbon around the regression line. In this case I used <code>F</code> or FALSE to turn it off.</p>
+<p>What’s important here is that from a visual inspection the <code>yearsUG</code> model provides a better fit. Why, because it’s reduced the resulting difference scores (of SS). The sum of the distances from each point to this line with <code>yearsUG</code> as a predictor (red line) is less than the means model (blue line). This is what we mean by “accounting for varience”. The <code>yearsUG</code> model accounts for more varience than the means model—why because it reduces the SS. A critical question that we strive to answer with our statistical tests (like the <em>F-test</em>) is whether the model using additional predictors accounts for more variance above a critical threshold that it may be deemed <em>significant</em>, or unlikely due to chance.</p>
+<p>As I mentioned, this is something that will become critically important in a few weeks. For now I just wanted to make this connection to your understanding of the role of the mean while it was still fresh.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r-getting-to-know-your-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sampling-distributions-and-building-the-logic-of-nhst.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Vignettes.pdf", "Vignettes.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

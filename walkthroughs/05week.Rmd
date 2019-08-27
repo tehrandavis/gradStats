@@ -1,0 +1,452 @@
+# Chi-square and associated methods
+
+This week we will be working through how to conduct and report Chi-square, $\chi^2$, analyses in `R`. As mentioned in class we can use $\chi^2$ in several ways: to assess goodness of fit (assuming all is fair), to test for independence, to compare models (see you next semester), and a derivative of the Chi-square logic to test for inter-rater reliability.
+
+In what follows we will walk through each of these scenarios, focusing on how to conduct the analyses in `R`. For each analysis we will also provide examples of how to construct frequency tables depending on what information is available to you. In some cases you are already provided with pre-tallied frequencies, in other cases you may be given raw data and need to create the tallied frequencies yourself. I realize in class I walked you through several methods of how get the appropriate results. Here I'm just going to focus on the most simple and efficient way to do this.
+
+Here are the packages we'll be using:
+```{r}
+pacman::p_load(tidyverse,  
+               kableExtra, # creating html tables for this page 
+               epitools, # calculating odds ratios
+               lme4, # for the comparing models example
+               vcd, # Cohen's kappa
+               gmodels # makes obsolete a lot of our workshop
+               )
+```
+
+Also, if you are using a newer version of `R`, you'll need to install `zoo`. `vcd` depends on `zoo` to work. If prompted in your Console with the question: "Do you want to install from sources the package which needs compilation?", type in "no":
+
+```{r}
+pacman::p_load(zoo) # this is a package that needs to be installed, but needs a response from you to do so.
+```
+
+## Goodness of fit test
+The Goodness of fit test examines how "close“ observed values are to those which would be expected if things were ‘fair’ or equal. Measures of **goodness of fit** test to see if the discrepancy between observed and expected values is a significant discrepancy using the following formula:
+
+$$\chi^2 = \sum{\frac{(O-E)^2}{E}}$$
+Where $O$ and $E$ refer to the observed frequency and expected frequency respectively. 
+
+### What to do if you are given a table with tallies
+
+In class I asked you to consider the data from your Howell text, Table 6.1, where the data are taken from a study testing therapeutic touch as a "real" phenomena. Therapeutic touch postulates that one may heal a patient by manipulating their "human energy field". If this is true, and if patients are indeed sensitive to therapeutic touch, then we would expect that patients should be able to report the effect (position of the healers hand) greater significantly greater than chance. The resulting frequencies and expected were:
+
+
+```{r echo=FALSE, results='asis'}
+# building a matrix in R, enter the items, specify the number of rows,  are the items filled in across rows or down columns.
+table6.1 <- matrix(c(123,157,280,140,140,280),ncol=3,byrow=TRUE)
+
+# give the table row and column names:
+rownames(table6.1) <- c("Observed","Expected")
+colnames(table6.1) <- c("Correct","Incorrect","Total")
+table6.1 <- as.table(table6.1)
+
+# format the table for web presentation:
+kable(table6.1, format = "html") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+In this case, the tallies are already done for you. You just need to enter them into `R` as a frequency table. 
+
+#### Creating the frequency table.
+
+The first important step is to build a matrix object that contains the table. This can be accomplished using the `matrix()` function. In this case we need to create a 2×2 matrix to place our four values in. The critical thing to remember when entering your values is that you need to go in order either down columns or across rows. By default `R` prefers you to go down columns, so we'll just do that here. For simplicity's sake let's just create an object to store these values. Since we are doing down columns, the entry order should be 123,140,157,140,280,280.
+
+```{r}
+table_values <- c(123,140,157,140,280,280)
+```
+
+We can then create matrix using the `matrix()` function with the following arguments:
+
++ `data`: the values you are putting into the matrix, in this case `table_values`
++ `nrow` or `ncol`: the number of rows or columns in the matrix; you only need to enter one or the other
++ `byrow`: `TRUE` or `FALSE`, will the values be entered into the matrix going across by rows (`TRUE`) or down by columns (`FALSE`). The function default is `FALSE`, meaning data is entered by column.
+
+So to get our numbers into a matrix named `table_6.1` we:
+
+```{r}
+table_6.1 <- matrix(data = table_values,nrow = 2)
+# no need to enter byrow= as I'm just using the default setting
+show(table_6.1)
+```
+
+Before moving on, we need to convert this matrix to a table object. This can be accomplished in one fell swoop by adding `as.table()` to the previous step in a `pipe`, `%>%`. Piping was mentioned in the Intro to Tidyverse DataCamp assignment. Basically it says take the previous output and now perform this additional function. Steps that would normally take multiple lines can be done in a single line:
+
+```{r}
+table_6.1 <- matrix(data = table_values,nrow = 2) %>% as.table()
+# the pipe operator %>% is from tidyverse. See Demos
+show(table_6.1)
+```
+
+Almost there, not we just need to give our table meaningful names, ABC is not going to cut it. This can be accomplished using `rownames()` and `colnames()` and assigning a vector of the appropriate names:
+
+```{r}
+rownames(table_6.1) <- c("Observed","Expected")
+colnames(table_6.1) <- c("Correct","Incorrect","Total")
+show(table_6.1)
+```
+
+And that's it. Your table is now in `R` and ready for the next step.
+
+#### Running the Chi-square
+
+For a simple Goodness of fit test I suggest using the `chisq.test()` function. Remember from class that this has several important arguments:
+
++ `x`: a vector (1 dimensional) or matrix (2-dimensional: rows, columns) of the observed data
++ `p`: a vector (1 dimensional) or matrix (2-dimensional: rows, columns) of the expected data expressed as raw numbers, $E$ or as probabilities $E/N$.
++ `rescale.p`: if you use the raw expected values then this needs to be set to `TRUE`
++ `correct`: perform a Yates correction when calculating the $\chi^2$
+
+So now that we have constructed our `table_6.1`, I would suggest calculating the $\chi^2$ as follows:
+
+1. create a matrix of the observed data
+2. create a matrix of the expected data
+3. submit these matrices to `chisq.test()`:
+  + correction or no correction: I typically prefer to perform the correction, **BUT ultimately is unnecessary here as `correction` only applies to 2 by 2 tables.**
+  + rescale or no rescale: I typically prefer to enter my raw expecteds and then set `rescale.p=TRUE`
+
+So If I were running the Goodness of fit test based upon the data above I might:
+
+```{r}
+# matrix of observed:
+observed <- matrix(data=c(123,157),nrow = 1)
+
+# matrix of expected:
+expected <- matrix(data=c(140,140),nrow = 1)
+
+# run the chi-square:
+chisq.test(x = observed, p = expected,rescale.p = T)
+```
+
+That said, remember you only need could just list the observeds:
+```{r}
+chisq.test(x = observed)
+```
+
+#### Using your built `R` table
+
+You may have noticed that I elected to create my `observed` and `expected` objects by entering the data by hand. "Then why on earth did you have us make that damn table?", you ask? Well I could have also got these values by indexing the table (see Demos, chapter 2). For example:
+
+```{r}
+table_6.1[1,1:2]
+```
+gives me my observeds and
+
+```{r}
+table_6.1[2,1:2]
+```
+
+gives me my expecteds. Knowing this I could just run the above `chisq.test()` as:
+
+```{r}
+chisq.test(x = table_6.1[1,1:2])
+```
+
+### Assuming all things are NOT equal
+
+Let's assume that we are dealing with a Goodness of fit that involves three or more categories. For example, taken from Howell Table 6.3 a game of Rock, Paper, Scissors. 
+
+**R-ninjas** Below is the code that I use to create the tables you see on this page. Note that the `kable()` function is what allows pretty web tables:
+```{r}
+table6.3 <- matrix(c(30,21,24,25,25,25),ncol=3,byrow=TRUE) # I'm a byrow = T person
+rownames(table6.3) <- c("Observed","Expected")
+colnames(table6.3) <- c("Rock","Paper","Scissors")
+table6.3 <- as.table(table6.3); show(table6.3) # the semicolon here seperates the lines
+
+kable(table6.3, format = "html") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+Assuming equal likelihood of a person selecting Rock, Paper, or Scissors I can just run this test as I did in the previous section. Note that in the code below I'm not even bothering with the expecteds because they are assumed equal:
+
+```{r}
+observed <- matrix(data = c(30,21,24), nrow = 1)
+chisq.test(x = observed)
+```
+
+**BUT WHAT IF MY EXPECTEDS AREN'T EQUAL???** That is, what if I know that people are twice as likely to choose Rock than Paper or Scissors. In this case the respective probabilities would be Rock = .5, Paper = .25, Scissors = .25). I can simply adjust `p=` in my `chisq.test()` function.
+```{r}
+expected_probabilities <- matrix(data = c(.5, .25, .25), nrow=1)
+chisq.test(x = observed, p=expected_probabilities)
+```
+
+As you can see, $\chi^2$ has been adjusted to reflect these new probabilities.
+
+### Real data is likely NOT pre-tallied
+In the above examples, the observeds and expecteds were already tallied for you. In the real-world however, you'll need to do the tallying yourself (or get your RA to do it). Let's imagine this scenario running a goodness of fit test on a game of Paper, Rock, Scissors, Lizard Spock. This data can be found using this link:
+
+```{r}
+prslOutcomes <- prslOutcomes <- read.delim("https://raw.githubusercontent.com/tehrandavis/statsData/master/prslOutcomes.txt")
+```
+
+Note that you want to be sure that the data object is stored as a `data.frame` or `data_frame` and if not convert it to one. Importing a data set from a file typically defaults to a `data.frame` but here is how to check and convert if necessary:
+
+```{r}
+class(prslOutcomes) # check class of object to ensure data.frame
+prslOutcomes_df <- data.frame(prslOutcomes) # convert if necessary, not necessary here but an example
+```
+
+
+And let's take a look at the data:
+
+
+```{r}
+prslOutcomes
+```
+
+In the data set above, each line represents a single play out of 160 total.
+
+When dealing with real data you'll need to get the actual frequency counts that go into the data. There are several ways to get these counts. 
+
+### getting counts the in-class way (not recommended)
+
+We mentioned in class that you can use the `plyr::count()` function to get tallied data. One of the frustrating things about `R` is that with so many packages being made, many authors us the same names for their functions. In the case of `count()` note that the following give you different results:
+
+
+```{r}
+count(prslOutcomes)
+dplyr::count(prslOutcomes)
+plyr::count(prslOutcomes)
+```
+
+Only `plyr::count()` gives us the counts per category. Let's save this to an object called `counts`:
+
+```{r}
+counts <- plyr::count(prslOutcomes)
+show(counts)
+```
+
+
+We can simply grab the frequency data from the `freq` column that `plyr::count()` has created:
+```{r}
+chisq.test(x=counts$freq)
+```
+
+### getting counts the `table()` way (my new recommendation)
+An alternative to the above would be to create a table from your raw data. Given something I just discovered after class yesterday, I think this may be the better way, if for nothing other than being consistent. In this case we create a table from the data frame of raw data using the `table()` function:
+
+```{r}
+table(prslOutcomes)
+```
+
+You can simply plug this table into the `chisq.test()` function:
+```{r}
+chisq.test(x=table(prslOutcomes))
+```
+
+And if we had prior knowledge that people tend to choose Lizard Spock 50% of the time, Rock 30%, and the remaining two 10% each? would you modify the previous call?
+
+
+## Contingency Table Analysis in R
+
+We use contingency tables to assess the relative independence of 2 categorical variables. Consider the example taken from the Howell text, Table 6.4: 
+```{r echo=FALSE}
+table6.4 <- matrix(c(33,251,284,33,508,541,66,759,825),ncol = 3,byrow = T)
+colnames(table6.4) <- c("Yes","No","Total")
+rownames(table6.4) <- c("Nonwhite","White","Total")
+
+#show(table6.4) # or fancy
+kable(table6.4, format = "html") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+The above table assesses whether the frequency of being handed the death penalty (Yes or No) is contingent on race (White or Non-White). In class I walked you through several ways of running the $\chi^2$ of independence test assuming you are given a table that has both observeds and marginal totals or just observeds. Ultimately this was done to show you how to calculate your expecteds in either scenario and perform the requisite steps flowing from there.
+
+**BUT BUMP ALL DAT... THAT'S RIGHT I SAID BUMP IT!**
+
+One of the cool things about `R` (for me at least) is discovering more efficient ways of doing things, and after class I got the thinking "there's got to be a simpler way of dealing with Contingency Tables than I'm used to". And in fact there is. 
+
+Ladies and Gents, I give you the `gmodels` package:
+```{r}
+pacman::p_load(gmodels)
+```
+
+Assuming we have the above table, we can use the `gmodels:CrossTable()` function. But first we need to recreate the table including **only our observed values** and save it to an object; here I'm saving it to `table6.4_observed`:
+
+```{r}
+table6.4_observed <- matrix(c(33,251,33,508),ncol = 2,byrow = T)
+colnames(table6.4_observed) <- c("Yes","No")
+rownames(table6.4_observed) <- c("Nonwhite","White")
+show(table6.4_observed)
+```
+
+From here we just throw this table into `gmodels::CrossTable`. Run `?gmodels::CrossTable` to get a feel for what arguments this function takes and what other things it can do. For now, I'm especially concerned with:
+
+> expected: If TRUE, chisq will be set to TRUE and expected cell counts from the Chi-Square will be included
+
+> chisq: If TRUE, the results of a chi-square test will be included
+
+So if we run this with the argument `expected=TRUE` then it calculates and displays our expecteds AND runs the $\chi^2$:
+```{r}
+gmodels::CrossTable(table6.4_observed,expected = T)
+```
+
+Voila!! The key at the top of the output gives you the info that's in each line of each cell, where:
+
++ line 1 is observed N
++ line 2 is expected N (it calculates them for you!!)
++ line 3 is the $\chi^2$ contribution of that cell (remember the sum of the cells gives you $\chi^2$)
++ line 4 is the proportion of that cell to the row total
++ line 5 is the proportion of that cell to the column total
++ line 6 is the proportion of that cell to the grand total
+
+and then BAM!!! The end of the output gives you your $\chi^2$ test both with and without the Yates correction.
+
+### Okay, but what about with REAL DATA:
+
+OK. Let's take a look at our old professor income data. In this case, instead of actual income values, let's just take a look at Men v. Women faculty and make a judgment on whether or not they make greater than 50K per year. 
+
+A raw data set may be found at the address below:
+```{r}
+FacultyIncome_chi <- read.delim("https://raw.githubusercontent.com/tehrandavis/statsData/master/FacultyIncome_chi.txt")
+```
+
+As in the REAL DATA example above, we can simply use the `table()` function as we did above to get tallies from this data frame:
+
+```{r}
+table(FacultyIncome_chi)
+```
+
+and throw this table into the `gmodels::CrossTable` function:
+
+```{r}
+gmodels::CrossTable(table(FacultyIncome_chi),expected = T)
+```
+
+And we're done. No need to get `count()` or use the `xtabs()` function or specify a formula. Life is good!
+
+## Effect Sizes and Odds Ratios
+
+Extending this to Table 6.5 from the Howell text, assessing the relationship between childhood sexual abuse (0 incidents, 1,2,3) and abuse as adult (yes,no):
+
+
+```{r echo=FALSE}
+table6.5 <- matrix(c(512,54,227,37,59,15,18,12),ncol = 2,byrow = T)
+rownames(table6.5) = c("0","1","2","3+")
+colnames(table6.5) = c("No","Yes")
+
+
+kable(table6.5, format = "html") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+And now a Chi-square:
+```{r}
+table6.5 <- matrix(c(512,54,227,37,59,15,18,12),ncol = 2,byrow = T)
+rownames(table6.5) = c("0","1","2","3+")
+colnames(table6.5) = c("No","Yes")
+
+show(table6.5)
+
+gmodels::CrossTable(table6.5,expected = T)
+```
+
+As I mentioned in class, we are not only interested in independence in itself, but also the the relationship between the frequency of our observed outcomes. This allow us to further interpret our data.
+
+For example we might be interested in not only whether instances of sexual abuse as a child affect the likelihood of experiencing abuse as an adult, but also how much more likely one is to be abused as an adult with increased childhood incidence.
+
+For this we can use odds ratios, which essentially act as a measure of effect size, or magnitude of the effect, for frequency data. Odd ratios may be calculated as by establishing a ratio of the binomial outcomes (in this case Yes v No) for each group (Incidence: 0,1,2,3+). 
+
+To do this "by hand" you can simply take the appropriate columns and perform division to get the odds for each group. In this case you can just divide the values in column 2 of `table6.5` by column 1 (because I'm interested in the relationship of number of incidents, Yes column). In themselves, the odds tell us the likelihood of occurrence:
+
+```{r}
+odds <- table6.5[,2]/table6.5[,1]; show(odds)
+```
+
+
+We then calculate each odds ratio by dividing each of the odds by a "control". In this case the first group, 0 incidents is the logical control.
+
+```{r}
+odds_ratios <- odds/odds[1]; show(odds_ratios)
+```
+
+One important bit. Since we are dividing all odds by our control group, the odds ratio for the control will always be 1. Another way to think of this is that the odds ratio for our null condition will always be 1. **Deviations away from 1 are deviations away from the null hypothesis.** This makes since... if incidence did not have an effect we would expect the odds of adult abuse to be the same for all groups.
+
+Rather than doing this by hand, however, you can simply use `epitools::oddsratio()`:
+```{r}
+epitools::oddsratio(table6.5)
+```
+
+Note that by default `epitools::oddsratio()` assumes that your table is constructed with your rows as groups and your columns as outcomes (YorN, Success or Fail, etc.). It also assumes that your first row is your control, and the second column is your column of interest. It this is not the case you need to reformat your table to fit.
+
+## Fisher's exact test
+
+Fisher's exact test is a statistical significance test used in the analysis of 2×2 contingency tables. Although in practice it is employed when sample sizes are small (expected < 5), it is valid for all sample sizes.
+
+It involves: 1. determining all possible tables that could be formed using same marginal totals observed and 2. calculating the probability of the observed data from whether it falls in the extreme region of all possible tables (i.e., < .05 probability). 
+
+The `gmodels::CrossTable()` function is nice as it will also run a Fisher's exact test for you as well. Returning to our examples from the previous section, Table 6.4 from the text:
+
+```{r echo=FALSE}
+kable(table6.4_observed, format = "html") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+Remember we only need our observed data:
+
+```{r}
+table6.4_observed <- matrix(c(33,251,33,508),ncol = 2,byrow = T)
+colnames(table6.4_observed) <- c("Yes","No")
+rownames(table6.4_observed) <- c("Nonwhite","White")
+show(table6.4_observed)
+```
+
+And now to run the Fischer test by adding an additional argument to `gmodels::CrossTable()`:
+
+```{r}
+gmodels::CrossTable(table6.4_observed,fisher = T)
+```
+
+Note that this provides a general Fischer test, as well as directional tests (greater than, less than). How might we interpret this output?
+
+The test uses the odds ratio obtained from the 2×2 data, in this case 2.02, and compares it to the ratio that would be obtained assuming independence, which is always 1 (see previous section on Odds Ratios. You may also notice the 95% confidence intervals. If the interval for any of the tests contains 1 then it must be that $p>.05$.
+
+## Cohen's kappa
+
+Cohen's kappa is a measure of inter-judge agreement and used when we want to assess the reliability of judges or raters, or inter-rater reliability. For example.
+
+Two judges interview 30 adolescents and rate them as exhibiting (1) no behavior problems, (2) internalizing behaviors, (3) externalizing behaviors:
+
+```{r Construct Cohens Kappa - Table, echo=FALSE}
+kappaExample <- c(15,2,3,20,1,3,2,6,0,1,3,4,16,6,8,30) %>% matrix(.,ncol = 4,byrow = T) %>% as.table()
+rownames(kappaExample) <- c("NoProblem","Internalizing","Externalizing","Total")
+colnames(kappaExample) <- c("NoProblem","Internalizing","Externalizing","Total")
+
+kable(kappaExample,format = "html") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+The frequency of Judge 1's reports move down columns, Judge 2's reports move across rows. What is being conveyed on this table are the intersection of those reports. For example moving across the top row: there were 15 adolescents that both judges agreed had "No Problem""; there were 2 that Judge 1 viewed as "Internalizing" and Judge 2 viewed as "No Problem"; there were 3 that Judge 1 viewed as "Externalizing" and Judge 2 said "No Problem", etc.
+
+In class we mentioned that we can get a measure of agreement based upon the observed agreements (along the diagonal in this table) and their expecteds (the amount of agreement we might expect purely due to chance). Based upon that, when can calculate from by hand:
+
+```{r calculate Cohens Kappa by Hand}
+N <- 30
+
+KappaAgree <- c(15,3,3)
+kappaExpec <- c((16*20)/30,(6*6)/30,(8*4)/30)
+
+kappa <- (sum(KappaAgree)-sum(kappaExpec))/(N-sum(kappaExpec))
+
+show(kappa)
+```
+
+Alternatively assuming we have saved this table as an object in `R` we can use the `Kappa` function from the `vcd` package:
+
+Constructing the table, note that I'm using piping to build my table in a single line (vector ➔ matrix ➔ table): Also note that I an using the table structure describe above (Rater 1 along columns, Rater down rows)
+
+```{r Cohens Kappa - if we have the table}
+kappaExample_table <- c(15,2,3,1,3,2,0,1,3) %>% matrix(.,ncol = 3,byrow = T)
+rownames(kappaExample_table) <- c("NoProblem","Internalizing","Externalizing")
+colnames(kappaExample_table) <- c("NoProblem","Internalizing","Externalizing")
+
+show(kappaExample_table)
+```
+
+And now Cohen's Kappa:
+
+```{r}
+vcd::Kappa(kappaExample_table)
+```
+
+Note that `psych` also has a `cohen.kappa()` function, but the data needs to be structured differently.
+
+
+
+That's it for now. Be sure to check back later. 
+```
+
